@@ -1,0 +1,13 @@
+.SubHeaderWrapper{
+	padding: 25px;
+	background-color: #ffffff!important;
+}
+.SubHeaderWrapper h3{
+	color: #000000!important;
+}
+.SubHeaderTabs img{
+	padding-right: 8px;
+}
+.ant-tabs-bar{
+	border-bottom: 2px solid #e8e8e8!important;
+}
