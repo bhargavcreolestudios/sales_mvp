@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "install": "cd client && yarn install && cd server && yarn install",
-    "server": "cd server && yarn start",
-    "dev": "cd client && yarn run start"
+    "install": "cd client && npm install && cd server && npm install",
+    "server": "cd server && npm start",
+    "dev": "cd client && npm run start"
   },
   "repository": {
     "type": "git",

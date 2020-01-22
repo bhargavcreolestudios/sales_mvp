@@ -1,15 +1,15 @@
 import React from 'react';
-import { Layout } from 'antd';
-import Header from '../components/Header';
-import SubHeader from '../components/SubHeader';
-
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import 'antd/dist/antd.css';
+import routes from '../routes';
 class App extends React.Component {
   render() {
   	return (
-	  <Layout>
-	    <Header />
-	    <SubHeader />
-	  </Layout>
+      <Router>
+        {routes.map((route, index) => 
+            <Route {...route} />
+        )}
+      </Router>
   	);
   }
 }

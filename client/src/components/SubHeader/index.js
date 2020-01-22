@@ -33,7 +33,7 @@ class SubHeader extends React.Component {
 		          New Customer
 		        </span>
 		      } 
-		      key="3">
+		      key="4">
 		      Tab 3
 		    </TabPane>
 		    <TabPane
@@ -43,7 +43,7 @@ class SubHeader extends React.Component {
 		          Customer Types
 		        </span>
 		      } 
-		      key="3">
+		      key="5">
 		      Tab 3
 		    </TabPane>
 		    <TabPane
@@ -53,7 +53,7 @@ class SubHeader extends React.Component {
 		          Column Options
 		        </span>
 		      } 
-		      key="3">
+		      key="6">
 		      Tab 3
 		    </TabPane>
 		    <TabPane
@@ -63,7 +63,7 @@ class SubHeader extends React.Component {
 		          Import Customers
 		        </span>
 		      } 
-		      key="3">
+		      key="7">
 		      Tab 3
 		    </TabPane>
 		    <TabPane
@@ -73,7 +73,7 @@ class SubHeader extends React.Component {
 		          Recycle
 		        </span>
 		      } 
-		      key="3">
+		      key="8">
 		      Tab 3
 		    </TabPane>
 		</Tabs>
