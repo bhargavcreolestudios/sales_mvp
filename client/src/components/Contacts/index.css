@@ -1,0 +1,38 @@
+.addNewSection{
+	width: 100%;
+	display: inline-flex;
+}
+.addNewSection .separator{
+	margin-left: 2%;
+    border-right: 1px solid #cecece;
+    height: 25px;
+    margin-top: 3px;
+}
+.newCustomer{
+	cursor: pointer;
+	margin: 5px 0px 0px 2%;
+}
+.filterSection{
+	margin-top: 10px;
+	padding: 15px 15px 7px 15px;
+	height: 55px;
+}
+.filterOptions{
+	float: right;
+}
+.ant-modal-title{
+	font-size: 24px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    text-align: left;
+    color: #141823;
+}
+.ant-modal-close-x{
+	width: 60px;
+    height: 60px;
+    font-size: 20px;
+    margin-top: 3px;
+}

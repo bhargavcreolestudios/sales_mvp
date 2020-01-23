@@ -7,7 +7,7 @@ class App extends React.Component {
   	return (
       <Router>
         {routes.map((route, index) => 
-            <Route {...route} />
+            <Route {...route} key={index} />
         )}
       </Router>
   	);

@@ -1,0 +1,12 @@
+.ant-tabs-tab{
+	font-size: 16px!important;
+  font-weight: 300!important;
+  font-stretch: normal!important;
+  font-style: normal!important;
+  line-height: 1.31!important;
+  letter-spacing: normal!important;
+  text-align: center!important;
+}
+.ant-tabs-tab-active{
+  color: #383838!important;
+}
