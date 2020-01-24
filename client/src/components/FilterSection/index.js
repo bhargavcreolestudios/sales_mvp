@@ -8,13 +8,13 @@ class FilterSection extends React.Component {
 		return (
 			<div className="filterSection">
 				<Row>
-					<Col span={12}>
+					<Col span={6}>
 						<div className="filterIcon">
 							<img src={iconFilter} />
 							<p>Filter by Keyword</p>
 						</div>
 					</Col>
-					<Col span={12}>
+					<Col span={18}>
 						<div className="filterOptions">
 							<div>
 								<label style={{ color: '#707070' }}>Location:</label>

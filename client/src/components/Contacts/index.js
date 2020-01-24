@@ -1,14 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Select, Table, Modal } from 'antd';
+
+import NewContact from '../NewContact';
+
 import iconFilter from '../../assets/iconFilter.png';
 import newCustomer from '../../assets/newCustomer.png';
 import iconMore from '../../assets/iconMore.png';
 import './index.css';
+
 const { Option } = Select;
 class Contacts extends React.Component {
 	state = {
 		isOpen: false
+	}
+	handleCreate = () => {
+		const { form } = this.formRef.props;
+	    form.validateFields((err, values) => {
+	    if (err) {
+	    	return;
+	    }
+	    console.log('Received values of form: ', values);
+	    form.resetFields();
+	    });
+	}
+	saveFormRef = formRef => {
+	  this.formRef = formRef;
 	}
 	render() {
 		const { isOpen } = this.state
@@ -117,7 +134,7 @@ class Contacts extends React.Component {
 				    </Select>
 				    <span className="separator" />
 				    <div onClick={() => this.setState({ isOpen: !isOpen })} className="newCustomer">
-				    	<img src={newCustomer} />New Customer
+				    	<img src={newCustomer} />New Contact
 				    </div>
 				</div>
 				<div className="filterSection">
@@ -151,19 +168,19 @@ class Contacts extends React.Component {
 				<div>
 					<Table rowSelection={rowSelection} columns={columns} dataSource={data} pagination={false} />
 					<Modal
-			          title="Customer Information"
+					  className="newContact"
+			          title="New Contact"
 			          visible={isOpen}
 			          onOk={() => this.setState({ isOpen: false })}
 			          onCancel={() => this.setState({ isOpen: false })}
+			          footer={null}
 			        >
-			          <Row>
-			          	<Col span={12}>
-
-			          	</Col>
-			          	<Col span={12}>
-			          		
-			          	</Col>
-			          </Row>
+			          <NewContact
+				        wrappedComponentRef={this.saveFormRef}
+				        visible={isOpen}
+				        onCancel={() => this.setState({ isOpen: false })}
+				        onCreate={this.handleCreate}
+    				  />
 			        </Modal>
 				</div>
 			</div>

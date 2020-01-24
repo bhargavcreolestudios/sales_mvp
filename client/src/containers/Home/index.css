@@ -1,3 +1,10 @@
+.customerInformation{
+	width: 960px!important;
+    height: 865px!important;
+    border-radius: 5px!important;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3)!important;
+    background-color: #ffffff!important;
+}
 .pageTitle{
 	background: #ffffff!important;
     margin-bottom: 0!important;

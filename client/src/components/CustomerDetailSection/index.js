@@ -10,7 +10,7 @@ class CustomerDetailSection extends React.Component {
 		return (
 			<div className="customer-detail-section">
 				<Row>
-				<Col span={12}>
+				<Col span={16}>
 					<div className="titleWrapper">
 						<h1 className="customerName">A & G Sales</h1>
 						<img src={iconEdit} />
@@ -33,7 +33,7 @@ class CustomerDetailSection extends React.Component {
 						</div>
 					</div>
 				</Col>
-      			<Col span={12}>
+      			<Col span={8}>
       				<div className="statisticsWrapper">
       					<Button type="primary">
 						  New Transaction | <Icon type="down" />
