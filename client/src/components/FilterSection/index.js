@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Select } from 'antd';
+import { Row, Col, Select, Checkbox } from 'antd';
 import iconFilter from '../../assets/iconFilter.png';
 import './index.css';
 const { Option } = Select;
@@ -22,6 +22,7 @@ class FilterSection extends React.Component {
 									style={{ width: 170 }}
 									placeholder="Select location"
 									optionFilterProp="children"
+									allowClear={true}
 									filterOption={(input, option) =>
 										option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
 									}

@@ -4,16 +4,26 @@ import { Table } from 'antd';
 import iconMore from '../../assets/iconMore.png';
 import './index.css';
 
+// SERVICES
+import customerService from '../../services/customerService';
+
 class CustomerListSection extends React.Component {
 	state = {
 		key: 0,
-		moreOption: false
+		moreOption: false,
+		customers: [],
 	};
 	moreOption = (key) => {
 		this.setState({ moreOption: true, key: key });
 	}
+	async componentDidMount(){
+	    const { customers } = this.state
+	    let allCustomers = await customerService.getAll();
+	    this.setState({ customers: allCustomers })
+  	}
 	render() {
-		const { moreOption, key } = this.state;
+		const { moreOption, key, customers } = this.state;
+		console.log(customers,'customers')
 		const columns = [
 			{
 				title: 'Name',

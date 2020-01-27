@@ -10,10 +10,11 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
 //class CustomerCreateForm extends React.Component{
   class extends React.Component {
   	state = { 
-  		isSameAdd: false
+  		isSameAdd: false,
+		isSubCustomer: true
   	}
 	render(){
-		const { isSameAdd } = this.state
+		const { isSameAdd, isSubCustomer } = this.state
 		const { visible, onCancel, onCreate, form } = this.props;
   		const { getFieldDecorator } = form;
 		return (
@@ -21,7 +22,9 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
 	            <Row>
 	              <Col className="col1" span={12}>
 	              	<Form.Item label="Company">
-		              {getFieldDecorator('company')(<Input />)}
+		              {getFieldDecorator('company', {
+			                rules: [{ required: true, message: 'Please enter company name!' }],
+			              })(<Input />)}
 		            </Form.Item>
 		            <Row>
 		              <Col className="spaceBetween1" span={12}>
@@ -33,15 +36,21 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
 		              </Col>
 		              <Col className="spaceBetween2" span={12}>
 		                <Form.Item label="Last Name">
-		              	  {getFieldDecorator('lastName')(<Input />)}
+		              	  {getFieldDecorator('lastName', {
+			                rules: [{ required: true, message: 'Please enter last name!' }],
+			            })(<Input />)}
 			            </Form.Item>
 		              </Col>
 		            </Row>
 		            <Form.Item label="Display Name">
-		              {getFieldDecorator('displayName')(<Input />)}
+		              {getFieldDecorator('displayName', {
+			                rules: [{ required: true, message: 'Please enter display name!' }],
+			            })(<Input />)}
 		            </Form.Item>
 		            <Form.Item label="Account Rep">
-		              {getFieldDecorator('accountRep')(<Select
+		              {getFieldDecorator('accountRep', {
+			                rules: [{ required: true, message: 'Please select account rep!' }],
+			            })(<Select
 			              className="select"
 			              placeholder="Select"
 			              onChange={(value) => console.log(value)}
@@ -52,7 +61,9 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
 			          )}
 		            </Form.Item>
 		            <Form.Item label="Customer Type">
-		              {getFieldDecorator('customerType')(<Select
+		              {getFieldDecorator('customerType', {
+			                rules: [{ required: true, message: 'Please select customer type!' }],
+			            })(<Select
 		              	  className="select"
 			              placeholder="Select"
 			              onChange={(value) => console.log(value)}
@@ -65,24 +76,32 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
 		          </Col>
 		          <Col className="col2" span={12}>
 		          	<Form.Item label="Email">
-		              {getFieldDecorator('email')(<Input />)}
+		              {getFieldDecorator('email', {
+			                rules: [{ required: true, message: 'Please enter email address!' }],
+			            })(<Input />)}
 		            </Form.Item>
 		            <Row>
 		              <Col className="spaceBetween1" span={12}>
 		              	<Form.Item label="Phone">
-		              	  {getFieldDecorator('Phone')(<Input />)}
+		              	  {getFieldDecorator('Phone', {
+			                rules: [{ required: true, message: 'Please enter phone number!' }],
+			            })(<Input />)}
 			            </Form.Item>
 		              </Col>
 		              <Col className="spaceBetween2" span={12}>
 		                <Form.Item label="Mobile">
-		              	  {getFieldDecorator('mobile')(<Input />)}
+		              	  {getFieldDecorator('mobile', {
+			                rules: [{ required: true, message: 'Please enter mobile number!' }],
+			            })(<Input />)}
 			            </Form.Item>
 		              </Col>
 		            </Row>
 		            <Row>
 		              <Col className="spaceBetween1" span={12}>
 		              	<Form.Item label="Fax">
-		              	  {getFieldDecorator('fax')(<Input />)}
+		              	  {getFieldDecorator('fax', {
+			                rules: [{ required: true, message: 'Please enter FAX number!' }],
+			            })(<Input />)}
 			            </Form.Item>
 		              </Col>
 		              <Col className="spaceBetween2" span={12}>
@@ -92,15 +111,17 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
 		              </Col>
 		            </Row>
 		            <Form.Item className="radio">
-		              {getFieldDecorator('isSubCustomer')(<Checkbox>Is Sub-Customer (Property)</Checkbox>,
+		              {getFieldDecorator('isSubCustomer')(<Checkbox onClick={()=> this.setState({ isSubCustomer: !isSubCustomer})}>Is Sub-Customer (Property)</Checkbox>,
 			          )}
 		            </Form.Item>
 		            <Form.Item>
-		              {getFieldDecorator('subCustomer')(<Select
+		              {getFieldDecorator('subCustomer', {
+			                rules: [{ required: !isSubCustomer, message: 'Please select parent customer!' }],
+			            })(<Select
+		              	  disabled={isSubCustomer}
 		              	  className="select"
 			              placeholder="Enter parent customer"
 			              onChange={(value) => console.log(value)}
-			              style={{ backgroundColor: '#eceef1', border: 'none', borderRadius: '7px' }}
 			            >
 			              <Option value="user 1">user 1</Option>
 			              <Option value="user 2">user 2</Option>
@@ -110,11 +131,13 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
 		            <Row>
 		              <Col className="spaceBetween1" span={12}>
 		              	<Form.Item label="Bill with Parent">
-		              	  {getFieldDecorator('billParent')(<Select
+		              	  {getFieldDecorator('billParent', {
+			                rules: [{ required: !isSubCustomer, message: 'Please select bill parent!' }],
+			            })(<Select
+		              	  	  disabled={isSubCustomer}
 			              	  className="select"
 				              placeholder="Select"
 				              onChange={(value) => console.log(value)}
-				              style={{ backgroundColor: '#eceef1', border: 'none', borderRadius: '7px' }}
 				            >
 				              <Option value="user 1">user 1</Option>
 				              <Option value="user 2">user 2</Option>
@@ -124,11 +147,13 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
 		              </Col>
 		              <Col className="spaceBetween2" span={12}>
 		                <Form.Item label="Property Type">
-		              	  {getFieldDecorator('propertyType')(<Select
+		              	  {getFieldDecorator('propertyType', {
+			                rules: [{ required: !isSubCustomer, message: 'Please select property type!' }],
+			            })(<Select
+		              	  	  disabled={isSubCustomer}
 			              	  className="select"
 				              placeholder="Select"
 				              onChange={(value) => console.log(value)}
-				              style={{ backgroundColor: '#eceef1', border: 'none', borderRadius: '7px' }}
 				            >
 				              <Option value="user 1">user 1</Option>
 				              <Option value="user 2">user 2</Option>
@@ -144,20 +169,28 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
 					      <Row>
 						      <Col className="spaceBetween1" span={12}>
 							      <Form.Item label="Billing Address">
-					                {getFieldDecorator('billingAddress')(<Input />)}
+					                {getFieldDecorator('billingAddress', {
+						                rules: [{ required: true, message: 'Please enter address!' }],
+						            })(<Input />)}
 					              </Form.Item>
 					              <Form.Item label="City">
-					                {getFieldDecorator('city')(<Input />)}
+					                {getFieldDecorator('billingCity', {
+						                rules: [{ required: true, message: 'Please enter city name!' }],
+						            })(<Input />)}
 					              </Form.Item>
 					              <Row>
 						              <Col className="spaceBetween1" span={12}>
 						              	<Form.Item label="State">
-						              	  {getFieldDecorator('state')(<Input />)}
+						              	  {getFieldDecorator('billingState', {
+						                rules: [{ required: true, message: 'Please enter state name!' }],
+						            })(<Input />)}
 							            </Form.Item>
 						              </Col>
 						              <Col className="spaceBetween2" span={12}>
 						                <Form.Item label="Zip Code">
-						              	  {getFieldDecorator('zipCode')(<Input />)}
+						              	  {getFieldDecorator('billingZipCode', {
+						                rules: [{ required: true, message: 'Please enter zip code!' }],
+						            })(<Input />)}
 							            </Form.Item>
 						              </Col>
 					              </Row>
@@ -171,22 +204,30 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
 					              		<label>Shipping Address</label>
 					              		{getFieldDecorator('isShippingAddress')(<Checkbox className="sameAddress" onClick={()=> this.setState({ isSameAdd: !isSameAdd })}>Same as billing address</Checkbox>)}
 					              	</div>
-					              	<div>
-					              		{getFieldDecorator('ShippingAddress')(<Input disabled={isSameAdd} />)}
-					              	</div>
+					              	<Form.Item>
+					              		{getFieldDecorator('shipaddress', {
+						                rules: [{ required: !isSameAdd, message: 'Please enter shipping address!' }],
+						            })(<Input disabled={isSameAdd} />)}
+					              	</Form.Item>
 					              </Form.Item>
 					              <Form.Item label="City">
-					                {getFieldDecorator('city')(<Input disabled={isSameAdd} />)}
+					                {getFieldDecorator('city', {
+						                rules: [{ required: !isSameAdd, message: 'Please enter city name!' }],
+						            })(<Input disabled={isSameAdd} />)}
 					              </Form.Item>
 					              <Row>
 						              <Col className="spaceBetween1" span={12}>
 						              	<Form.Item label="State">
-						              	  {getFieldDecorator('state')(<Input disabled={isSameAdd} />)}
+						              	  {getFieldDecorator('state', {
+						                	rules: [{ required: !isSameAdd, message: 'Please enter state name!' }],
+						                  })(<Input disabled={isSameAdd} />)}
 							            </Form.Item>
 						              </Col>
 						              <Col className="spaceBetween2" span={12}>
 						                <Form.Item label="Zip Code">
-						              	  {getFieldDecorator('zipCode')(<Input disabled={isSameAdd} />)}
+						              	  {getFieldDecorator('zipCode', {
+						                	rules: [{ required: !isSameAdd, message: 'Please enter zip code!' }],
+						                  })(<Input disabled={isSameAdd} />)}
 							            </Form.Item>
 						              </Col>
 					              </Row>
@@ -200,12 +241,16 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
 						      	<Row>
 						      		<Col className="spaceBetween1" span={12}>
 						      			<Form.Item label="Account No">
-						              	  {getFieldDecorator('accountNo')(<Input />)}
+						              	  {getFieldDecorator('accountNo', {
+						                	rules: [{ required: true, message: 'Please enter account number!' }],
+						                  })(<Input />)}
 							            </Form.Item>
 						      		</Col>
 						      		<Col className="spaceBetween2" span={12}>
 						      		  <Form.Item label="Payment Terms">
-							              {getFieldDecorator('paymentTerms')(<Select
+							              {getFieldDecorator('paymentTerms', {
+						                	rules: [{ required: true, message: 'Please select payment terms!' }],
+						                  })(<Select
 							              	  className="select"
 								              placeholder="Select"
 								              onChange={(value) => console.log(value)}
@@ -220,7 +265,9 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
 						      	<Row>
 						      		<Col className="spaceBetween1" span={12}>
 						      			<Form.Item label="Preferred Payment">
-							              {getFieldDecorator('preferredPayment')(<Select
+							              {getFieldDecorator('preferredPayment', {
+						                	rules: [{ required: true, message: 'Please select preferred payment!' }],
+						                  })(<Select
 							              	  className="select"
 								              placeholder="Select"
 								              onChange={(value) => console.log(value)}
@@ -233,7 +280,9 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
 						      		</Col>
 						      		<Col className="spaceBetween2" span={12}>
 						      		  <Form.Item label="Preferred Delivery">
-							              {getFieldDecorator('preferredDelivery')(<Select
+							              {getFieldDecorator('preferredDelivery', {
+						                	rules: [{ required: true, message: 'Please select preferred delivery!' }],
+						                  })(<Select
 							              	  className="select"
 								              placeholder="Select"
 								              onChange={(value) => console.log(value)}
@@ -248,12 +297,16 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
 						      	<Row>
 						      		<Col className="spaceBetween1" span={12}>
 						      			<Form.Item label="Opening Balance">
-						              	  {getFieldDecorator('openingBalance')(<Input />)}
+						              	  {getFieldDecorator('openingBalance', {
+						                	rules: [{ required: true, message: 'Please enter opening balance!' }],
+						                  })(<Input />)}
 							            </Form.Item>
 						      		</Col>
 						      		<Col className="spaceBetween2" span={12}>
 						      		  <Form.Item label="As Of">
-						              	  {getFieldDecorator('asOf')(<Input />)}
+						              	  {getFieldDecorator('asOf', {
+						                	rules: [{ required: true, message: 'Please enter as of!' }],
+						                  })(<Input />)}
 							            </Form.Item>
 						      		</Col>
 						      	</Row>
@@ -261,7 +314,9 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
 
 				              <Col className="col2" span={12}>
 							      <Form.Item className="reasonSection">
-						              {getFieldDecorator('reason')(<Select
+						              {getFieldDecorator('reason', {
+						                	rules: [{ required: true, message: 'Please select a reason!' }],
+						                  })(<Select
 						              	  className="select"
 							              placeholder="Select a reason"
 							              onChange={(value) => console.log(value)}
@@ -272,10 +327,14 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
 							          )}
 						          </Form.Item>
 						          <Form.Item label="Tax Resale No.">
-					              	  {getFieldDecorator('taxResaleNo')(<Input />)}
+					              	  {getFieldDecorator('taxResaleNo', {
+						                	rules: [{ required: true, message: 'Please enter tax resale number!' }],
+						                  })(<Input />)}
 					              </Form.Item>
 					              <Form.Item label="Exemption Details">
-					              	  {getFieldDecorator('exemptionDetails')(<Input />)}
+					              	  {getFieldDecorator('exemptionDetails', {
+						                	rules: [{ required: true, message: 'Please enter exemption details!' }],
+						                  })(<Input />)}
 						          </Form.Item>
 				              </Col>
 				          </Row>

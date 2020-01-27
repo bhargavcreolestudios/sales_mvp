@@ -12,20 +12,25 @@ import columnOptions from '../../assets/columnOptions.png';
 import importCustomers from '../../assets/importCustomers.png';
 import recycle from '../../assets/recycle.png';
 
+
+
 const { Title } = Typography;
 class Home extends React.Component {
 	state = {
 		isOpen: false,
-		defaultActiveKey: '0'
+		defaultActiveKey: '0',
 	}
-	handleCreate = () => {
+	
+	handleCreate = e => {
+		e.preventDefault();
 		const { form } = this.formRef.props;
-	    form.validateFields((err, values) => {
-	    if (err) {
-	    	return;
-	    }
-	    console.log('Received values of form: ', values);
-	    form.resetFields();
+	    form.validateFieldsAndScroll((err, values) => {
+		    if (err) {
+		    	return;
+		    }else{
+		    	console.log('Received values of form: ', values);
+		    	form.resetFields();
+		    }
 	    });
 	}
 	saveFormRef = formRef => {
