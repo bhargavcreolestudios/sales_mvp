@@ -14,35 +14,31 @@ const productSchema = new Schema({
     accountRep: String,
     customerType: String,
     isSubCustomer: Boolean,
-    subCustomer: {
-    	parentCustomer: String,
-    	billWithParent: String,
-    	propertyType: String
-    },
-    address: {
-    	billingAddress: String,
-    	city: String,
-    	state: String,
-    	zipCode: String,
-    },
+    
+    parentCustomer: String,
+	billWithParent: String,
+	propertyType: String,
+	
+    billingAddress: String,
+	city: String,
+	state: String,
+	zipCode: String,
+    
     shippingAddressSame: Boolean,
-    shipping: {
-    	shippingAddress: String,
-    	city: String,
-    	state: String,
-    	zipCode: String,
-    },
-    billingDetails: {
-    	accountNo: String,
-    	paymentTerms: String,
-    	preferredPayment: String,
-    	preferredDelivery: String,
-    	openingBalance: { type: Number, default: 0 },
-    	asOf: String,
-    	reason: String,
-    	taxResaleNo: String,
-    	exemptionDetails: String,
-    },
+    
+	shippingAddress: String,
+	shippingCity: String,
+	shippingState: String,
+	shippingZipCode: String,
+    accountNo: String,
+	paymentTerms: String,
+	preferredPayment: String,
+	preferredDelivery: String,
+	openingBalance: { type: Number, default: 0 },
+	asOf: String,
+	reason: String,
+	taxResaleNo: String,
+	exemptionDetails: String,
 })
 
 mongoose.model('customers', productSchema);
