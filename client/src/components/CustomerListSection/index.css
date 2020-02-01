@@ -79,9 +79,7 @@
 .ant-table-tbody > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td .iconMoreWrapper{
   visibility: visible;
 }
-.ant-checkbox-inner{
-  visibility: hidden;
-}
+
 .ant-table-tbody > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td .ant-checkbox-inner{
   visibility: visible;
 }

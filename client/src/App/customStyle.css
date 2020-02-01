@@ -1,0 +1,71 @@
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  src: url('../assets/fonts/Roboto-Regular.ttf');
+}
+@font-face {
+  font-family: 'Roboto-Medium';
+  font-style: normal;
+  src: url('../assets/fonts/Roboto-Medium.ttf');
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Roboto';
+}
+.ant-input {
+  font-family: Roboto;
+  font-size: 16px;
+  color: #000;
+}
+.ant-select-selection__placeholder {
+  font-family: 'Roboto';
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.31;
+  letter-spacing: normal;
+  text-align: left;
+  color: #393939;
+}
+.ant-select-selection-selected-value {
+  font-family: 'Roboto';
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #393939;
+}
+.ant-select-disabled .ant-select-selection-selected-value,
+.ant-select-disabled .ant-select-selection__placeholder {
+  color: #a7b0b2;
+}
+.ant-table-header-column .ant-checkbox-wrapper {
+  display: none;
+}
+.ant-checkbox-wrapper span:not(.ant-checkbox) {
+  font-family: 'Roboto';
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.31;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000000;
+}
+ .ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #fff;
+  border-color: #fff;
+} 
+.ant-checkbox-checked .ant-checkbox-inner::after {
+  border: 2px solid #1890ff;
+  border-top: 0;
+  border-left: 0;
+}

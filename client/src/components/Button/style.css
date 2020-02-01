@@ -1,0 +1,37 @@
+/* Button -> action primary */
+.btnMain.ant-btn {
+    font-family: 'Roboto-Medium';
+    position: relative;
+    font-size: 16px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 1.31;
+    letter-spacing: normal;
+    color: #ffffff;
+    padding: 6px 5px;
+    width: 52%;
+    text-align: center;
+    height: 39px;
+  }
+  .btnMain span {
+    position: relative;
+    left: -13px;
+  }
+  .btnMain .dropDownIcon {
+    background-image: url('../../assets/iconDropdown.png');
+    display: inline-block;
+    background-repeat: no-repeat;
+    width: 15px;
+    height: 7px;
+    position: absolute;
+    right: 13px;
+    top: 42%;
+  }
+  .btnMain .dropDownIcon:before {
+    content: '|';
+    display: inline-block;
+    width: 6px;
+    position: relative;
+    right: 16px;
+    top: -6px;
+  }

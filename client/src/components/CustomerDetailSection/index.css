@@ -1,53 +1,63 @@
-.customer-detail-section{
-	 background-color: #ffffff;
-	 padding: 10px 55px;
+.customerInformation {
+  width: 960px !important;
+  height: 865px !important;
+  border-radius: 5px !important;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3) !important;
+  background-color: #ffffff !important;
 }
-.customerName{
-	font-size: 30px;
-    font-weight: 500;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.3;
-    letter-spacing: normal;
-    text-align: left;
-    color: #141823;
+.customer-detail-section {
+  background-color: #ffffff;
+  padding: 10px 55px;
 }
-.titleWrapper{
-	display: inline-flex;
+.customerName {
+  font-size: 30px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-family: 'Roboto-Medium';
+  font-style: normal;
+  line-height: 1.3;
+  letter-spacing: normal;
+  text-align: left;
+  color: #141823;
 }
-.titleWrapper img{
-	width: 18px;
-    height: 18px;
-    object-fit: contain;
-    margin: 12px 0px 0px 30px;
+.titleWrapper {
+  display: inline-flex;
 }
-.titleDetailSection{
-	display: inline-flex;
-	font-size: 18px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.33;
-    letter-spacing: normal;
-    text-align: left;
-    color: #383838;
-    margin-bottom: 10px;
+.titleWrapper img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  margin: 12px 0px 0px 30px;
 }
-.titleDetailSection span{
-	border-left: 2px solid #e7e8ed;
-    margin: 0px 25px;
-    height: 15px;
-    margin-top: 5px;
+.titleDetailSection {
+  display: inline-flex;
+  font-size: 18px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  text-align: left;
+  color: #383838;
+  margin-bottom: 10px;
 }
-.customerDetail{
-	display: inline-flex;
+.titleDetailSection span {
+  border-left: 2px solid #e7e8ed;
+  margin: 0px 25px;
+  height: 15px;
+  margin-top: 5px;
 }
-.customerDetail .details{
-	padding: 0px 30px;
+.customerDetail {
+  display: inline-flex;
 }
-.customerDetail .details div{
-	padding: 10px 0px;
-	font-size: 14px;
+.customerDetail .details {
+  padding: 0px 30px;
+}
+
+.customerDetail .details div {
+  display: flex;
+  padding: 10px 0px;
+  font-size: 14px;
   font-weight: 500;
   font-stretch: normal;
   font-style: normal;
@@ -56,10 +66,13 @@
   text-align: left;
   color: #707070;
 }
-.customerDetail .details div a{
-	text-align: left;
-	margin-left: 25px;
-	font-size: 16px;
+.customerDetail .details div span {
+  width: 84px;
+}
+.customerDetail .details div a {
+  text-align: left;
+  /* margin-left: 25px; */
+  font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -68,45 +81,46 @@
   text-align: left;
   color: #004881;
 }
-.ant-btn-primary{
+.ant-btn-primary {
   float: right;
   font-size: 16px;
-    font-weight: 500;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.31;
-    letter-spacing: normal;
-    text-align: center;
-    color: #ffffff;
-    background-color: #1b79d8;
-    border-color: #1b79d8;
-}
-.ant-btn-primary:hover, .ant-btn-primary:focus{
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.31;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
   background-color: #1b79d8;
-    border-color: #1b79d8;
+  border-color: #1b79d8;
 }
-.statisticsWrapper{
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+  background-color: #1b79d8;
+  border-color: #1b79d8;
+}
+.statisticsWrapper {
   float: right;
-
 }
-.firstStatistic, .secondStatistic{
+.firstStatistic,
+.secondStatistic {
   width: 186px;
   height: 70px;
   border-radius: 3px;
   background-color: #f5f5f7;
 }
-.secondStatistic{
+.secondStatistic {
   margin-left: 25px;
 }
-.statisticsSection{
+.statisticsSection {
   display: inline-flex;
   padding-top: 90px;
 }
-.openWrapper{
+.openWrapper {
   padding: 5px 0px;
   display: inline-flex;
 }
-.openWrapper .price{
+.openWrapper .price {
   font-size: 26px;
   font-weight: 300;
   font-stretch: normal;
@@ -116,7 +130,7 @@
   text-align: left;
   color: #000000;
 }
-.status{
+.status {
   font-size: 12px;
   font-weight: 900;
   font-stretch: normal;
@@ -127,15 +141,15 @@
   color: #383838;
   margin-left: 40px;
 }
-.statisticsColorOver{
-  background-color: #d51a1a!important;
+.statisticsColorOver {
+  background-color: #d51a1a !important;
 }
-.statisticsColor{
+.statisticsColor {
   height: 1px;
   padding: 5px;
   width: 10px;
   border-radius: 3px;
   box-shadow: 0 5px 20px 0 #f1edf1;
-  background-color: #a066ed; 
+  background-color: #a066ed;
   margin: 11px 12px 11px 15px;
 }
