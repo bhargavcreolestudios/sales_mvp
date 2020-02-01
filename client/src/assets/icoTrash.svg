@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16.592" height="17.998" viewBox="0 0 16.592 17.998">
+    <defs>
+        <style>
+            .cls-1{fill:#127cd8}
+        </style>
+    </defs>
+    <g id="icoTrash" transform="translate(-20)">
+        <g id="Group_6895" data-name="Group 6895" transform="translate(20)">
+            <g id="Group_6894" data-name="Group 6894">
+                <path id="Path_4272" d="M35.889 2.918h-4.254v-.809A2.112 2.112 0 0 0 29.526 0h-2.46a2.112 2.112 0 0 0-2.109 2.109v.809H20.7a.7.7 0 1 0 0 1.406h.728l.857 11.108v.01A2.812 2.812 0 0 0 25.089 18H31.5a2.789 2.789 0 0 0 2.8-2.537.7.7 0 0 0-1.4-.128 1.39 1.39 0 0 1-1.4 1.259h-6.411a1.4 1.4 0 0 1-1.4-1.274l-.848-10.996h10.91l-.6 7.785a.7.7 0 0 0 .647.755h.055a.7.7 0 0 0 .7-.649l.609-7.893h.728a.7.7 0 1 0 0-1.406zm-5.66 0h-3.866v-.809a.7.7 0 0 1 .7-.7h2.461a.7.7 0 0 1 .7.7z" class="cls-1" data-name="Path 4272" transform="translate(-20)"/>
+                <path id="Path_4273" d="M146.672 163a.7.7 0 0 0-.672.733l.352 8.048a.7.7 0 0 0 .7.672h.031a.7.7 0 0 0 .672-.733l-.352-8.048a.7.7 0 0 0-.731-.672z" class="cls-1" data-name="Path 4273" transform="translate(-141.57 -157.269)"/>
+                <path id="Path_4274" d="M316.352 163.672L316 171.72a.7.7 0 0 0 .672.733h.031a.7.7 0 0 0 .7-.672l.352-8.048a.7.7 0 0 0-1.4-.061z" class="cls-1" data-name="Path 4274" transform="translate(-305.594 -157.27)"/>
+                <path id="Path_4275" d="M236 163.7v8.048a.7.7 0 1 0 1.406 0V163.7a.7.7 0 1 0-1.406 0z" class="cls-1" data-name="Path 4275" transform="translate(-228.407 -157.27)"/>
+            </g>
+        </g>
+    </g>
+</svg>

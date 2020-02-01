@@ -1,8 +1,8 @@
-import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import 'antd/dist/antd.css';
-import './customStyle.css';
-import routes from '../routes';
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import "antd/dist/antd.css";
+import "./customStyle.css";
+import routes from "../routes";
 class App extends React.Component {
   render() {
     return (

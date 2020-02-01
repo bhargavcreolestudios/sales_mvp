@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="icoImport" width="17.998" height="17.998" viewBox="0 0 17.998 17.998">
+    <defs>
+        <style>
+            .cls-1{fill:#127cd8}
+        </style>
+    </defs>
+    <g id="Group_6893" data-name="Group 6893">
+        <g id="Group_6892" data-name="Group 6892">
+            <path id="Path_4269" d="M236.7 10.018a.7.7 0 0 0 .7-.7V.7a.7.7 0 1 0-1.4 0v8.615a.7.7 0 0 0 .7.703z" class="cls-1" data-name="Path 4269" transform="translate(-227.704)"/>
+            <path id="Path_4270" d="M102.023 228.072a2.111 2.111 0 0 0 2.982 0l3.895-3.872a.7.7 0 1 0-.992-1l-3.893 3.878a.7.7 0 0 1-.993 0l-3.822-3.869a.7.7 0 0 0-1 .987z" class="cls-1" data-name="Path 4270" transform="translate(-94.555 -215.16)"/>
+            <path id="Path_4271" d="M17.295 412a.7.7 0 0 0-.7.7 1.408 1.408 0 0 1-1.406 1.406H2.812a1.408 1.408 0 0 1-1.406-1.406.7.7 0 0 0-1.406 0 2.815 2.815 0 0 0 2.812 2.812h12.374A2.815 2.815 0 0 0 18 412.7a.7.7 0 0 0-.705-.7z" class="cls-1" data-name="Path 4271" transform="translate(0 -397.517)"/>
+        </g>
+    </g>
+</svg>

@@ -1,13 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Row, Col, Select, Table, Modal } from 'antd';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Row, Col, Select, Table, Modal } from "antd";
 
-import NewContact from '../NewContact';
+import NewContact from "../NewContact";
 
-import iconFilter from '../../assets/iconFilter.png';
-import newCustomer from '../../assets/newCustomer.png';
-import iconMore from '../../assets/iconMore.png';
-import './index.css';
+import iconFilter from "../../assets/iconFilter.png";
+import newCustomer from "../../assets/newCustomer.png";
+import iconMore from "../../assets/iconMore.png";
+import "./index.css";
 
 const { Option } = Select;
 class Contacts extends React.Component {
@@ -21,7 +21,7 @@ class Contacts extends React.Component {
       if (err) {
         return;
       }
-      console.log('Received values of form: ', values);
+      console.log("Received values of form: ", values);
       form.resetFields();
     });
   };
@@ -31,7 +31,7 @@ class Contacts extends React.Component {
       if (err) {
         return;
       }
-      console.log('Received values of form: ', values);
+      console.log("Received values of form: ", values);
       form.resetFields();
     });
   };
@@ -42,20 +42,20 @@ class Contacts extends React.Component {
     this.formRef = formRef;
   };
   handleRowClick = (record, index) => {
-    console.log(record, 'record');
+    console.log(record, "record");
     this.setState({ isEditModal: true });
   };
   render() {
     const { isOpen, isEditModal } = this.state;
     const columns = [
       {
-        title: 'Name',
-        dataIndex: 'name',
+        title: "Name",
+        dataIndex: "name",
         render: (text, record) => (
           <div className="nameWrapper">
             <div className="customTD fullNameWrapper">
               <p className="name">
-                <Link to="/customer-detail" style={{ color: '#004881' }}>
+                <Link to="/customer-detail" style={{ color: "#004881" }}>
                   {text}
                 </Link>
               </p>
@@ -68,8 +68,8 @@ class Contacts extends React.Component {
         )
       },
       {
-        title: 'Title / Position',
-        dataIndex: 'titlePosition',
+        title: "Title / Position",
+        dataIndex: "titlePosition",
         render: (text, record) => (
           <div className="customTD">
             <p className="content">{text}</p>
@@ -77,69 +77,69 @@ class Contacts extends React.Component {
         )
       },
       {
-        title: 'E-Mail',
-        dataIndex: 'email',
+        title: "E-Mail",
+        dataIndex: "email",
         render: text => <p className="content otherContent">{text}</p>
       },
       {
-        title: 'Extension',
-        dataIndex: 'extension',
+        title: "Extension",
+        dataIndex: "extension",
         render: text => <p className="content otherContent">{text}</p>
       },
       {
-        title: 'Mobile No.',
-        dataIndex: 'mobileno',
+        title: "Mobile No.",
+        dataIndex: "mobileno",
         render: text => <p className="content otherContent">{text}</p>
       },
       {
-        title: 'Other No.',
-        dataIndex: 'otherno',
+        title: "Other No.",
+        dataIndex: "otherno",
         render: text => <p className="content otherContent">{text}</p>
       }
     ];
     const data = [
       {
         key: 1,
-        name: 'Bill Epson',
-        titlePosition: 'President',
-        email: 'bill.epson@agsales.com',
-        extension: '100',
-        mobileno: '(562) 803-1888',
-        otherno: '(562) 555-6523'
+        name: "Bill Epson",
+        titlePosition: "President",
+        email: "bill.epson@agsales.com",
+        extension: "100",
+        mobileno: "(562) 803-1888",
+        otherno: "(562) 555-6523"
       },
       {
         key: 2,
-        name: 'John Doe',
-        titlePosition: 'VP of Sales',
-        email: 'john.doe@agsales.com',
-        extension: '120',
-        mobileno: '(866) 537-2263',
-        otherno: ''
+        name: "John Doe",
+        titlePosition: "VP of Sales",
+        email: "john.doe@agsales.com",
+        extension: "120",
+        mobileno: "(866) 537-2263",
+        otherno: ""
       },
       {
         key: 3,
-        name: 'Mark Bridges',
-        titlePosition: 'Field User',
-        email: 'Mark@agsales.com',
-        extension: '212',
-        mobileno: '(866) 796-4283',
-        otherno: '(866) 796-4283'
+        name: "Mark Bridges",
+        titlePosition: "Field User",
+        email: "Mark@agsales.com",
+        extension: "212",
+        mobileno: "(866) 796-4283",
+        otherno: "(866) 796-4283"
       },
       {
         key: 4,
-        name: 'Ashley Houk',
-        titlePosition: 'Supervisor',
-        email: 'ashley@agsales.com',
-        extension: '112',
-        mobileno: '(909) 391-7024',
-        otherno: '(866) 796-4283'
+        name: "Ashley Houk",
+        titlePosition: "Supervisor",
+        email: "ashley@agsales.com",
+        extension: "112",
+        mobileno: "(909) 391-7024",
+        otherno: "(866) 796-4283"
       }
     ];
     const rowSelection = {
       onChange: (selectedRowKeys, selectedRows) => {
         console.log(
           `selectedRowKeys: ${selectedRowKeys}`,
-          'selectedRows: ',
+          "selectedRows: ",
           selectedRows
         );
       }
@@ -209,7 +209,7 @@ class Contacts extends React.Component {
           {/* Create Modal */}
           <Modal
             className="newContact"
-            getContainer={() => document.getElementById('modal-wrapper')}
+            getContainer={() => document.getElementById("modal-wrapper")}
             title="New Contact"
             visible={isOpen}
             onOk={() => this.setState({ isOpen: false })}
@@ -226,7 +226,7 @@ class Contacts extends React.Component {
           {/* Edit Modal */}
           <Modal
             className="newContact"
-            getContainer={() => document.getElementById('modal-wrapper')}
+            getContainer={() => document.getElementById("modal-wrapper")}
             title="New Contact"
             visible={isEditModal}
             onOk={() => this.setState({ isEditModal: false })}
