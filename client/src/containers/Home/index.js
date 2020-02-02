@@ -2,15 +2,10 @@ import React from "react";
 import { Layout, Typography, Modal } from "antd";
 import Header from "../../components/Header";
 import SubHeader from "../../components/SubHeader";
+import services from '../../services/customerService'
 import "./index.css";
 import AllSection from "../../components/TabSection/AllSection";
 import CustomerCreateForm from "../../components/CustomerCreateForm";
-
-import newCustomer from "../../assets/newCustomer.png";
-import customerTypes from "../../assets/customerTypes.png";
-import columnOptions from "../../assets/columnOptions.png";
-import importCustomers from "../../assets/importCustomers.png";
-import recycle from "../../assets/recycle.png";
 
 const { Title } = Typography;
 class Home extends React.Component {
@@ -22,7 +17,9 @@ class Home extends React.Component {
   handleCreate = e => {
     e.preventDefault();
     const { form } = this.formRef.props;
-    form.validateFieldsAndScroll((err, values) => {
+    form.validateFieldsAndScroll(async (err, values) => {
+      let res = await services.createCustomer(values);
+      console.log(res, 'res');
       if (err) {
         return;
       } else {

@@ -1,5 +1,6 @@
 const express = require('express');
-
+const chalk = require('chalk');
+const log = require('./config/helper')
 const app = express();
 
 const mongoose = require('mongoose');
@@ -32,5 +33,5 @@ if (process.env.NODE_ENV === 'production') {
 
 const PORT = process.env.PORT || 3030;
 app.listen(PORT, () => {
-  console.log(`app running on port ${PORT}`)
+  log(chalk.green.bold(`App running on port ${PORT}`))
 });
