@@ -11,6 +11,7 @@ export default {
         _id: id
       }
     });
+    console.log(res, 'ressss');
     return res.data || {};
   },
   createCustomer: async payload => {
@@ -34,8 +35,9 @@ export default {
     });
     return res.data || [];
   },
-  createContact: async payload => {
+  createContact: async (userId, payload) => {
     let res = await axios.post(`http://localhost:3030/api/contact`, {
+      userId: userId,
       ...payload
     });
     return res.data || null;
