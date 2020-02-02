@@ -1,17 +1,45 @@
 import React from 'react';
-import { Row, Col, Modal } from 'antd';
-import { Link } from 'react-router-dom';
+import { Row, Col, Modal, notification, Spin } from 'antd';
+import { Link, withRouter } from 'react-router-dom';
 import Button from '../Button';
 import iconEdit from '../../assets/iconEdit.png';
 import customerImage from '../../assets/customerImage.png';
 import CustomerEditForm from '../CustomerCreateForm';
+import customerService from '../../services/customerService';
 import './index.css';
 
 class CustomerDetailSection extends React.Component {
   state = {
+    loading: false,
     customerEditModal: false,
+    customerDetail: {},
     formRef: React.createRef()
   };
+  async componentDidMount() {
+    try {
+      this.setState({ loading: true });
+      if (this.props.match.params.id) {
+        let detail = await customerService.getCustomer(
+          this.props.match.params.id
+        );
+        if (Object.keys(detail).length > 1) {
+          this.setState({ customerDetail: detail });
+        } else {
+          notification['info']({
+            message: 'No Record',
+            description: 'Redirecting to homepage.',
+            duration: 1.5
+          });
+          setTimeout(() => {
+            this.props.history.push('/');
+          }, 2000);
+        }
+      } else {
+        this.props.history.replace('/');
+      }
+      this.setState({ loading: false });
+    } catch (error) {}
+  }
   openEditCustomerModal = e => {
     e.preventDefault();
     this.setState({
@@ -23,22 +51,45 @@ class CustomerDetailSection extends React.Component {
       formRef
     });
   };
+  handleCreate = (e, values) => {
+    e.preventDefault();
+    const { formRef } = this.state;
+    const { form } = formRef.props;
+    form.validateFieldsAndScroll(async (err, values) => {
+      if (err) {
+        return;
+      } else {
+        await customerService.updateCustomer(this.props.match.params.id, values);
+        let customerDetail = await customerService.getCustomer(this.props.match.params.id);
+        this.setState({ customerDetail, customerEditModal: false, errorForm: false });
+        form.resetFields();
+      }
+    });
+  };
   render() {
-    const { customerEditModal } = this.state;
+    const { customerEditModal, customerDetail, loading } = this.state;
     return (
-      <>
+      <Spin spinning={loading} size="large">
         <div className="customer-detail-section">
           <Row>
             <Col span={16}>
               <div className="titleWrapper">
-                <h1 className="customerName">A & G Sales</h1>
+                <h1 className="customerName">{`${
+                  customerDetail.companyName
+                    ? customerDetail.companyName
+                    : 'A & G Sales'
+                }`}</h1>
                 <a onClick={this.openEditCustomerModal}>
                   <img src={iconEdit} />
                 </a>
               </div>
               <div>
                 <div className="titleDetailSection">
-                  <p>A & G Fence & Supply</p>
+                  <p>{`${
+                    customerDetail.displayName
+                      ? customerDetail.displayName
+                      : 'A & G Fence & Supply'
+                  }`}</p>
                   <span></span>
                   <p>Manufacturer</p>
                 </div>
@@ -48,14 +99,28 @@ class CustomerDetailSection extends React.Component {
                   <img src={customerImage} />
                   <div className="details">
                     <div>
-                      <span>Phone:</span> <Link to="/">+1 (562) 803-1888</Link>
+                      <span>Phone:</span>{' '}
+                      <Link to="/">{`${
+                        customerDetail.phone
+                          ? customerDetail.phone
+                          : '+1 (562) 803-1888'
+                      }`}</Link>
                     </div>
                     <div>
                       <span>Address:</span>
-                      <Link to="/">11926 Woodruff Ave. Downey, CA 90241</Link>
+                      <Link to="/">{`${
+                        customerDetail.billingAddress
+                          ? customerDetail.billingAddress
+                          : '11926 Woodruff Ave. Downey, CA 90241'
+                      }`}</Link>
                     </div>
                     <div>
-                      <span>E-mail:</span> <Link to="/">info@agsales.com</Link>
+                      <span>E-mail:</span>{' '}
+                      <Link to="/">{`${
+                        customerDetail.email
+                          ? customerDetail.email
+                          : 'info@agsales.com'
+                      }`}</Link>
                     </div>
                   </div>
                 </div>
@@ -105,6 +170,7 @@ class CustomerDetailSection extends React.Component {
             footer={null}
           >
             <CustomerEditForm
+              customerInfo={customerDetail}
               wrappedComponentRef={this.saveFormRef}
               visible={customerEditModal}
               onCancel={() => this.setState({ customerEditModal: false })}
@@ -112,8 +178,8 @@ class CustomerDetailSection extends React.Component {
             />
           </Modal>
         </div>
-      </>
+      </Spin>
     );
   }
 }
-export default CustomerDetailSection;
+export default withRouter(CustomerDetailSection);

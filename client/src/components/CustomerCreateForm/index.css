@@ -90,3 +90,15 @@
   position: relative;
   top: -12px;
 }
+.errorTabAstrik .ant-tabs-nav-container .ant-tabs-nav-wrap .ant-tabs-nav-animated {
+  position: relative;
+}
+.errorTabAstrik .ant-tabs-nav-container .ant-tabs-nav-wrap .ant-tabs-nav-animated div:not(.ant-tabs-ink-bar) .ant-tabs-tab:last-child:after {
+  display: inline-block;
+  margin-right: 4px;
+  color: #f5222d;
+  font-size: 14px;
+  font-family: SimSun, sans-serif;
+  line-height: 1;
+  content: '*';
+}

@@ -8,7 +8,7 @@ const routes = [
     exact: true
   },
   {
-    path: '/customer-detail',
+    path: '/customer-detail/:id',
     component: CustomerDetail,
     exact: true
   },

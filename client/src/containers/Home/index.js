@@ -1,29 +1,32 @@
-import React from "react";
-import { Layout, Typography, Modal } from "antd";
-import Header from "../../components/Header";
-import SubHeader from "../../components/SubHeader";
-import services from '../../services/customerService'
-import "./index.css";
-import AllSection from "../../components/TabSection/AllSection";
-import CustomerCreateForm from "../../components/CustomerCreateForm";
+import React from 'react';
+import { Layout, Typography, Modal } from 'antd';
+import Header from '../../components/Header';
+import SubHeader from '../../components/SubHeader';
+import services from '../../services/customerService';
+import './index.css';
+import AllSection from '../../components/TabSection/AllSection';
+import CustomerCreateForm from '../../components/CustomerCreateForm';
 
 const { Title } = Typography;
 class Home extends React.Component {
   state = {
     isOpen: false,
-    defaultActiveKey: "0"
+    customers: [],
+    errorForm: false,
+    defaultActiveKey: '0'
   };
 
   handleCreate = e => {
     e.preventDefault();
     const { form } = this.formRef.props;
     form.validateFieldsAndScroll(async (err, values) => {
-      let res = await services.createCustomer(values);
-      console.log(res, 'res');
       if (err) {
+        this.setState({ errorForm: true });
         return;
       } else {
-        console.log("Received values of form: ", values);
+        await services.createCustomer(values);
+        let allCustomers = await services.getCustomers();
+        this.setState({ customers: allCustomers, isOpen: false, errorForm: false });
         form.resetFields();
       }
     });
@@ -35,18 +38,18 @@ class Home extends React.Component {
     this.setState({ isOpen: !this.state.isOpen });
   };
   render() {
-    const { isOpen, defaultActiveKey } = this.state;
+    const { isOpen, defaultActiveKey, customers, errorForm } = this.state;
     const tabs = [
       {
-        tab: "All",
-        component: <AllSection />
+        tab: 'All',
+        component: <AllSection customers={customers} />
       },
       {
-        tab: "New",
+        tab: 'New',
         component: <div>hi</div>
       },
       {
-        tab: "Inactive",
+        tab: 'Inactive',
         component: <div>hi</div>
       }
     ];
@@ -66,17 +69,18 @@ class Home extends React.Component {
           className="customerInformation"
           title="Customer Information"
           visible={isOpen}
-          onOk={() => this.setState({ isOpen: false, defaultActiveKey: "0" })}
+          onOk={() => this.setState({ isOpen: false, defaultActiveKey: '0' })}
           onCancel={() =>
-            this.setState({ isOpen: false, defaultActiveKey: "0" })
+            this.setState({ isOpen: false, defaultActiveKey: '0' })
           }
           footer={null}
         >
           <CustomerCreateForm
+            errorForm={errorForm}
             wrappedComponentRef={this.saveFormRef}
             visible={isOpen}
             onCancel={() =>
-              this.setState({ isOpen: false, defaultActiveKey: "0" })
+              this.setState({ isOpen: false, defaultActiveKey: '0', errorForm: false })
             }
             onCreate={this.handleCreate}
           />

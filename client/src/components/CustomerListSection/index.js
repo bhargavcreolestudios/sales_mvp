@@ -1,14 +1,14 @@
-import React from "react";
-import { Link, withRouter } from "react-router-dom";
-import { Table, Popover, Divider } from "antd";
-import iconMore from "../../assets/iconMore.png";
-import iconAddFile from "../../assets/icoAddfile.svg";
-import iconEmail from "../../assets/icoMSend.svg";
-import iconInactive from "../../assets/icoInvalid.svg";
-import "./index.css";
+import React from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import { Table, Popover, Divider } from 'antd';
+import iconMore from '../../assets/iconMore.png';
+import iconAddFile from '../../assets/icoAddfile.svg';
+import iconEmail from '../../assets/icoMSend.svg';
+import iconInactive from '../../assets/icoInvalid.svg';
+import './index.css';
 
 // SERVICES
-import customerService from "../../services/customerService";
+import customerService from '../../services/customerService';
 
 class CustomerListSection extends React.Component {
   state = {
@@ -22,6 +22,13 @@ class CustomerListSection extends React.Component {
   async componentDidMount() {
     let allCustomers = await customerService.getCustomers();
     this.setState({ customers: allCustomers });
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.customers !== prevProps.customers) {
+      this.setState({
+        customers: this.props.customers
+      });
+    }
   }
   PopoverAction = (id, e) => {
     this.moreOption(id);
@@ -52,9 +59,9 @@ class CustomerListSection extends React.Component {
     );
     const columns = [
       {
-        title: "Name",
-        dataIndex: "firstName",
-        key: "firstName",
+        title: 'Name',
+        dataIndex: 'firstName',
+        key: 'firstName',
         render: (text, record) => (
           <div className="nameWrapper">
             <div className="customTD fullNameWrapper">
@@ -69,7 +76,7 @@ class CustomerListSection extends React.Component {
               trigger="click"
               onClick={this.PopoverAction.bind(this, record._id)}
               getPopupContainer={() =>
-                document.getElementById("customerListingTable")
+                document.getElementById('customerListingTable')
               }
               onVisibleChange={this.onVisibleChange.bind(this, record._id)}
             >
@@ -87,9 +94,9 @@ class CustomerListSection extends React.Component {
         )
       },
       {
-        title: "Address",
-        dataIndex: "billingAddress",
-        key: "billingAddress",
+        title: 'Address',
+        dataIndex: 'billingAddress',
+        key: 'billingAddress',
         render: (text, record) => (
           <div className="customTD">
             <p className="content">{text}</p>
@@ -100,21 +107,21 @@ class CustomerListSection extends React.Component {
         )
       },
       {
-        title: "Type",
-        dataIndex: "customerType",
-        key: "customerType",
+        title: 'Type',
+        dataIndex: 'customerType',
+        key: 'customerType',
         render: text => <p className="content otherContent">{text}</p>
       },
       {
-        title: "Phone",
-        dataIndex: "phone",
-        key: "phone",
+        title: 'Phone',
+        dataIndex: 'phone',
+        key: 'phone',
         render: text => <p className="content otherContent">{text}</p>
       },
       {
-        title: "Fax No.",
-        dataIndex: "fax",
-        key: "fax",
+        title: 'Fax No.',
+        dataIndex: 'fax',
+        key: 'fax',
         render: text => <p className="content otherContent">{text}</p>
       }
     ];
@@ -122,7 +129,7 @@ class CustomerListSection extends React.Component {
       onChange: (selectedRowKeys, selectedRows) => {
         console.log(
           `selectedRowKeys: ${selectedRowKeys}`,
-          "selectedRows: ",
+          'selectedRows: ',
           selectedRows
         );
       }
@@ -143,7 +150,7 @@ class CustomerListSection extends React.Component {
           onRow={record => ({
             onClick: e => {
               this.props.history.push({
-                pathname: "/customer-detail"
+                pathname: `/customer-detail/${record._id}`
               });
             }
           })}
