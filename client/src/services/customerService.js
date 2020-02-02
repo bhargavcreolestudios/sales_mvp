@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   getCustomers: async () => {
@@ -11,7 +11,7 @@ export default {
         _id: id
       }
     });
-    console.log(res, 'ressss');
+    console.log(res, "ressss");
     return res.data || {};
   },
   createCustomer: async payload => {
@@ -39,6 +39,13 @@ export default {
     let res = await axios.post(`http://localhost:3030/api/contact`, {
       userId: userId,
       ...payload
+    });
+    return res.data || null;
+  },
+  updateContact: async (id, payload) => {
+    let res = await axios.put(`http://localhost:3030/api/contact`, {
+      _id: id,
+      payload: JSON.stringify(payload)
     });
     return res.data || null;
   },

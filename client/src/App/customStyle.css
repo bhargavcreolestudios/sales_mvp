@@ -1,12 +1,12 @@
 @font-face {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
-  src: url('../assets/fonts/Roboto-Regular.ttf');
+  src: url("../assets/fonts/Roboto-Regular.ttf");
 }
 @font-face {
-  font-family: 'Roboto-Medium';
+  font-family: "Roboto-Medium";
   font-style: normal;
-  src: url('../assets/fonts/Roboto-Medium.ttf');
+  src: url("../assets/fonts/Roboto-Medium.ttf");
 }
 *,
 *:before,
@@ -14,7 +14,7 @@
   box-sizing: border-box;
 }
 body {
-  font-family: 'Roboto';
+  font-family: "Roboto";
 }
 .ant-input {
   font-family: Roboto;
@@ -22,7 +22,7 @@ body {
   color: #000;
 }
 .ant-select-selection__placeholder {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -33,7 +33,7 @@ body {
   color: #393939;
 }
 .ant-select-selection-selected-value {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -50,7 +50,7 @@ body {
   display: none;
 }
 .ant-checkbox-wrapper span:not(.ant-checkbox) {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-size: 14px;
   font-weight: normal;
   font-stretch: normal;

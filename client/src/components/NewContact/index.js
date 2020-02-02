@@ -1,14 +1,27 @@
-import React from 'react';
-import { Form, Input, Row, Col, Checkbox, Divider, Button } from 'antd';
-import FormButton from '../Button';
-import './index.css';
-
-const NewContact = Form.create({ name: 'form_in_modal' })(
+import React from "react";
+import { Form, Input, Row, Col, Checkbox, Divider, Button } from "antd";
+import FormButton from "../Button";
+import "./index.css";
+const NewContact = Form.create({ name: "form_in_modal" })(
   //class NewContact extends React.Component{
   class extends React.Component {
-    state = {};
+    state = {
+      contactDetail: {}
+    };
+    componentDidMount() {
+      this.setState({
+        contactDetail: this.props.contactInfo
+      });
+    }
+    componentDidUpdate(prevProps) {
+      if (this.props.contactInfo !== prevProps.contactInfo) {
+        this.setState({
+          contactDetail: this.props.contactInfo
+        });
+      }
+    }
     render() {
-      const {} = this.state;
+      const { contactDetail } = this.state;
       const { visible, onCreate, form, isEdit } = this.props;
       const { getFieldDecorator } = form;
       return (
@@ -18,62 +31,78 @@ const NewContact = Form.create({ name: 'form_in_modal' })(
               <Row>
                 <Col className="spaceBetween1" span={12}>
                   <Form.Item label="First Name">
-                    {getFieldDecorator('firstName', {
+                    {getFieldDecorator("firstName", {
+                      initialValue: isEdit ? contactDetail.firstName : "",
                       rules: [
-                        { required: true, message: 'Please enter first name!' }
+                        { required: true, message: "Please enter first name!" }
                       ]
                     })(<Input />)}
                   </Form.Item>
                 </Col>
                 <Col className="spaceBetween2" span={12}>
                   <Form.Item label="Last Name">
-                    {getFieldDecorator('lastName', {
+                    {getFieldDecorator("lastName", {
+                      initialValue: isEdit ? contactDetail.lastName : "",
                       rules: [
-                        { required: true, message: 'Please enter last name!' }
+                        { required: true, message: "Please enter last name!" }
                       ]
                     })(<Input />)}
                   </Form.Item>
                 </Col>
               </Row>
               <Form.Item label="Title/Position">
-                {getFieldDecorator('position', {
+                {getFieldDecorator("position", {
+                  initialValue: isEdit ? contactDetail.position : "",
                   rules: [
-                    { required: true, message: 'Please enter position/title!' }
+                    { required: true, message: "Please enter position/title!" }
                   ]
                 })(<Input />)}
               </Form.Item>
               <Form.Item label="Email">
-                {getFieldDecorator('email', {
+                {getFieldDecorator("email", {
+                  initialValue: isEdit ? contactDetail.email : "",
                   rules: [
-                    { type: 'email', message: 'Please enter  valid email!' },
-                    { required: true, message: 'Please enter email!' }
+                    { type: "email", message: "Please enter  valid email!" },
+                    { required: true, message: "Please enter email!" }
                   ]
                 })(<Input />)}
               </Form.Item>
               <Row>
                 <Col span={8}>
                   <Form.Item className="spaceBetween1" label="Mobile">
-                    {getFieldDecorator('mobile', {
+                    {getFieldDecorator("mobile", {
+                      initialValue: isEdit ? contactDetail.mobile : "",
                       rules: [
-                        { required: true, message: 'Please enter mobile number!' }
+                        {
+                          required: true,
+                          message: "Please enter mobile number!"
+                        }
                       ]
                     })(<Input />)}
                   </Form.Item>
                 </Col>
                 <Col span={8}>
                   <Form.Item className="spaceBetween2" label="Office No.">
-                    {getFieldDecorator('officeNumber', {
-                       rules: [
-                        { required: true, message: 'Please enter office number!' }
+                    {getFieldDecorator("officeNumber", {
+                      initialValue: isEdit ? contactDetail.officeNumber : "",
+                      rules: [
+                        {
+                          required: true,
+                          message: "Please enter office number!"
+                        }
                       ]
                     })(<Input />)}
                   </Form.Item>
                 </Col>
                 <Col span={8}>
                   <Form.Item className="spaceBetween3" label="Extension">
-                    {getFieldDecorator('extension', {
-                       rules: [
-                        { required: true, message: 'Please enter extension number!' }
+                    {getFieldDecorator("extension", {
+                      initialValue: isEdit ? contactDetail.extension : "",
+                      rules: [
+                        {
+                          required: true,
+                          message: "Please enter extension number!"
+                        }
                       ]
                     })(<Input />)}
                   </Form.Item>
@@ -87,13 +116,12 @@ const NewContact = Form.create({ name: 'form_in_modal' })(
                   <Checkbox>Make inactive</Checkbox>
                 </span>
               ) : (
-                ''
+                ""
               )}
               <div className="btn-grp">
                 <FormButton type="primary" htmlType="submit">
                   Save
                 </FormButton>
-
                 <Button
                   className="cancelBtn"
                   type="default"

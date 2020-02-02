@@ -1,25 +1,38 @@
-import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { Row, Col, Select, Table, Modal } from 'antd';
-
-import NewContact from '../NewContact';
-import services from '../../services/customerService';
-import iconFilter from '../../assets/iconFilter.png';
-import newCustomer from '../../assets/newCustomer.png';
-import iconMore from '../../assets/iconMore.png';
-import './index.css';
+import React from "react";
+import { Link, withRouter } from "react-router-dom";
+import { Row, Col, Select, Table, Modal, Input } from "antd";
+import NewContact from "../NewContact";
+import services from "../../services/customerService";
+import iconFilter from "../../assets/icoSFilter.svg";
+import newCustomer from "../../assets/icoAdd1.svg";
+import iconMore from "../../assets/icoMoreo.svg";
+import "./index.css";
 
 const { Option } = Select;
 class Contacts extends React.Component {
   state = {
     isOpen: false,
     contacts: [],
-    isEditModal: false
+    showData: [],
+    isEditModal: false,
+    status: [
+      "Inactive",
+      "Past Due",
+      "Credit Hold",
+      "PO Required",
+      "Bad Standing"
+    ],
+    filter: {
+      search: "",
+      status: []
+    },
+    editContact: {}
   };
   async componentDidMount() {
     let res = await services.getContacts(this.props.match.params.id);
     this.setState({
-      contacts: res.contacts
+      contacts: res.contacts,
+      showData: res.contacts
     });
   }
   handleCreate = e => {
@@ -29,29 +42,32 @@ class Contacts extends React.Component {
       if (err) {
         return;
       }
-      await services.createContact(
-        this.props.match.params.id,
-        values
-      );
+      await services.createContact(this.props.match.params.id, values);
       let resGet = await services.getContacts(this.props.match.params.id);
       this.setState({
         contacts: resGet.contacts,
+        showData: resGet.contacts,
         isOpen: false
       });
       form.resetFields();
     });
   };
-  handleEditSubmit = () => {
-    const { form } = this.formRef.props;
+  handleEditSubmit = e => {
+    e.preventDefault();
+    const { form } = this.formEditRef.props;
     form.validateFields(async (err, values) => {
       if (err) {
         return;
       }
-      await services.updateContact(
-        this.props.match.params.id,
-        values
-      );
-      console.log('Received values of form: ', values);
+      await services.updateContact(this.state.editContact._id, values);
+      console.log("Received values of form: ", values);
+      let resGet = await services.getContacts(this.props.match.params.id);
+      this.setState({
+        contacts: resGet.contacts,
+        showData: resGet.contacts,
+        editId: "",
+        isEditModal: false
+      });
       form.resetFields();
     });
   };
@@ -59,23 +75,74 @@ class Contacts extends React.Component {
     this.formRef = formRef;
   };
   saveEditFormRef = formRef => {
-    this.formRef = formRef;
+    this.formEditRef = formRef;
   };
   handleRowClick = (record, index) => {
-    console.log(record, 'record');
-    this.setState({ isEditModal: true });
+    console.log(record, "record");
+    this.setState({ isEditModal: true, editContact: record });
+  };
+  filterData = () => {
+    let { filter, contacts } = this.state;
+    let dataSource = [];
+    Object.keys(contacts).map((component, index) => {
+      return dataSource.push(contacts[component]);
+    });
+    contacts = dataSource;
+    if (filter.search.length > 3) {
+      let searchData = [];
+      contacts.filter(data => {
+        for (let [key, value] of Object.entries(data)) {
+          if (
+            value
+              .toString()
+              .toLowerCase()
+              .includes(filter.search.toString().toLowerCase())
+          )
+            searchData.push(data);
+        }
+        contacts = searchData;
+      });
+    }
+    if (filter.status.length > 0) {
+      // contacts = contacts.filter(data => {
+      //   return filter.status.includes(data.state);
+      // });
+    }
+    this.setState({ showData: contacts });
+  };
+  selectAction = (key, value) => {
+    let { filter } = this.state;
+    filter[key] = value;
+    this.setState({ filter }, () => {
+      this.filterData();
+    });
+  };
+  searchChanged = e => {
+    let { filter } = this.state;
+    let value = e.target.value;
+    filter.search = value;
+    this.setState({ filter }, () => {
+      this.filterData();
+    });
   };
   render() {
-    const { isOpen, isEditModal, contacts } = this.state;
+    const {
+      isOpen,
+      isEditModal,
+      contacts,
+      status,
+      showData,
+      editContact
+    } = this.state;
     const columns = [
       {
-        title: 'Name',
-        dataIndex: 'name',
+        title: "Name",
+        dataIndex: "name",
         render: (text, record) => (
           <div className="nameWrapper">
             <div className="customTD fullNameWrapper">
               <p className="name">
-                <Link to="/customer-detail" style={{ color: '#004881' }}>
+                <Link to="/customer-detail" style={{ color: "#004881" }}>
                   {record.firstName}
                 </Link>
               </p>
@@ -88,8 +155,8 @@ class Contacts extends React.Component {
         )
       },
       {
-        title: 'Title / Position',
-        dataIndex: 'titlePosition',
+        title: "Title / Position",
+        dataIndex: "titlePosition",
         render: (text, record) => (
           <div className="customTD">
             <p className="content">{record.position}</p>
@@ -97,23 +164,23 @@ class Contacts extends React.Component {
         )
       },
       {
-        title: 'E-Mail',
-        dataIndex: 'email',
+        title: "E-Mail",
+        dataIndex: "email",
         render: text => <p className="content otherContent">{text}</p>
       },
       {
-        title: 'Extension',
-        dataIndex: 'extension',
+        title: "Extension",
+        dataIndex: "extension",
         render: text => <p className="content otherContent">{text}</p>
       },
       {
-        title: 'Mobile No.',
-        dataIndex: 'mobile',
+        title: "Mobile No.",
+        dataIndex: "mobile",
         render: text => <p className="content otherContent">{text}</p>
       },
       {
-        title: 'Other No.',
-        dataIndex: 'officeNumber',
+        title: "Other No.",
+        dataIndex: "officeNumber",
         render: text => <p className="content otherContent">{text}</p>
       }
     ];
@@ -121,7 +188,7 @@ class Contacts extends React.Component {
       onChange: (selectedRowKeys, selectedRows) => {
         console.log(
           `selectedRowKeys: ${selectedRowKeys}`,
-          'selectedRows: ',
+          "selectedRows: ",
           selectedRows
         );
       }
@@ -151,14 +218,21 @@ class Contacts extends React.Component {
             <Col span={22}>
               <div className="filterIcon">
                 <img src={iconFilter} />
-                <p>Filter by Keyword</p>
+                <Input
+                  allowClear={true}
+                  className="filterInputSearch"
+                  placeholder="Filter by Keyword"
+                  onChange={this.searchChanged.bind(this)}
+                />
               </div>
             </Col>
             <Col span={2}>
               <div className="filterOptions">
                 <div>
                   <Select
-                    style={{ width: 90 }}
+                    onChange={this.selectAction.bind(this, "status")}
+                    mode="multiple"
+                    style={{ width: 130 }}
                     placeholder="Status"
                     optionFilterProp="children"
                     filterOption={(input, option) =>
@@ -167,9 +241,13 @@ class Contacts extends React.Component {
                         .indexOf(input.toLowerCase()) >= 0
                     }
                   >
-                    <Option value="Miner Los Angeles">Miner Los Angeles</Option>
-                    <Option value="lucy">Lucy</Option>
-                    <Option value="tom">Tom</Option>
+                    {status.map(status => {
+                      return (
+                        <Option key={status} value={status}>
+                          {status}
+                        </Option>
+                      );
+                    })}
                   </Select>
                 </div>
               </div>
@@ -186,13 +264,13 @@ class Contacts extends React.Component {
               };
             }}
             rowKey={record => record._id}
-            dataSource={contacts}
+            dataSource={showData}
             pagination={false}
           />
           {/* Create Modal */}
           <Modal
             className="newContact"
-            getContainer={() => document.getElementById('modal-wrapper')}
+            getContainer={() => document.getElementById("modal-wrapper")}
             title="New Contact"
             visible={isOpen}
             onOk={() => this.setState({ isOpen: false })}
@@ -210,7 +288,7 @@ class Contacts extends React.Component {
           {/* Edit Modal */}
           <Modal
             className="newContact"
-            getContainer={() => document.getElementById('modal-wrapper')}
+            getContainer={() => document.getElementById("modal-wrapper")}
             title="New Contact"
             visible={isEditModal}
             onOk={() => this.setState({ isEditModal: false })}
@@ -220,6 +298,7 @@ class Contacts extends React.Component {
             <NewContact
               wrappedComponentRef={this.saveEditFormRef}
               visible={isEditModal}
+              contactInfo={editContact}
               isEdit={true}
               destroyOnClose={true}
               onCancel={() => this.setState({ isEditModal: false })}

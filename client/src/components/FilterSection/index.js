@@ -1,17 +1,121 @@
 import React from "react";
-import { Row, Col, Select, Checkbox } from "antd";
-import iconFilter from "../../assets/iconFilter.png";
+import { Row, Col, Select, Input } from "antd";
+import iconFilter from "../../assets/icoSFilter.svg";
 import "./index.css";
+import services from "../../services/customerService";
 const { Option } = Select;
 class FilterSection extends React.Component {
+  state = {
+    locations: [],
+    accountRepresentatives: [],
+    customerTypes: [],
+    divisions: ["Commercial", "Gates", "Residential"],
+    status: [
+      "Inactive",
+      "Past Due",
+      "Credit Hold",
+      "PO Required",
+      "Bad Standing"
+    ],
+    filter: {
+      search: "",
+      location: [],
+      division: [],
+      accountRepresentative: [],
+      customerType: [],
+      status: []
+    }
+  };
+  async componentDidMount() {
+    let locations = await services.getLocations();
+    let accountRepresentatives = await services.getAccountRepresentatives();
+    let customerTypes = await services.getCustomerTypes();
+    this.setState({
+      locations: locations,
+      accountRepresentatives: accountRepresentatives,
+      customerTypes: customerTypes
+    });
+  }
+  filterData = () => {
+    let { filter } = this.state;
+    let { customers } = this.props;
+    if (filter.search.length > 3) {
+      let searchData = [];
+      customers.filter(data => {
+        for (let [key, value] of Object.entries(data)) {
+          if (
+            value
+              .toString()
+              .toLowerCase()
+              .includes(filter.search.toString().toLowerCase())
+          )
+            searchData.push(data);
+        }
+        customers = searchData;
+      });
+    }
+    if (filter.location.length > 0) {
+      customers = customers.filter(data => {
+        return filter.location.includes(data.state);
+      });
+    }
+    if (filter.division.length > 0) {
+      // customers = customers.filter(data => {
+      //   return filter.division.includes(data.state);
+      // });
+    }
+    if (filter.accountRepresentative.length > 0) {
+      customers = customers.filter(data => {
+        return filter.accountRepresentative.includes(data.accountRep);
+      });
+    }
+    if (filter.customerType.length > 0) {
+      customers = customers.filter(data => {
+        return filter.customerType.includes(data.customerType);
+      });
+    }
+    if (filter.status.length > 0) {
+      // customers = customers.filter(data => {
+      //   return filter.status.includes(data.state);
+      // });
+    }
+    this.props.filter(customers);
+  };
+  selectAction = (key, value) => {
+    let { filter } = this.state;
+    filter[key] = value;
+    this.setState({ filter }, () => {
+      this.filterData();
+    });
+  };
+  searchChanged = e => {
+    let { filter } = this.state;
+    let value = e.target.value;
+    filter.search = value;
+    this.setState({ filter }, () => {
+      this.filterData();
+    });
+  };
   render() {
+    let {
+      locations,
+      divisions,
+      accountRepresentatives,
+      customerTypes,
+      status
+    } = this.state;
     return (
       <div className="filterSection">
         <Row>
           <Col span={6}>
             <div className="filterIcon">
               <img src={iconFilter} />
-              <p>Filter by Keyword</p>
+              <Input
+                allowClear={true}
+                className="filterInputSearch"
+                placeholder="Filter by Keyword"
+                onChange={this.searchChanged.bind(this)}
+              />
             </div>
           </Col>
           <Col span={18}>
@@ -19,7 +123,9 @@ class FilterSection extends React.Component {
               <div>
                 <label style={{ color: "#707070" }}>Location:</label>
                 <Select
-                  style={{ width: 170 }}
+                  onChange={this.selectAction.bind(this, "location")}
+                  mode="multiple"
+                  style={{ width: 150 }}
                   placeholder="Select location"
                   optionFilterProp="children"
                   allowClear={true}
@@ -29,14 +135,20 @@ class FilterSection extends React.Component {
                       .indexOf(input.toLowerCase()) >= 0
                   }
                 >
-                  <Option value="Miner Los Angeles">Miner Los Angeles</Option>
-                  <Option value="lucy">Lucy</Option>
-                  <Option value="tom">Tom</Option>
+                  {locations.map(location => {
+                    return (
+                      <Option key={location._id} value={location.location}>
+                        {location.location}
+                      </Option>
+                    );
+                  })}
                 </Select>
               </div>
               <div>
                 <Select
-                  style={{ width: 100 }}
+                  onChange={this.selectAction.bind(this, "division")}
+                  mode="multiple"
+                  style={{ width: 130 }}
                   placeholder="Division"
                   optionFilterProp="children"
                   filterOption={(input, option) =>
@@ -45,15 +157,24 @@ class FilterSection extends React.Component {
                       .indexOf(input.toLowerCase()) >= 0
                   }
                 >
-                  <Option value="Division">Division</Option>
-                  <Option value="lucy">Lucy</Option>
-                  <Option value="tom">Tom</Option>
+                  {divisions.map(division => {
+                    return (
+                      <Option key={division} value={division}>
+                        {division}
+                      </Option>
+                    );
+                  })}
                 </Select>
               </div>
               <div>
                 <Select
-                  style={{ width: 125 }}
-                  placeholder="Account Req"
+                  onChange={this.selectAction.bind(
+                    this,
+                    "accountRepresentative"
+                  )}
+                  mode="multiple"
+                  style={{ width: 150 }}
+                  placeholder="Account Rep"
                   optionFilterProp="children"
                   filterOption={(input, option) =>
                     option.props.children
@@ -61,15 +182,24 @@ class FilterSection extends React.Component {
                       .indexOf(input.toLowerCase()) >= 0
                   }
                 >
-                  <Option value="Account Request">Account Request</Option>
-                  <Option value="lucy">Lucy</Option>
-                  <Option value="tom">Tom</Option>
+                  {accountRepresentatives.map(accountRepresentative => {
+                    return (
+                      <Option
+                        key={accountRepresentative._id}
+                        value={accountRepresentative.name}
+                      >
+                        {accountRepresentative.name}
+                      </Option>
+                    );
+                  })}
                 </Select>
               </div>
               <div>
                 <Select
-                  style={{ width: 75 }}
-                  placeholder="Type"
+                  onChange={this.selectAction.bind(this, "customerType")}
+                  mode="multiple"
+                  style={{ width: 150 }}
+                  placeholder="Customer Type"
                   optionFilterProp="children"
                   filterOption={(input, option) =>
                     option.props.children
@@ -77,14 +207,20 @@ class FilterSection extends React.Component {
                       .indexOf(input.toLowerCase()) >= 0
                   }
                 >
-                  <Option value="Type">Type</Option>
-                  <Option value="lucy">Lucy</Option>
-                  <Option value="tom">Tom</Option>
+                  {customerTypes.map(customerType => {
+                    return (
+                      <Option key={customerType._id} value={customerType.type}>
+                        {customerType.type}
+                      </Option>
+                    );
+                  })}
                 </Select>
               </div>
               <div>
                 <Select
-                  style={{ width: 90 }}
+                  onChange={this.selectAction.bind(this, "status")}
+                  mode="multiple"
+                  style={{ width: 130 }}
                   placeholder="Status"
                   optionFilterProp="children"
                   filterOption={(input, option) =>
@@ -93,9 +229,13 @@ class FilterSection extends React.Component {
                       .indexOf(input.toLowerCase()) >= 0
                   }
                 >
-                  <Option value="Status">Status</Option>
-                  <Option value="lucy">Lucy</Option>
-                  <Option value="tom">Tom</Option>
+                  {status.map(status => {
+                    return (
+                      <Option key={status} value={status}>
+                        {status}
+                      </Option>
+                    );
+                  })}
                 </Select>
               </div>
             </div>

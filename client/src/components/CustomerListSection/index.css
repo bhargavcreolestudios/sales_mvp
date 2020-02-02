@@ -59,6 +59,7 @@
   margin: 7px auto;
 }
 .ant-table-thead > tr > th {
+  color: #383838;
   background: #ffffff !important;
   border-bottom: 3px solid #f5f5f7 !important;
 }

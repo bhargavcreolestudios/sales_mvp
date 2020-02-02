@@ -1,12 +1,12 @@
-import React from 'react';
-import { Row, Col, Modal, notification, Spin } from 'antd';
-import { Link, withRouter } from 'react-router-dom';
-import Button from '../Button';
-import iconEdit from '../../assets/iconEdit.png';
-import customerImage from '../../assets/customerImage.png';
-import CustomerEditForm from '../CustomerCreateForm';
-import customerService from '../../services/customerService';
-import './index.css';
+import React from "react";
+import { Row, Col, Modal, notification, Spin } from "antd";
+import { Link, withRouter } from "react-router-dom";
+import Button from "../Button";
+import customerService from "../../services/customerService";
+import iconEdit from "../../assets/icoPedit.svg";
+import customerImage from "../../assets/customerImage.png";
+import CustomerEditForm from "../CustomerCreateForm";
+import "./index.css";
 
 class CustomerDetailSection extends React.Component {
   state = {
@@ -25,17 +25,17 @@ class CustomerDetailSection extends React.Component {
         if (Object.keys(detail).length > 1) {
           this.setState({ customerDetail: detail });
         } else {
-          notification['info']({
-            message: 'No Record',
-            description: 'Redirecting to homepage.',
+          notification["info"]({
+            message: "No Record",
+            description: "Redirecting to homepage.",
             duration: 1.5
           });
           setTimeout(() => {
-            this.props.history.push('/');
+            this.props.history.push("/");
           }, 2000);
         }
       } else {
-        this.props.history.replace('/');
+        this.props.history.replace("/");
       }
       this.setState({ loading: false });
     } catch (error) {}
@@ -59,9 +59,18 @@ class CustomerDetailSection extends React.Component {
       if (err) {
         return;
       } else {
-        await customerService.updateCustomer(this.props.match.params.id, values);
-        let customerDetail = await customerService.getCustomer(this.props.match.params.id);
-        this.setState({ customerDetail, customerEditModal: false, errorForm: false });
+        await customerService.updateCustomer(
+          this.props.match.params.id,
+          values
+        );
+        let customerDetail = await customerService.getCustomer(
+          this.props.match.params.id
+        );
+        this.setState({
+          customerDetail,
+          customerEditModal: false,
+          errorForm: false
+        });
         form.resetFields();
       }
     });
@@ -77,7 +86,7 @@ class CustomerDetailSection extends React.Component {
                 <h1 className="customerName">{`${
                   customerDetail.companyName
                     ? customerDetail.companyName
-                    : 'A & G Sales'
+                    : "A & G Sales"
                 }`}</h1>
                 <a onClick={this.openEditCustomerModal}>
                   <img src={iconEdit} />
@@ -88,7 +97,7 @@ class CustomerDetailSection extends React.Component {
                   <p>{`${
                     customerDetail.displayName
                       ? customerDetail.displayName
-                      : 'A & G Fence & Supply'
+                      : "A & G Fence & Supply"
                   }`}</p>
                   <span></span>
                   <p>Manufacturer</p>
@@ -99,11 +108,11 @@ class CustomerDetailSection extends React.Component {
                   <img src={customerImage} />
                   <div className="details">
                     <div>
-                      <span>Phone:</span>{' '}
+                      <span>Phone:</span>{" "}
                       <Link to="/">{`${
                         customerDetail.phone
                           ? customerDetail.phone
-                          : '+1 (562) 803-1888'
+                          : "+1 (562) 803-1888"
                       }`}</Link>
                     </div>
                     <div>
@@ -111,15 +120,15 @@ class CustomerDetailSection extends React.Component {
                       <Link to="/">{`${
                         customerDetail.billingAddress
                           ? customerDetail.billingAddress
-                          : '11926 Woodruff Ave. Downey, CA 90241'
+                          : "11926 Woodruff Ave. Downey, CA 90241"
                       }`}</Link>
                     </div>
                     <div>
-                      <span>E-mail:</span>{' '}
+                      <span>E-mail:</span>{" "}
                       <Link to="/">{`${
                         customerDetail.email
                           ? customerDetail.email
-                          : 'info@agsales.com'
+                          : "info@agsales.com"
                       }`}</Link>
                     </div>
                   </div>
@@ -163,7 +172,7 @@ class CustomerDetailSection extends React.Component {
           <Modal
             title="Customer Information"
             className="customerInformation"
-            getContainer={() => document.getElementById('modal-wrapper')}
+            getContainer={() => document.getElementById("modal-wrapper")}
             visible={customerEditModal}
             onOk={() => this.setState({ customerEditModal: false })}
             onCancel={() => this.setState({ customerEditModal: false })}

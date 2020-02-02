@@ -1,11 +1,11 @@
-import React from 'react';
-import { Layout, Typography, Modal } from 'antd';
-import Header from '../../components/Header';
-import SubHeader from '../../components/SubHeader';
-import services from '../../services/customerService';
-import './index.css';
-import AllSection from '../../components/TabSection/AllSection';
-import CustomerCreateForm from '../../components/CustomerCreateForm';
+import React from "react";
+import { Layout, Typography, Modal } from "antd";
+import Header from "../../components/Header";
+import SubHeader from "../../components/SubHeader";
+import services from "../../services/customerService";
+import "./index.css";
+import AllSection from "../../components/TabSection/AllSection";
+import CustomerCreateForm from "../../components/CustomerCreateForm";
 
 const { Title } = Typography;
 class Home extends React.Component {
@@ -13,7 +13,7 @@ class Home extends React.Component {
     isOpen: false,
     customers: [],
     errorForm: false,
-    defaultActiveKey: '0'
+    defaultActiveKey: "0"
   };
 
   handleCreate = e => {
@@ -26,7 +26,11 @@ class Home extends React.Component {
       } else {
         await services.createCustomer(values);
         let allCustomers = await services.getCustomers();
-        this.setState({ customers: allCustomers, isOpen: false, errorForm: false });
+        this.setState({
+          customers: allCustomers,
+          isOpen: false,
+          errorForm: false
+        });
         form.resetFields();
       }
     });
@@ -41,16 +45,24 @@ class Home extends React.Component {
     const { isOpen, defaultActiveKey, customers, errorForm } = this.state;
     const tabs = [
       {
-        tab: 'All',
+        tab: "All",
         component: <AllSection customers={customers} />
       },
       {
-        tab: 'New',
-        component: <div>hi</div>
+        tab: "New",
+        component: (
+          <h2 style={{ textAlign: "center", color: "#aaaaaa" }}>
+            No Data Found
+          </h2>
+        )
       },
       {
-        tab: 'Inactive',
-        component: <div>hi</div>
+        tab: "Inactive",
+        component: (
+          <h2 style={{ textAlign: "center", color: "#aaaaaa" }}>
+            No Data Found
+          </h2>
+        )
       }
     ];
     return (
@@ -69,9 +81,9 @@ class Home extends React.Component {
           className="customerInformation"
           title="Customer Information"
           visible={isOpen}
-          onOk={() => this.setState({ isOpen: false, defaultActiveKey: '0' })}
+          onOk={() => this.setState({ isOpen: false, defaultActiveKey: "0" })}
           onCancel={() =>
-            this.setState({ isOpen: false, defaultActiveKey: '0' })
+            this.setState({ isOpen: false, defaultActiveKey: "0" })
           }
           footer={null}
         >
@@ -80,7 +92,11 @@ class Home extends React.Component {
             wrappedComponentRef={this.saveFormRef}
             visible={isOpen}
             onCancel={() =>
-              this.setState({ isOpen: false, defaultActiveKey: '0', errorForm: false })
+              this.setState({
+                isOpen: false,
+                defaultActiveKey: "0",
+                errorForm: false
+              })
             }
             onCreate={this.handleCreate}
           />
