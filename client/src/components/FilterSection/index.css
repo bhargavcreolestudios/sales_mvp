@@ -65,7 +65,7 @@
   content: '';
   position: absolute;
   right: 0;
-  top: 0;
+  top: -5px;
   bottom: 0;
   width: calc(100% + 80px);
   border-radius: 3px;
@@ -195,8 +195,24 @@
 .expandicon {
     filter: invert(1);
     position: absolute;
-    right: 0;
+    right: 8px;
     top: 50%;
     transform: translateY(-50%);
     padding-right: 5px !important;
+}
+.filterOptions .selectlocation label {
+  color: #707070 !important;
+}
+.filterOptions .selectlocation.open-dd label {
+  color: #000 !important;
+}
+.overlay:after {
+  content: '';
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  position: absolute;
+  opacity: 0.5;
 }

@@ -20,7 +20,8 @@
   content: '';
   position: absolute;
   top: 84%;
-  left: 40%;
+  left: 50%;
+  transform: translateX(-50%);
   width: 0;
   height: 0;
   border-left: 10px solid transparent;
@@ -37,4 +38,7 @@
 .right-menu li {
   display: inline-block;
   padding: 0px 15px;
+}
+.ant-menu-dark.ant-menu-horizontal {
+  padding-left: 80px;
 }

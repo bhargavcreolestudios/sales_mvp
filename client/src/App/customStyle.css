@@ -68,10 +68,16 @@ body {
   border: 2px solid #1890ff;
   border-top: 0;
   border-left: 0;
+  left: 6px;
+  text-align: center;
 }
 .ant-input-number {
   width: 100%;
 }
 .ant-input-number .ant-input-number-input {
   border: none;
+}
+.ant-checkbox-inner {
+  height: 22px;
+  width: 22px;
 }
