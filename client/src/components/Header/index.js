@@ -27,7 +27,7 @@ class Header extends React.Component {
 	        <Menu.Item key="9">Sales</Menu.Item>
 	        <Menu.Item key="10">Expenses</Menu.Item>
 	        <Menu.Item key="11">Assets</Menu.Item>
-	        <Menu.Item key="12"></Menu.Item>
+	        <Menu.Item key="12">HR</Menu.Item>
 	        <Menu.Item key="13">Resources</Menu.Item>
 	        <Menu.Item className="right-icons">
 		        <ul className="right-menu">

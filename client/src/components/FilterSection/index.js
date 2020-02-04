@@ -156,7 +156,7 @@ class FilterSection extends React.Component {
                 )}
                   mode="multiple"
                   style={{ width: 150 }}
-                  placeholder="Location"
+                  placeholder=""
                   optionFilterProp="children"
                   filterOption={(input, option) =>
                     option.props.children
@@ -164,15 +164,6 @@ class FilterSection extends React.Component {
                       .indexOf(input.toLowerCase()) >= 0
                   }
                 >
-                  <Option value="Minewr los angeles">
-                        Minewr los angeles
-                      </Option>
-                      <Option value="abc deg utjh">
-                        abc deg utjh
-                      </Option>
-                      <Option value="qwerty">
-                        qwerty
-                      </Option>
                   {locations.map(location => {
                     return (
                       <Option key={location._id} value={location.location}>
@@ -183,51 +174,42 @@ class FilterSection extends React.Component {
                 </Select>
                 <img className="expandicon" src={iconExpand} />
               </div>
-              <div>
-              {/* <label style={{ color: "#707070" }}>Location:</label>
-              <Select
-                  onChange={this.selectAction.bind(this, "location")}
-                  getPopupContainer={() =>
-                     document.getElementById("selectlocation")
-                   }
-                   onDropdownVisibleChange={(open) => this.handleSelectVisible(open, 'division')}
-                   dropdownRender={menu => (
-                  <div>
-                    {menu}
-                    <div className="dropdownfooter">
-                    <img src={iconClose} />
-                    <Button className="close">Clear</Button>
-                      </div>
-                  </div>
-                )}
-                  mode="multiple"
-                  style={{ width: 150 }}
-                  placeholder="Location"
-                  optionFilterProp="children"
-                  filterOption={(input, option) =>
-                    option.props.children
-                      .toLowerCase()
-                      .indexOf(input.toLowerCase()) >= 0
-                  }
-                >
-                  <Option value="Minewr los angeles">
-                        Minewr los angeles
-                      </Option>
-                      <Option value="abc deg utjh">
-                        abc deg utjh
-                      </Option>
-                      <Option value="qwerty">
-                        qwerty
-                      </Option>
-                   {divisions.map(division => {
-                    return (
-                      <Option key={division} value={division}>
-                        {division}
-                      </Option>
-                    );
-                  })}
-                </Select>*/}
+              <div className={`selectlocation ${currentSelect === 'division' ? 'open-dd': ''}`} id="divisionlocation">
+                <label style={{ color: "#707070" }}>Division:</label>
                 <Select
+                    onChange={this.selectAction.bind(this, "division")}
+                    getPopupContainer={() =>
+                       document.getElementById("divisionlocation")
+                     }
+                     onDropdownVisibleChange={(open) => this.handleSelectVisible(open, 'division')}
+                     dropdownRender={menu => (
+                    <div>
+                      {menu}
+                      <div className="dropdownfooter">
+                      <img src={iconClose} />
+                      <Button className="close">Clear</Button>
+                        </div>
+                    </div>
+                  )}
+                    mode="multiple"
+                    style={{ width: 150 }}
+                    placeholder="Division"
+                    optionFilterProp="children"
+                    filterOption={(input, option) =>
+                      option.props.children
+                        .toLowerCase()
+                        .indexOf(input.toLowerCase()) >= 0
+                    }
+                  >
+                   {divisions.map(division => {
+                      return (
+                        <Option key={division} value={division}>
+                          {division}
+                        </Option>
+                      );
+                    })}
+                  </Select>
+                {/*<Select
                   onChange={this.selectAction.bind(this, "division")}
                   mode="multiple"
                   style={{ width: 130 }}
@@ -246,10 +228,47 @@ class FilterSection extends React.Component {
                       </Option>
                     );
                   })}
-                </Select>
+                </Select>*/}
               </div>
-              <div>
+              <div className={`selectlocation ${currentSelect === 'accountRepresentative' ? 'open-dd': ''}`} id="accountRepresentativelocation">
+              <label style={{ color: "#707070" }}>Account Rep:</label>
                 <Select
+                      onChange={this.selectAction.bind(this, "accountRepresentative")}
+                      getPopupContainer={() =>
+                         document.getElementById("accountRepresentativelocation")
+                       }
+                       onDropdownVisibleChange={(open) => this.handleSelectVisible(open, 'accountRepresentative')}
+                       dropdownRender={menu => (
+                      <div>
+                        {menu}
+                        <div className="dropdownfooter">
+                        <img src={iconClose} />
+                        <Button className="close">Clear</Button>
+                          </div>
+                      </div>
+                    )}
+                      mode="multiple"
+                      style={{ width: 150 }}
+                      placeholder="Account Rep"
+                      optionFilterProp="children"
+                      filterOption={(input, option) =>
+                        option.props.children
+                          .toLowerCase()
+                          .indexOf(input.toLowerCase()) >= 0
+                      }
+                    >
+                    {accountRepresentatives.map(accountRepresentative => {
+                    return (
+                      <Option
+                        key={accountRepresentative._id}
+                        value={accountRepresentative.name}
+                      >
+                        {accountRepresentative.name}
+                      </Option>
+                    );
+                  })}
+                    </Select>
+                {/*<Select
                   onChange={this.selectAction.bind(
                     this,
                     "accountRepresentative"
@@ -274,10 +293,44 @@ class FilterSection extends React.Component {
                       </Option>
                     );
                   })}
-                </Select>
+                </Select>*/}
               </div>
-              <div>
-                <Select
+              <div className={`selectlocation ${currentSelect === 'customerType' ? 'open-dd': ''}`} id="customertypelocation">
+                <label style={{ color: "#707070" }}>Customer:</label>
+                  <Select
+                      onChange={this.selectAction.bind(this, "customerType")}
+                      getPopupContainer={() =>
+                         document.getElementById("customertypelocation")
+                       }
+                       onDropdownVisibleChange={(open) => this.handleSelectVisible(open, 'customerType')}
+                       dropdownRender={menu => (
+                      <div>
+                        {menu}
+                        <div className="dropdownfooter">
+                        <img src={iconClose} />
+                        <Button className="close">Clear</Button>
+                          </div>
+                      </div>
+                    )}
+                      mode="multiple"
+                      style={{ width: 150 }}
+                      placeholder="Customer Type"
+                      optionFilterProp="children"
+                      filterOption={(input, option) =>
+                        option.props.children
+                          .toLowerCase()
+                          .indexOf(input.toLowerCase()) >= 0
+                      }
+                    >
+                     {customerTypes.map(division => {
+                        return (
+                          <Option key={division._id} value={division.type}>
+                            {division.type}
+                          </Option>
+                        );
+                      })}
+                    </Select>
+                {/*<Select
                   onChange={this.selectAction.bind(this, "customerType")}
                   mode="multiple"
                   style={{ width: 150 }}
@@ -296,10 +349,44 @@ class FilterSection extends React.Component {
                       </Option>
                     );
                   })}
-                </Select>
+                </Select>*/}
               </div>
-              <div>
-                <Select
+              <div className={`selectlocation ${currentSelect === 'status' ? 'open-dd': ''}`} id="statuslocation">
+              <label style={{ color: "#707070" }}>Status:</label>
+                  <Select
+                      onChange={this.selectAction.bind(this, "status")}
+                      getPopupContainer={() =>
+                         document.getElementById("statuslocation")
+                       }
+                       onDropdownVisibleChange={(open) => this.handleSelectVisible(open, 'status')}
+                       dropdownRender={menu => (
+                      <div>
+                        {menu}
+                        <div className="dropdownfooter">
+                        <img src={iconClose} />
+                        <Button className="close">Clear</Button>
+                          </div>
+                      </div>
+                    )}
+                      mode="multiple"
+                      style={{ width: 150 }}
+                      placeholder="Status"
+                      optionFilterProp="children"
+                      filterOption={(input, option) =>
+                        option.props.children
+                          .toLowerCase()
+                          .indexOf(input.toLowerCase()) >= 0
+                      }
+                    >
+                     {status.map(status => {
+                    return (
+                      <Option key={status} value={status}>
+                        {status}
+                      </Option>
+                    );
+                  })}
+                    </Select>
+                {/*<Select
                   onChange={this.selectAction.bind(this, "status")}
                   mode="multiple"
                   style={{ width: 130 }}
@@ -318,7 +405,7 @@ class FilterSection extends React.Component {
                       </Option>
                     );
                   })}
-                </Select>
+                </Select>*/}
               </div>
             </div>
           </Col>
