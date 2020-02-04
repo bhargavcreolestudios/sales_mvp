@@ -57,7 +57,7 @@
 .SubHeaderTabs .ant-tabs-nav .ant-tabs-tab:hover {
   color: #147cd8;
 }
-.ant-tabs-bar {
+.SubHeaderTabs .ant-tabs-bar {
   border-bottom: 2px solid #e8e8e8 !important;
   margin-bottom: 0;
 }
