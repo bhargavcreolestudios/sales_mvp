@@ -6,7 +6,7 @@
   color: #000000 !important;
 }
 .SubHeaderWrapper .SubHeaderButtons {
-  left: 300px;
+  left: 230px;
   position: absolute;
   border: none;
   z-index: 100;
@@ -51,9 +51,13 @@
 .SubHeaderTabs .ant-tabs-nav {
   color: #383838;
 }
+.SubHeaderTabs .ant-tabs-nav .ant-tabs-tab {
+  margin: 0;
+}
 .SubHeaderTabs .ant-tabs-nav .ant-tabs-tab:hover {
   color: #147cd8;
 }
 .ant-tabs-bar {
   border-bottom: 2px solid #e8e8e8 !important;
+  margin-bottom: 0;
 }

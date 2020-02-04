@@ -1,6 +1,8 @@
 import React from "react";
-import { Row, Col, Select, Input } from "antd";
+import { Row, Col, Select, Input,Divider,Icon,Button } from "antd";
+import iconExpand from "../../assets/expand.svg";
 import iconFilter from "../../assets/icoSFilter.svg";
+import iconClose from "../../assets/close.svg";
 import "./index.css";
 import services from "../../services/customerService";
 const { Option } = Select;
@@ -105,7 +107,7 @@ class FilterSection extends React.Component {
       status
     } = this.state;
     return (
-      <div className="filterSection">
+      <div className="filterSection" id="filterSection">
         <Row>
           <Col span={6}>
             <div className="filterIcon">
@@ -120,21 +122,41 @@ class FilterSection extends React.Component {
           </Col>
           <Col span={18}>
             <div className="filterOptions">
-              <div>
+              <div className="selectlocation" id="selectlocation">
                 <label style={{ color: "#707070" }}>Location:</label>
                 <Select
                   onChange={this.selectAction.bind(this, "location")}
+                  getPopupContainer={() =>
+                     document.getElementById("selectlocation")
+                   }
+                   dropdownRender={menu => (
+                  <div>
+                    {menu}
+                    <div className="dropdownfooter">
+                    <img src={iconClose} />
+                    <Button className="close">Clear</Button>
+                      </div>
+                  </div>
+                )}
                   mode="multiple"
                   style={{ width: 150 }}
                   placeholder="Select location"
                   optionFilterProp="children"
-                  allowClear={true}
                   filterOption={(input, option) =>
                     option.props.children
                       .toLowerCase()
                       .indexOf(input.toLowerCase()) >= 0
                   }
                 >
+                  <Option value="Minewr los angeles">
+                        Minewr los angeles
+                      </Option>
+                      <Option value="abc deg utjh">
+                        abc deg utjh
+                      </Option>
+                      <Option value="qwerty">
+                        qwerty
+                      </Option>
                   {locations.map(location => {
                     return (
                       <Option key={location._id} value={location.location}>
@@ -143,6 +165,7 @@ class FilterSection extends React.Component {
                     );
                   })}
                 </Select>
+                <img className="expandicon" src={iconExpand} />
               </div>
               <div>
                 <Select

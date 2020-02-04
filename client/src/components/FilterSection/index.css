@@ -3,15 +3,18 @@
   background-color: #f5f5f7 !important;
   border-radius: 5px !important;
 }
+
 .filterIcon {
   align-items: center;
   display: inline-flex;
 }
+
 .filterIcon img {
   width: 25px;
   height: 25px;
   object-fit: contain;
 }
+
 .filterIcon p {
   height: 20px;
   font-size: 15px;
@@ -23,19 +26,23 @@
   text-align: left;
   color: #393939;
 }
+
 .ant-select-selection {
   background-color: inherit !important;
   border: none !important;
 }
+
 .ant-select-open .ant-select-selection,
 .ant-select-focused .ant-select-selection,
 .ant-select-selection:focus,
 .ant-select-selection:active {
   box-shadow: none !important;
 }
+
 .filterOptions {
   display: inline-flex !important;
 }
+
 .filterInputSearch .ant-input,
 .filterInputSearch .ant-input:hover,
 .filterInputSearch .ant-input:active,
@@ -43,4 +50,153 @@
   background-color: #f5f5f7;
   border: none;
   box-shadow: none;
+}
+
+.filterInputSearch .ant-input::placeholder {
+  color: #393939;
+}
+
+.selectlocation .ant-select {
+  position: relative;
+  padding-right: 15px;
+}
+
+.selectlocation .ant-select-open:after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: calc(100% + 80px);
+  border-radius: 3px;
+  background-color: #e8e8eb;
+  z-index: 0;
+}
+
+.filterOptions .selectlocation label,
+.filterOptions .selectlocation .ant-select-selection {
+  position: relative;
+  z-index: 1;
+  color: #000 !important;
+  font-size: 16px;
+}
+
+.filterOptions .selectlocation .ant-select-open .ant-select-selection__placeholder {
+  color: #000 !important;
+}
+
+.selectlocation .ant-select-dropdown.ant-select-dropdown--multiple .ant-select-dropdown-menu-item {
+  padding-left: 40px;
+  padding-right: 12px;
+}
+
+.selectlocation .ant-select-dropdown.ant-select-dropdown--multiple .ant-select-dropdown-menu-item .ant-select-selected-icon {
+  right: auto;
+  left: 12px;
+}
+
+.selectlocation .ant-select-dropdown.ant-select-dropdown--multiple .ant-select-dropdown-menu-item:hover,
+.selectlocation .ant-select-dropdown.ant-select-dropdown--multiple .ant-select-dropdown-menu-item-selected {
+  background-color: transparent;
+  font-weight: normal;
+}
+
+.selectlocation .ant-select-dropdown.ant-select-dropdown--multiple .ant-select-dropdown-menu-item .ant-select-selected-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  border: solid 1px #e7e8ed;
+  background-color: #ffffff;
+  line-height: 20px;
+}
+
+.selectlocation .ant-select-dropdown.ant-select-dropdown--multiple .ant-select-dropdown-menu-item-selected .ant-select-selected-icon {
+  border: solid 1px #1b79d8;
+  color: #1b79d8;
+}
+
+.selectlocation .ant-select-dropdown {
+  left: -14px !important;
+  right: 0 !important;
+  width: auto !important;
+  top: 33px !important;
+  border-radius: 3px;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+}
+
+.selectlocation {
+  position: relative;
+}
+
+.selectlocation .ant-btn.close {
+  display: inline-block;
+  width: 35px;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  font-size: 14px;
+  height: auto;
+}
+
+.selectlocation .ant-btn.close:hover {
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.selectlocation .ant-btn.close:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.selectlocation .dropdownfooter {
+  text-align: right;
+  color: #9799a3;
+  border-top: solid 1px #e7e8ed;
+  margin: 10px 12px;
+  padding-top: 10px;
+}
+
+.selectlocation .dropdownfooter img {
+  cursor: pointer;
+}
+
+.selectlocation .ant-select-selection--multiple .ant-select-selection__choice {
+  background-color: transparent;
+  color: #000;
+  padding: 0;
+  border:0;
+}
+
+.selectlocation .anticon svg {
+  display: none;
+}
+
+.selectlocation .ant-select-dropdown.ant-select-dropdown--multiple .ant-select-dropdown-menu-item-selected .anticon:after {
+  content: '';
+  background-image: url("../../assets/check.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  top: 5px;
+  bottom: 4px;
+  left: 4px;
+  right: 4px;
+  line-height: normal;
+}
+
+.selectlocation .ant-select-selection--multiple .ant-select-selection__choice:not(:first-child) {
+  display: none;
+}
+.ant-select-selection--multiple .ant-select-search--inline {
+  position: absolute;
+}
+.filterIcon {
+  width: 100%;
+}
+.expandicon {
+    filter: invert(1);
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-right: 5px !important;
 }
