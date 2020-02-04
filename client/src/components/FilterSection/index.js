@@ -11,6 +11,7 @@ class FilterSection extends React.Component {
     locations: [],
     accountRepresentatives: [],
     customerTypes: [],
+    currentSelect: null,
     divisions: ["Commercial", "Gates", "Residential"],
     status: [
       "Inactive",
@@ -98,11 +99,25 @@ class FilterSection extends React.Component {
       this.filterData();
     });
   };
+  handleSelectVisible = (open, key) => {
+    if(open) {
+      this.setState({
+        currentSelect: key
+      })
+    }else {
+      this.setState({
+        currentSelect: null
+      })
+    }
+    this.props.parentSelect(open)
+  }
   render() {
     let {
       locations,
       divisions,
+      filter,
       accountRepresentatives,
+      currentSelect,
       customerTypes,
       status
     } = this.state;
@@ -122,13 +137,14 @@ class FilterSection extends React.Component {
           </Col>
           <Col span={18}>
             <div className="filterOptions">
-              <div className="selectlocation" id="selectlocation">
-                <label style={{ color: "#707070" }}>Location:</label>
+              <div className={`selectlocation ${currentSelect === 'location' ? 'open-dd': ''}`} id="selectlocation">
+               <label style={{ color: "#707070" }}>Location:</label>
                 <Select
                   onChange={this.selectAction.bind(this, "location")}
                   getPopupContainer={() =>
                      document.getElementById("selectlocation")
                    }
+                   onDropdownVisibleChange={(open) => this.handleSelectVisible(open, 'location')}
                    dropdownRender={menu => (
                   <div>
                     {menu}
@@ -140,7 +156,7 @@ class FilterSection extends React.Component {
                 )}
                   mode="multiple"
                   style={{ width: 150 }}
-                  placeholder="Select location"
+                  placeholder="Location"
                   optionFilterProp="children"
                   filterOption={(input, option) =>
                     option.props.children
@@ -168,6 +184,49 @@ class FilterSection extends React.Component {
                 <img className="expandicon" src={iconExpand} />
               </div>
               <div>
+              {/* <label style={{ color: "#707070" }}>Location:</label>
+              <Select
+                  onChange={this.selectAction.bind(this, "location")}
+                  getPopupContainer={() =>
+                     document.getElementById("selectlocation")
+                   }
+                   onDropdownVisibleChange={(open) => this.handleSelectVisible(open, 'division')}
+                   dropdownRender={menu => (
+                  <div>
+                    {menu}
+                    <div className="dropdownfooter">
+                    <img src={iconClose} />
+                    <Button className="close">Clear</Button>
+                      </div>
+                  </div>
+                )}
+                  mode="multiple"
+                  style={{ width: 150 }}
+                  placeholder="Location"
+                  optionFilterProp="children"
+                  filterOption={(input, option) =>
+                    option.props.children
+                      .toLowerCase()
+                      .indexOf(input.toLowerCase()) >= 0
+                  }
+                >
+                  <Option value="Minewr los angeles">
+                        Minewr los angeles
+                      </Option>
+                      <Option value="abc deg utjh">
+                        abc deg utjh
+                      </Option>
+                      <Option value="qwerty">
+                        qwerty
+                      </Option>
+                   {divisions.map(division => {
+                    return (
+                      <Option key={division} value={division}>
+                        {division}
+                      </Option>
+                    );
+                  })}
+                </Select>*/}
                 <Select
                   onChange={this.selectAction.bind(this, "division")}
                   mode="multiple"

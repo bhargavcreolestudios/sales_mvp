@@ -206,7 +206,7 @@
 .filterOptions .selectlocation.open-dd label {
   color: #000 !important;
 }
-.overlay:after {
+.overlay table:after {
   content: '';
   top: 0;
   bottom: 0;

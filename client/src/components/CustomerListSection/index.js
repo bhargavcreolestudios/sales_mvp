@@ -15,6 +15,7 @@ class CustomerListSection extends React.Component {
   state = {
     key: 0,
     moreOption: false,
+    currentSelect: false,
     customers: [],
     showData: []
   };
@@ -43,8 +44,13 @@ class CustomerListSection extends React.Component {
   filteredData = showData => {
     this.setState({ showData });
   };
+  parentSelect = (data) => {
+    this.setState({
+      currentSelect: data
+    })
+  } 
   render() {
-    const { moreOption, key, customers, showData } = this.state;
+    const { moreOption, key, customers, showData, currentSelect } = this.state;
     const content = (
       <div className="CustomerListingActivityContent">
         <p>
@@ -146,8 +152,8 @@ class CustomerListSection extends React.Component {
     };
     return (
       <>
-        <FilterSection filter={this.filteredData} customers={customers} />
-        <div id="customerListingTable">
+        <FilterSection filter={this.filteredData} customers={customers} parentSelect={this.parentSelect}/>
+        <div id="customerListingTable" className={`${currentSelect ? 'overlay': ''}`}>
           <Table
             rowKey="key"
             className="customerListingTable"
