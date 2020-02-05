@@ -11,7 +11,7 @@ class FilterSection extends React.Component {
     locations: [],
     accountRepresentatives: [],
     customerTypes: [],
-    currentSelect: null,
+    currentSelect: {},
     divisions: ["Commercial", "Gates", "Residential"],
     status: [
       "Inactive",
@@ -99,18 +99,88 @@ class FilterSection extends React.Component {
       this.filterData();
     });
   };
-  handleSelectVisible = (open, key) => {
-    if(open) {
+
+  handleLocationSelectVisible = (open, key) => {
+    let { currentSelect } = this.state;
+      currentSelect.location = open;
       this.setState({
-        currentSelect: key
+        currentSelect
       })
-    }else {
-      this.setState({
-        currentSelect: null
-      })
-    }
-    this.props.parentSelect(open)
+      this.props.parentSelect(open);
   }
+
+   handleDivisionSelectVisible = (open, key) => {
+    let { currentSelect } = this.state;
+      currentSelect.division = open;
+      this.setState({
+        currentSelect
+      })
+      this.props.parentSelect(open);
+  }
+
+  handleTypeSelectVisible = (open, key) => {
+    let { currentSelect } = this.state;
+      currentSelect.customerType = open;
+      this.setState({
+        currentSelect
+      })
+      this.props.parentSelect(open);
+  }
+  handleAccountSelectVisible = (open, key) => {
+    let { currentSelect } = this.state;
+      currentSelect.accountRepresentative = open;
+      this.setState({
+        currentSelect
+      })
+      this.props.parentSelect(open);
+  }
+  handleStatusSelectVisible = (open, key) => {
+    let { currentSelect } = this.state;
+      currentSelect.status = open;
+      this.setState({
+        currentSelect
+      })
+      this.props.parentSelect(open);
+  }
+
+ /* handleSelectVisible = (open, key) => {
+    let { currentSelect } = this.state;
+    if(key === 'location') {
+      currentSelect.location = open;
+      this.setState({
+        currentSelect
+      })
+      this.props.parentSelect(open, 'location');
+    }
+    else if(key === 'division') {
+      currentSelect.division = open
+      this.setState({
+        currentSelect
+      })
+      this.props.parentSelect(open, 'division');
+    }
+    else if(key === 'accountRepresentative') {
+      currentSelect.accountRepresentative = open
+      this.setState({
+        currentSelect
+      })
+      this.props.parentSelect(open, 'accountRepresentative');
+    }
+    else if(key === 'customerType') {
+      currentSelect.customerType = open
+      this.setState({
+        currentSelect
+      })
+      this.props.parentSelect(open, 'customerType');
+    }
+    else if (key === 'status') {
+      currentSelect.status = open
+      this.setState({
+        currentSelect
+      })
+      this.props.parentSelect(open, 'status');
+    }
+  }*/
   render() {
     let {
       locations,
@@ -137,14 +207,14 @@ class FilterSection extends React.Component {
           </Col>
           <Col span={18}>
             <div className="filterOptions">
-              <div className={`selectlocation ${currentSelect === 'location' ? 'open-dd': ''} ${filter.location.length > 0 ? 'dropdown-open': ''}`} id="selectlocation">
+              <div className={`selectlocation ${currentSelect.location ? 'open-dd': ''} ${filter.location.length > 0 ? 'dropdown-open': ''}`} id="selectlocation">
                {filter.location.length > 0  && <label style={{ color: "#707070" }}>Location:</label>}
                 <Select
                   onChange={this.selectAction.bind(this, "location")}
                   getPopupContainer={() =>
                      document.getElementById("selectlocation")
                    }
-                   onDropdownVisibleChange={(open) => this.handleSelectVisible(open, 'location')}
+                   onDropdownVisibleChange={(open) => this.handleLocationSelectVisible(open, 'location')}
                    dropdownRender={menu => (
                   <div>
                     {menu}
@@ -156,7 +226,7 @@ class FilterSection extends React.Component {
                 )}
                   mode="multiple"
                   style={{ width: 115 }}
-                  placeholder="Location:"
+                  placeholder="Location"
                   optionFilterProp="children"
                   filterOption={(input, option) =>
                     option.props.children
@@ -174,14 +244,15 @@ class FilterSection extends React.Component {
                 </Select>
                 <img className="expandicon" src={iconExpand} />
               </div>
-              <div className={`selectlocation ${currentSelect === 'division' ? 'open-dd': ''} ${filter.division.length > 0 ? 'dropdown-open': ''}`} id="divisionlocation">
+              <div className={`selectlocation ${currentSelect.division ? 'open-dd': ''} ${filter.division.length > 0 ? 'dropdown-open': ''}`} id="divisionlocation">
               {filter.division.length > 0  && <label style={{ color: "#707070" }}>Division:</label>}
                 <Select
                     onChange={this.selectAction.bind(this, "division")}
                     getPopupContainer={() =>
                        document.getElementById("divisionlocation")
                      }
-                     onDropdownVisibleChange={(open) => this.handleSelectVisible(open, 'division')}
+                     
+                     onDropdownVisibleChange={(open) => this.handleDivisionSelectVisible(open, 'division')}
                      dropdownRender={menu => (
                     <div>
                       {menu}
@@ -212,14 +283,14 @@ class FilterSection extends React.Component {
                   <img className="expandicon" src={iconExpand} />
                
               </div>
-              <div className={`selectlocation ${currentSelect === 'accountRepresentative' ? 'open-dd': ''} ${filter.accountRepresentative.length > 0 ? 'dropdown-open': ''}`} id="accountRepresentativelocation">
+              <div className={`selectlocation ${currentSelect.accountRepresentative ? 'open-dd': ''} ${filter.accountRepresentative.length > 0 ? 'dropdown-open': ''}`} id="accountRepresentativelocation">
               {filter.accountRepresentative.length > 0  && <label style={{ color: "#707070" }}>Account Rep:</label>}
                 <Select
                       onChange={this.selectAction.bind(this, "accountRepresentative")}
                       getPopupContainer={() =>
                          document.getElementById("accountRepresentativelocation")
                        }
-                       onDropdownVisibleChange={(open) => this.handleSelectVisible(open, 'accountRepresentative')}
+                       onDropdownVisibleChange={(open) => this.handleAccountSelectVisible(open, 'accountRepresentative')}
                        dropdownRender={menu => (
                       <div>
                         {menu}
@@ -254,14 +325,14 @@ class FilterSection extends React.Component {
             
                   
               </div>
-              <div className={`selectlocation ${currentSelect === 'customerType' ? 'open-dd': ''} ${filter.customerType.length > 0 ? 'dropdown-open': ''}`} id="customertypelocation">
-              {filter.customerType.length > 0  && <label style={{ color: "#707070" }}>Customer:</label>}
+              <div className={`selectlocation ${currentSelect.customerType ? 'open-dd': ''} ${filter.customerType.length > 0 ? 'dropdown-open': ''}`} id="customertypelocation">
+              {filter.customerType.length > 0  && <label style={{ color: "#707070" }}>Type:</label>}
                   <Select
                       onChange={this.selectAction.bind(this, "customerType")}
                       getPopupContainer={() =>
                          document.getElementById("customertypelocation")
                        }
-                       onDropdownVisibleChange={(open) => this.handleSelectVisible(open, 'customerType')}
+                       onDropdownVisibleChange={(open) => this.handleTypeSelectVisible(open, 'customerType')}
                        dropdownRender={menu => (
                       <div>
                         {menu}
@@ -272,8 +343,8 @@ class FilterSection extends React.Component {
                       </div>
                     )}
                       mode="multiple"
-                      style={{ width: 155 }}
-                      placeholder="Customer Type"
+                      style={{ width: 95 }}
+                      placeholder="Type"
                       optionFilterProp="children"
                       filterOption={(input, option) =>
                         option.props.children
@@ -292,14 +363,14 @@ class FilterSection extends React.Component {
                     <img className="expandicon" src={iconExpand} />
                 
               </div>
-              <div className={`selectlocation ${currentSelect === 'status' ? 'open-dd': ''} ${filter.status.length > 0 ? 'dropdown-open': ''}`} id="statuslocation">
+              <div className={`selectlocation ${currentSelect.status ? 'open-dd': ''} ${filter.status.length > 0 ? 'dropdown-open': ''}`} id="statuslocation">
               {filter.status.length > 0  && <label style={{ color: "#707070" }}>Status:</label>}
                   <Select
                       onChange={this.selectAction.bind(this, "status")}
                       getPopupContainer={() =>
                          document.getElementById("statuslocation")
                        }
-                       onDropdownVisibleChange={(open) => this.handleSelectVisible(open, 'status')}
+                       onDropdownVisibleChange={(open) => this.handleStatusSelectVisible(open, 'status')}
                        dropdownRender={menu => (
                       <div>
                         {menu}

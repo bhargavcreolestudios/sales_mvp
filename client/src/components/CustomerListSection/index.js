@@ -17,6 +17,7 @@ class CustomerListSection extends React.Component {
     moreOption: false,
     currentSelect: false,
     customers: [],
+    currentKey: null,
     showData: []
   };
   moreOption = key => {
@@ -49,13 +50,14 @@ class CustomerListSection extends React.Component {
   filteredData = showData => {
     this.setState({ showData });
   };
-  parentSelect = (data) => {
+  parentSelect = (data, status) => {
     this.setState({
-      currentSelect: data
+      currentSelect: data,
+      currentKey: status
     })
   } 
   render() {
-    const { moreOption, key, customers, showData, currentSelect } = this.state;
+    const { moreOption, key, customers, showData, currentSelect, currentKey } = this.state;
     const content = (
       <div className="CustomerListingActivityContent">
         <p>

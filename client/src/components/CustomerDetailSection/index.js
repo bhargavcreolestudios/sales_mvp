@@ -109,27 +109,27 @@ class CustomerDetailSection extends React.Component {
                   <div className="details">
                     <div>
                       <span>Phone:</span>{" "}
-                      <Link to="/">{`${
+                      <p to="/">{`${
                         customerDetail.phone
                           ? customerDetail.phone
                           : "+1 (562) 803-1888"
-                      }`}</Link>
+                      }`}</p>
                     </div>
                     <div>
                       <span>Address:</span>
-                      <Link to="/">{`${
+                      <p to="/">{`${
                         customerDetail.billingAddress
                           ? customerDetail.billingAddress
                           : "11926 Woodruff Ave. Downey, CA 90241"
-                      }`}</Link>
+                      }`}</p>
                     </div>
                     <div>
                       <span>E-mail:</span>{" "}
-                      <Link to="/">{`${
+                      <p to="/">{`${
                         customerDetail.email
                           ? customerDetail.email
                           : "info@agsales.com"
-                      }`}</Link>
+                      }`}</p>
                     </div>
                   </div>
                 </div>

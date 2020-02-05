@@ -34,21 +34,14 @@ class Contacts extends React.Component {
   async componentDidMount() {
     let res = await services.getContacts(this.props.match.params.id);
     this.setState({
-      contacts: res.contacts,
+      contacts: res.contacts || [],
       showData: res.contacts
     });
   }
   handleSelectVisible = (open, key) => {
-    if(open) {
-      this.setState({
-        currentSelect: key
-      })
-    }else {
-      this.setState({
-        currentSelect: null
-      })
-    }
-    // this.props.parentSelect(open)
+    this.setState({
+      currentSelect: open
+    })
   }
   handleCreate = e => {
     e.preventDefault();
@@ -75,7 +68,6 @@ class Contacts extends React.Component {
         return;
       }
       await services.updateContact(this.state.editContact._id, values);
-      console.log("Received values of form: ", values);
       let resGet = await services.getContacts(this.props.match.params.id);
       this.setState({
         contacts: resGet.contacts,
@@ -93,35 +85,36 @@ class Contacts extends React.Component {
     this.formEditRef = formRef;
   };
   handleRowClick = (record, index) => {
-    console.log(record, "record");
     this.setState({ isEditModal: true, editContact: record });
   };
   filterData = () => {
     let { filter, contacts } = this.state;
     let dataSource = [];
-    Object.keys(contacts).map((component, index) => {
-      return dataSource.push(contacts[component]);
-    });
-    contacts = dataSource;
-    if (filter.search.length > 3) {
-      let searchData = [];
-      contacts.filter(data => {
-        for (let [key, value] of Object.entries(data)) {
-          if (
-            value
-              .toString()
-              .toLowerCase()
-              .includes(filter.search.toString().toLowerCase())
-          )
-            searchData.push(data);
-        }
-        contacts = searchData;
+    if(contacts.length > 0) {
+        Object.keys(contacts).map((component, index) => {
+        return dataSource.push(contacts[component]);
       });
-    }
-    if (filter.status.length > 0) {
-      // contacts = contacts.filter(data => {
-      //   return filter.status.includes(data.state);
-      // });
+      contacts = dataSource;
+      if (filter.search.length > 3) {
+        let searchData = [];
+        contacts.filter(data => {
+          for (let [key, value] of Object.entries(data)) {
+            if (
+              value
+                .toString()
+                .toLowerCase()
+                .includes(filter.search.toString().toLowerCase())
+            )
+              searchData.push(data);
+          }
+          contacts = searchData;
+        });
+      }
+      if (filter.status.length > 0) {
+        // contacts = contacts.filter(data => {
+        //   return filter.status.includes(data.state);
+        // });
+      }
     }
     this.setState({ showData: contacts });
   };
@@ -211,7 +204,7 @@ class Contacts extends React.Component {
       }
     };
     return (
-      <div>
+      <div className="mainContactWrapper">
         <div className="addNewSection">
           <div className="contactfilter">
           <Select defaultValue="All" style={{ width: 80 }}>
@@ -291,7 +284,7 @@ class Contacts extends React.Component {
             </Col>
           </Row>
         </div>
-        <div>
+        <div className={`${currentSelect ? 'overlay': ''}`}>
           <Table
             rowSelection={rowSelection}
             columns={columns}

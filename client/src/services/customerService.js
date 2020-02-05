@@ -11,7 +11,6 @@ export default {
         _id: id
       }
     });
-    console.log(res, "ressss");
     return res.data || {};
   },
   createCustomer: async payload => {

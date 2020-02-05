@@ -70,5 +70,8 @@
 .ant-select-open~.expandicon {
   transform: rotate(180deg) translateY(-50%);
   top: 8px;
-  right: -3px;
+  right: 5px;
+}
+.mainContactWrapper {
+  min-height: 350px;
 }

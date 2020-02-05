@@ -69,7 +69,7 @@
 .customerDetail .details div span {
   width: 84px;
 }
-.customerDetail .details div a {
+.customerDetail .details div p {
   text-align: left;
   /* margin-left: 25px; */
   font-size: 16px;
