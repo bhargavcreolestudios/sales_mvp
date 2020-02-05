@@ -90,13 +90,13 @@ table .ant-checkbox-checked .ant-checkbox-inner::after {
   text-align: center;
   top: 10px;
 }
-#customerListingTable table th {
+table th {
   color: #707070;
 }
-#customerListingTable table th:nth-child(2) {
+table th:nth-child(2) {
   color: #141823;
 }
-#customerListingTable table th:nth-child(2) .ant-table-column-title:after {
+table th:nth-child(2) .ant-table-column-title:after {
   content: '';
   background-image: url("../assets/icoSortd.svg");
   height: 20px;
@@ -106,16 +106,16 @@ table .ant-checkbox-checked .ant-checkbox-inner::after {
   display: inline-block;
   vertical-align: middle;
 }
-#customerListingTable table td:nth-child(2),
-#customerListingTable table td:nth-child(3),
-#customerListingTable table td:nth-child(4) {
-  width: 25%;
+table td:nth-child(2),
+table td:nth-child(3),
+table td:nth-child(4) {
+  width: 23%;
 }
 .ant-form-item-required::before {
   color: #a80a0a;
-  font-weight: 600;
+  font-weight: 500;
 }
-.ant-table-thead > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td, .ant-table-tbody > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td, .ant-table-thead > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td, .ant-table-tbody > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td
+.ant-table-thead > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td, .ant-table-tbody > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td, .ant-table-thead > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td, .ant-table-tbody > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td,.ant-table-tbody tr.row-select td
 {
   background-color: #f5f5f7;
 }
@@ -125,7 +125,7 @@ table .ant-checkbox-checked .ant-checkbox-inner::after {
   transition: none;
 }
 
-.ant-table-tbody > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td .ant-checkbox-wrapper,.ant-table-tbody .ant-checkbox-wrapper.ant-checkbox-wrapper-checked {
+.ant-table-tbody > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td .ant-checkbox-wrapper,.ant-table-tbody .ant-checkbox-wrapper.ant-checkbox-wrapper-checked,.ant-table-tbody tr.row-select td .ant-checkbox-wrapper {
   visibility: visible;
 }
 .SubHeaderWrapper .SubHeaderButtons .ant-btn {
@@ -157,7 +157,8 @@ table .ant-checkbox-checked .ant-checkbox-inner::after {
 
 .ant-table-tbody > tr.ant-table-row-selected > td span,
 .ant-table-tbody > tr.ant-table-row-selected > td .nameWrapper a,
-.ant-table-tbody > tr:hover > td .nameWrapper a {
+.ant-table-tbody > tr:hover > td .nameWrapper a,
+.ant-table-tbody tr.row-select td .nameWrapper a {
   text-decoration: underline;
   text-decoration-color: #004881;
   color: #004881 !important;
@@ -170,3 +171,43 @@ table .ant-checkbox-checked .ant-checkbox-inner::after {
   letter-spacing: normal;
   text-align: left;
 }
+
+form .ant-input,form .ant-select-selection {
+  height: 36px;
+}
+form .ant-select-selection__rendered {
+  line-height:36px;
+}
+.ant-modal .ant-modal-header {
+  padding-top: 35px;
+  padding-right: 65px;
+}
+.ant-modal .ant-modal-close > span {
+  display: none;
+}
+.ant-modal .ant-modal-close:after {
+  content:'';
+  background-image: url(../assets/close-x.svg);
+  background-position: center;
+  display: inline-block;
+  height: 25px;
+  width: 25px;
+  background-size: 14px;
+  background-repeat: no-repeat;
+}
+.ant-modal .ant-modal-close {
+  top:36px;
+  right: 40px;
+}
+.ant-modal-mask {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+.ant-modal .ant-modal-content {
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+h3.ant-typography, .ant-typography h3 {
+  font-family: roboto-medium;
+  font-weight: normal;
+}
+

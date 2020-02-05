@@ -67,10 +67,10 @@
   right: 2px;
   top: 15px;
 }
-.ant-select-open~.expandicon {
+.contactfilter .ant-select-open~.expandicon {
   transform: rotate(180deg) translateY(-50%);
   top: 8px;
-  right: 5px;
+  right: -3px;
 }
 .mainContactWrapper {
   min-height: 350px;
