@@ -85,7 +85,7 @@ class CustomerListSection extends React.Component {
           <div className="nameWrapper">
             <div className="customTD fullNameWrapper">
               <p className="name">
-                <span>{text}</span>
+                <span>{record.companyName}</span>
               </p>
               <p className="content">{record.displayName}</p>
             </div>

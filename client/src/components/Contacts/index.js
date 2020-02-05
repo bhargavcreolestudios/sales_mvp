@@ -16,6 +16,7 @@ class Contacts extends React.Component {
     isOpen: false,
     contacts: [],
     showData: [],
+    rowSelect: null,
     currentSelect: null,
     isEditModal: false,
     status: [
@@ -85,7 +86,7 @@ class Contacts extends React.Component {
     this.formEditRef = formRef;
   };
   handleRowClick = (record, index) => {
-    this.setState({ isEditModal: true, editContact: record });
+    this.setState({ isEditModal: true, editContact: record, rowSelect: record._id });
   };
   filterData = () => {
     let { filter, contacts } = this.state;
@@ -153,10 +154,9 @@ class Contacts extends React.Component {
             <div className="customTD fullNameWrapper">
               <p className="name">
                 <Link to="/customer-detail" style={{ color: "#141823" }}>
-                  {record.firstName}
+                  {`${record.firstName} ${record.lastName}`}
                 </Link>
               </p>
-              <p className="content">{record.lastName}</p>
             </div>
             <div className="iconMoreWrapper">
               <img src={iconMore} />
@@ -293,6 +293,11 @@ class Contacts extends React.Component {
                 onClick: () => this.handleRowClick(record, index)
               };
             }}
+            rowClassName={(record, index)=> {
+              if(this.state.rowSelect === record._id) {
+                return 'row-select'
+              }
+            }}
             rowKey={record => record._id}
             dataSource={showData}
             pagination={false}
@@ -321,8 +326,8 @@ class Contacts extends React.Component {
             getContainer={() => document.getElementById("modal-wrapper")}
             title="New Contact"
             visible={isEditModal}
-            onOk={() => this.setState({ isEditModal: false })}
-            onCancel={() => this.setState({ isEditModal: false })}
+            onOk={() => this.setState({ isEditModal: false, rowSelect: null })}
+            onCancel={() => this.setState({ isEditModal: false, rowSelect: null })}
             footer={null}
           >
             <NewContact
