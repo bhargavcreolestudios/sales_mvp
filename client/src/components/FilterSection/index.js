@@ -137,8 +137,8 @@ class FilterSection extends React.Component {
           </Col>
           <Col span={18}>
             <div className="filterOptions">
-              <div className={`selectlocation ${currentSelect === 'location' ? 'open-dd': ''}`} id="selectlocation">
-               <label style={{ color: "#707070" }}>Location:</label>
+              <div className={`selectlocation ${currentSelect === 'location' ? 'open-dd': ''} ${filter.location.length > 0 ? 'dropdown-open': ''}`} id="selectlocation">
+               {filter.location.length > 0  && <label style={{ color: "#707070" }}>Location:</label>}
                 <Select
                   onChange={this.selectAction.bind(this, "location")}
                   getPopupContainer={() =>
@@ -155,8 +155,8 @@ class FilterSection extends React.Component {
                   </div>
                 )}
                   mode="multiple"
-                  style={{ width: 150 }}
-                  placeholder=""
+                  style={{ width: 115 }}
+                  placeholder="Location:"
                   optionFilterProp="children"
                   filterOption={(input, option) =>
                     option.props.children
@@ -174,8 +174,8 @@ class FilterSection extends React.Component {
                 </Select>
                 <img className="expandicon" src={iconExpand} />
               </div>
-              <div className={`selectlocation ${currentSelect === 'division' ? 'open-dd': ''}`} id="divisionlocation">
-                <label style={{ color: "#707070" }}>Division:</label>
+              <div className={`selectlocation ${currentSelect === 'division' ? 'open-dd': ''} ${filter.location.length > 0 ? 'dropdown-open': ''}`} id="divisionlocation">
+              {filter.division.length > 0  && <label style={{ color: "#707070" }}>Division:</label>}
                 <Select
                     onChange={this.selectAction.bind(this, "division")}
                     getPopupContainer={() =>

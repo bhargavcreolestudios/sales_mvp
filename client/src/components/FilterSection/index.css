@@ -67,7 +67,7 @@
   right: 0;
   top: -5px;
   bottom: 0;
-  width: calc(100% + 80px);
+  width: 100%;
   border-radius: 3px;
   background-color: #e8e8eb;
   z-index: 0;
@@ -116,12 +116,21 @@
 }
 
 .selectlocation .ant-select-dropdown {
-  left: -14px !important;
+  left: 0px !important;
   right: 0 !important;
-  width: auto !important;
+  width: 200px !important;
   top: 33px !important;
   border-radius: 3px;
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+}
+
+.selectlocation.dropdown-open .ant-select-dropdown {
+  left: -14px !important;
+  width: auto !important;
+}
+
+.selectlocation.dropdown-open .ant-select-open:after {
+  width: calc(100% + 80px )
 }
 
 .selectlocation {
@@ -215,6 +224,10 @@
   background-color: #fff;
   position: absolute;
   opacity: 0.5;
+}
+
+.selectlocation .ant-select-selection--multiple .ant-select-search--inline .ant-select-search__field {
+  color: transparent;
 }
 
 /*filter section */
