@@ -102,3 +102,13 @@
   line-height: 1;
   content: '*';
 }
+.ant-form-item-label label:before {
+    display: inline-block;
+    margin-right: 4px;
+    font-size: 14px;
+    font-family: SimSun, sans-serif;
+    line-height: 1;
+    content: '*';
+    color: #a80a0a;
+    font-weight: 600;
+}

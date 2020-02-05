@@ -44,6 +44,9 @@
 .customTD p {
   margin-bottom: 0 !important;
 }
+.customTD .name.bolderName span {
+  font-family: 'Roboto-Medium';
+}
 .content {
   font-size: 14px;
   /*font-weight: normal;*/

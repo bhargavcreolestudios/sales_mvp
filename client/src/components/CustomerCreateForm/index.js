@@ -452,7 +452,7 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                             {getFieldDecorator('paymentTerms', {
                               initialValue: isEdit
                                 ? customerDetail.paymentTerms
-                                : '',
+                                : undefined,
                               rules: [
                                 {
                                   required: true,
@@ -463,10 +463,9 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                               <Select
                                 className="select"
                                 placeholder="Select"
-                                onChange={value => console.log(value)}
                               >
-                                <Option value="user 1">user 1</Option>
-                                <Option value="user 2">user 2</Option>
+                                <Option value="6 Month">6 Month</Option>
+                                <Option value="1 Year">1 Year</Option>
                               </Select>
                             )}
                           </Form.Item>
@@ -478,7 +477,7 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                             {getFieldDecorator('preferredPayment', {
                               initialValue: isEdit
                                 ? customerDetail.preferredPayment
-                                : '',
+                                : undefined,
                               rules: [
                                 {
                                   required: true,
@@ -489,10 +488,10 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                               <Select
                                 className="select"
                                 placeholder="Select"
-                                onChange={value => console.log(value)}
                               >
-                                <Option value="user 1">user 1</Option>
-                                <Option value="user 2">user 2</Option>
+                                <Option value="Cash">Cash</Option>
+                                <Option value="Credit Card">Credit Card</Option>
+                                <Option value="Net Banking">Net Banking</Option>
                               </Select>
                             )}
                           </Form.Item>
@@ -502,7 +501,7 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                             {getFieldDecorator('preferredDelivery', {
                               initialValue: isEdit
                                 ? customerDetail.preferredDelivery
-                                : '',
+                                : undefined,
                               rules: [
                                 {
                                   required: true,
@@ -513,10 +512,9 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                               <Select
                                 className="select"
                                 placeholder="Select"
-                                onChange={value => console.log(value)}
                               >
-                                <Option value="user 1">user 1</Option>
-                                <Option value="user 2">user 2</Option>
+                                <Option value="Today">Today</Option>
+                                <Option value="Tomorrow">Tomorrow</Option>
                               </Select>
                             )}
                           </Form.Item>
