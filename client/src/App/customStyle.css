@@ -30,7 +30,7 @@ body {
   line-height: 1.31;
   letter-spacing: normal;
   text-align: left;
-  color: #393939;
+  color: #707070;
 }
 .ant-select-selection-selected-value {
   font-family: "Roboto";
@@ -62,7 +62,7 @@ body {
 }
 .ant-checkbox-checked .ant-checkbox-inner {
   background-color: #fff;
-  border-color: #fff;
+  /* border-color: #fff; */
 }
 .ant-checkbox-checked .ant-checkbox-inner::after {
   border: 2px solid #1890ff;
@@ -118,4 +118,55 @@ table .ant-checkbox-checked .ant-checkbox-inner::after {
 .ant-table-thead > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td, .ant-table-tbody > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td, .ant-table-thead > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td, .ant-table-tbody > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td
 {
   background-color: #f5f5f7;
+}
+
+.ant-table-tbody .ant-checkbox-wrapper {
+  visibility: hidden;
+  transition: none;
+}
+
+.ant-table-tbody > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td .ant-checkbox-wrapper,.ant-table-tbody .ant-checkbox-wrapper.ant-checkbox-wrapper-checked {
+  visibility: visible;
+}
+.SubHeaderWrapper .SubHeaderButtons .ant-btn {
+  padding: 0 12px;
+}
+.SubHeaderTabs .ant-tabs-ink-bar {
+  display: none !important;
+}
+
+.SubHeaderTabs .ant-tabs-tab:after {
+  content:'';
+  background-color: #147cd8;
+  height: 4px;
+  position: absolute;
+  bottom: 0px;
+  opacity: 0;  
+  left: 16px;
+  right: 16px;
+  z-index: 1;
+}
+
+.SubHeaderTabs .ant-tabs-tab-active:after {
+  opacity: 1;
+}
+
+.ant-table-thead > tr:hover.ant-table-row-selected > td, .ant-table-tbody > tr:hover.ant-table-row-selected > td {
+  background: #f0f5fd;
+}
+
+.ant-table-tbody > tr.ant-table-row-selected > td span,
+.ant-table-tbody > tr.ant-table-row-selected > td .nameWrapper a,
+.ant-table-tbody > tr:hover > td .nameWrapper a {
+  text-decoration: underline;
+  text-decoration-color: #004881;
+  color: #004881 !important;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.36;
+  letter-spacing: normal;
+  text-align: left;
 }

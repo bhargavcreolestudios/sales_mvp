@@ -174,7 +174,7 @@ class FilterSection extends React.Component {
                 </Select>
                 <img className="expandicon" src={iconExpand} />
               </div>
-              <div className={`selectlocation ${currentSelect === 'division' ? 'open-dd': ''} ${filter.location.length > 0 ? 'dropdown-open': ''}`} id="divisionlocation">
+              <div className={`selectlocation ${currentSelect === 'division' ? 'open-dd': ''} ${filter.division.length > 0 ? 'dropdown-open': ''}`} id="divisionlocation">
               {filter.division.length > 0  && <label style={{ color: "#707070" }}>Division:</label>}
                 <Select
                     onChange={this.selectAction.bind(this, "division")}
@@ -192,7 +192,7 @@ class FilterSection extends React.Component {
                     </div>
                   )}
                     mode="multiple"
-                    style={{ width: 150 }}
+                    style={{ width: 110 }}
                     placeholder="Division"
                     optionFilterProp="children"
                     filterOption={(input, option) =>
@@ -209,6 +209,7 @@ class FilterSection extends React.Component {
                       );
                     })}
                   </Select>
+                  <img className="expandicon" src={iconExpand} />
                 {/*<Select
                   onChange={this.selectAction.bind(this, "division")}
                   mode="multiple"
@@ -230,8 +231,8 @@ class FilterSection extends React.Component {
                   })}
                 </Select>*/}
               </div>
-              <div className={`selectlocation ${currentSelect === 'accountRepresentative' ? 'open-dd': ''}`} id="accountRepresentativelocation">
-              <label style={{ color: "#707070" }}>Account Rep:</label>
+              <div className={`selectlocation ${currentSelect === 'accountRepresentative' ? 'open-dd': ''} ${filter.accountRepresentative.length > 0 ? 'dropdown-open': ''}`} id="accountRepresentativelocation">
+              {filter.accountRepresentative.length > 0  && <label style={{ color: "#707070" }}>Account Rep:</label>}
                 <Select
                       onChange={this.selectAction.bind(this, "accountRepresentative")}
                       getPopupContainer={() =>
@@ -248,7 +249,7 @@ class FilterSection extends React.Component {
                       </div>
                     )}
                       mode="multiple"
-                      style={{ width: 150 }}
+                      style={{ width: 140 }}
                       placeholder="Account Rep"
                       optionFilterProp="children"
                       filterOption={(input, option) =>
@@ -268,6 +269,7 @@ class FilterSection extends React.Component {
                     );
                   })}
                     </Select>
+                    <img className="expandicon" src={iconExpand} />
                 {/*<Select
                   onChange={this.selectAction.bind(
                     this,
@@ -295,8 +297,8 @@ class FilterSection extends React.Component {
                   })}
                 </Select>*/}
               </div>
-              <div className={`selectlocation ${currentSelect === 'customerType' ? 'open-dd': ''}`} id="customertypelocation">
-                <label style={{ color: "#707070" }}>Customer:</label>
+              <div className={`selectlocation ${currentSelect === 'customerType' ? 'open-dd': ''} ${filter.customerType.length > 0 ? 'dropdown-open': ''}`} id="customertypelocation">
+              {filter.customerType.length > 0  && <label style={{ color: "#707070" }}>Customer:</label>}
                   <Select
                       onChange={this.selectAction.bind(this, "customerType")}
                       getPopupContainer={() =>
@@ -313,7 +315,7 @@ class FilterSection extends React.Component {
                       </div>
                     )}
                       mode="multiple"
-                      style={{ width: 150 }}
+                      style={{ width: 155 }}
                       placeholder="Customer Type"
                       optionFilterProp="children"
                       filterOption={(input, option) =>
@@ -330,6 +332,7 @@ class FilterSection extends React.Component {
                         );
                       })}
                     </Select>
+                    <img className="expandicon" src={iconExpand} />
                 {/*<Select
                   onChange={this.selectAction.bind(this, "customerType")}
                   mode="multiple"
@@ -351,8 +354,8 @@ class FilterSection extends React.Component {
                   })}
                 </Select>*/}
               </div>
-              <div className={`selectlocation ${currentSelect === 'status' ? 'open-dd': ''}`} id="statuslocation">
-              <label style={{ color: "#707070" }}>Status:</label>
+              <div className={`selectlocation ${currentSelect === 'status' ? 'open-dd': ''} ${filter.status.length > 0 ? 'dropdown-open': ''}`} id="statuslocation">
+              {filter.status.length > 0  && <label style={{ color: "#707070" }}>Status:</label>}
                   <Select
                       onChange={this.selectAction.bind(this, "status")}
                       getPopupContainer={() =>
@@ -369,7 +372,7 @@ class FilterSection extends React.Component {
                       </div>
                     )}
                       mode="multiple"
-                      style={{ width: 150 }}
+                      style={{ width: 95 }}
                       placeholder="Status"
                       optionFilterProp="children"
                       filterOption={(input, option) =>
@@ -386,6 +389,7 @@ class FilterSection extends React.Component {
                     );
                   })}
                     </Select>
+                    <img className="expandicon" src={iconExpand} />
                 {/*<Select
                   onChange={this.selectAction.bind(this, "status")}
                   mode="multiple"

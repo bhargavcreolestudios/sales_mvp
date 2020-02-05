@@ -6,6 +6,7 @@ import services from "../../services/customerService";
 import iconFilter from "../../assets/icoSFilter.svg";
 import newCustomer from "../../assets/icoAdd1.svg";
 import iconMore from "../../assets/icoMoreo.svg";
+import iconExpand from "../../assets/expand.svg";
 import "./index.css";
 
 const { Option } = Select;
@@ -142,7 +143,7 @@ class Contacts extends React.Component {
           <div className="nameWrapper">
             <div className="customTD fullNameWrapper">
               <p className="name">
-                <Link to="/customer-detail" style={{ color: "#004881" }}>
+                <Link to="/customer-detail" style={{ color: "#141823" }}>
                   {record.firstName}
                 </Link>
               </p>
@@ -196,6 +197,7 @@ class Contacts extends React.Component {
     return (
       <div>
         <div className="addNewSection">
+          <div className="contactfilter">
           <Select defaultValue="All" style={{ width: 80 }}>
             <Option value="jack">Jack</Option>
             <Option value="All">All (4)</Option>
@@ -204,6 +206,8 @@ class Contacts extends React.Component {
             </Option>
             <Option value="Yiminghe">yiminghe</Option>
           </Select>
+          <img className="expandicon" src={iconExpand} />
+          </div>
           <span className="separator" />
           <div
             onClick={() => this.setState({ isOpen: !isOpen })}

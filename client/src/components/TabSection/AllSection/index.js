@@ -7,7 +7,7 @@ class AllSection extends React.Component {
     return (
       <div className="AllSectionWrapper" id="AllSectionWrapper">
         {/* <FilterSection /> */}
-        <CustomerListSection customers={this.props.customers} />
+        <CustomerListSection customers={this.props.customers} noData={this.props.noData} />
       </div>
     );
   }

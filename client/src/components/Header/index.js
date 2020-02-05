@@ -13,7 +13,7 @@ class Header extends React.Component {
           theme="dark"
           mode="horizontal"
           defaultSelectedKeys={['9']}
-          style={{ lineHeight: '64px' }}
+          style={{ lineHeight: '55px' }}
           className="headerWrapper"
 	    >
 	    	<Menu.Item key="1"></Menu.Item>

@@ -23,16 +23,21 @@ class CustomerListSection extends React.Component {
     this.setState({ moreOption: true, key: key });
   };
   async componentDidMount() {
-    let allCustomers = await customerService.getCustomers();
-    this.setState({ customers: allCustomers, showData: allCustomers });
+    if(!this.props.noData) {
+      let allCustomers = await customerService.getCustomers();
+      this.setState({ customers: allCustomers, showData: allCustomers });
+    }
   }
   componentDidUpdate(prevProps) {
-    if (this.props.customers !== prevProps.customers) {
-      this.setState({
-        customers: this.props.customers,
-        showData: this.props.customers
-      });
+    if(!this.props.noData) {
+      if (this.props.customers !== prevProps.customers) {
+        this.setState({
+          customers: this.props.customers,
+          showData: this.props.customers
+        });
+      }
     }
+    
   }
   PopoverAction = (id, e) => {
     this.moreOption(id);

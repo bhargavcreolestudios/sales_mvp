@@ -46,22 +46,18 @@ class Home extends React.Component {
     const tabs = [
       {
         tab: "All",
-        component: <AllSection customers={customers} />
+        component: <AllSection customers={customers} noData={false} />
       },
       {
         tab: "New",
         component: (
-          <h2 style={{ textAlign: "center", color: "#aaaaaa" }}>
-            No Data Found
-          </h2>
+          <AllSection customers={[]} noData={true} />
         )
       },
       {
         tab: "Inactive",
         component: (
-          <h2 style={{ textAlign: "center", color: "#aaaaaa" }}>
-            No Data Found
-          </h2>
+          <AllSection customers={[]} noData={true} />
         )
       }
     ];

@@ -54,3 +54,21 @@
     font-size: 20px;
     margin-top: 3px;
 }
+.contactfilter {
+  position: relative;
+}
+
+.contactfilter .ant-select-arrow {
+  display: none;
+}
+
+.contactfilter .expandicon {
+  padding-left: 10px;
+  right: 2px;
+  top: 15px;
+}
+.ant-select-open~.expandicon {
+  transform: rotate(180deg) translateY(-50%);
+  top: 8px;
+  right: -3px;
+}

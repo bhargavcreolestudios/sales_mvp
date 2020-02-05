@@ -61,7 +61,7 @@
   padding-right: 15px;
 }
 
-.selectlocation .ant-select-open:after {
+.selectlocation.open-dd:after {
   content: '';
   position: absolute;
   right: 0;
@@ -96,7 +96,8 @@
 }
 
 .selectlocation .ant-select-dropdown.ant-select-dropdown--multiple .ant-select-dropdown-menu-item:hover,
-.selectlocation .ant-select-dropdown.ant-select-dropdown--multiple .ant-select-dropdown-menu-item-selected {
+.selectlocation .ant-select-dropdown.ant-select-dropdown--multiple .ant-select-dropdown-menu-item-selected,
+.ant-select-dropdown-menu-item-active:not(.ant-select-dropdown-menu-item-disabled) {
   background-color: transparent;
   font-weight: normal;
 }
@@ -125,12 +126,15 @@
 }
 
 .selectlocation.dropdown-open .ant-select-dropdown {
-  left: -14px !important;
   width: auto !important;
 }
 
-.selectlocation.dropdown-open .ant-select-open:after {
-  width: calc(100% + 80px )
+.selectlocation.dropdown-open {
+  padding-left: 10px;
+}
+
+.selectlocation.dropdown-open .ant-select {
+  width: auto !important;
 }
 
 .selectlocation {
@@ -170,9 +174,13 @@
 
 .selectlocation .ant-select-selection--multiple .ant-select-selection__choice {
   background-color: transparent;
-  color: #000;
+  color: #383838;
   padding: 0;
   border:0;
+}
+
+.selectlocation.open-dd .ant-select-selection--multiple .ant-select-selection__choice {
+  color: #000;
 }
 
 .selectlocation .anticon svg {
@@ -202,12 +210,13 @@
   width: 100%;
 }
 .expandicon {
-    filter: invert(1);
+    filter: brightness(0.5);
     position: absolute;
     right: 8px;
     top: 50%;
     transform: translateY(-50%);
     padding-right: 5px !important;
+    z-index: 1;
 }
 .filterOptions .selectlocation label {
   color: #707070 !important;
@@ -215,6 +224,11 @@
 .filterOptions .selectlocation.open-dd label {
   color: #000 !important;
 }
+
+.filterOptions .selectlocation.open-dd .expandicon {
+  filter: invert(1);
+}
+
 .overlay table:after {
   content: '';
   top: 0;
@@ -230,4 +244,15 @@
   color: transparent;
 }
 
+
+#statuslocation.selectlocation .ant-select-dropdown {
+  left: auto !important;
+}
+
+#statuslocation.selectlocation.dropdown-open .ant-select-dropdown {
+  width: 100% !important;
+}
 /*filter section */
+.headerWrapper .ant-menu-item {
+  padding: 0 12px;
+}
