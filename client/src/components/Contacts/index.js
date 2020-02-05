@@ -336,7 +336,7 @@ class Contacts extends React.Component {
               contactInfo={editContact}
               isEdit={true}
               destroyOnClose={true}
-              onCancel={() => this.setState({ isEditModal: false })}
+              onCancel={() => this.setState({ isEditModal: false, rowSelect: null })}
               onCreate={this.handleEditSubmit}
             />
           </Modal>
