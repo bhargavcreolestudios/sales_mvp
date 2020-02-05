@@ -210,7 +210,8 @@ h3.ant-typography, .ant-typography h3 {
   font-family: roboto-medium;
   font-weight: normal;
 }
-.customTD.fullNameWrapper p {
+.customTD.fullNameWrapper .lineheight-normal {
   line-height:30px;
 }
+
 

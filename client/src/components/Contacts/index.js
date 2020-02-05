@@ -152,7 +152,7 @@ class Contacts extends React.Component {
         render: (text, record) => (
           <div className="nameWrapper">
             <div className="customTD fullNameWrapper">
-              <p className="name">
+              <p className="name lineheight-normal">
                 <Link to="/customer-detail" style={{ color: "#141823" }}>
                   {`${record.firstName} ${record.lastName}`}
                 </Link>
