@@ -6,7 +6,7 @@ import routes from "../routes";
 class App extends React.Component {
   render() {
     return (
-      <Router>
+      <Router basename="/sales_mvp">
         {routes.map((route, index) => (
           <Route {...route} key={index} />
         ))}

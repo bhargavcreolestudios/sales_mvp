@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 mongoose.Promise = global.Promise;
 mongoose.set("useCreateIndex", true);
 mongoose.connect(
-  process.env.MONGODB_URI || `mongodb://localhost:27017/sales_mvp`,
+  process.env.MONGODB_URI || `mongodb://139.59.65.130:27017/sales_mvp`,
   { useUnifiedTopology: true, useNewUrlParser: true }
 );
 
