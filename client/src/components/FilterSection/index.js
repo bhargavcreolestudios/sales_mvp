@@ -210,26 +210,7 @@ class FilterSection extends React.Component {
                     })}
                   </Select>
                   <img className="expandicon" src={iconExpand} />
-                {/*<Select
-                  onChange={this.selectAction.bind(this, "division")}
-                  mode="multiple"
-                  style={{ width: 130 }}
-                  placeholder="Division"
-                  optionFilterProp="children"
-                  filterOption={(input, option) =>
-                    option.props.children
-                      .toLowerCase()
-                      .indexOf(input.toLowerCase()) >= 0
-                  }
-                >
-                  {divisions.map(division => {
-                    return (
-                      <Option key={division} value={division}>
-                        {division}
-                      </Option>
-                    );
-                  })}
-                </Select>*/}
+               
               </div>
               <div className={`selectlocation ${currentSelect === 'accountRepresentative' ? 'open-dd': ''} ${filter.accountRepresentative.length > 0 ? 'dropdown-open': ''}`} id="accountRepresentativelocation">
               {filter.accountRepresentative.length > 0  && <label style={{ color: "#707070" }}>Account Rep:</label>}
@@ -270,32 +251,8 @@ class FilterSection extends React.Component {
                   })}
                     </Select>
                     <img className="expandicon" src={iconExpand} />
-                {/*<Select
-                  onChange={this.selectAction.bind(
-                    this,
-                    "accountRepresentative"
-                  )}
-                  mode="multiple"
-                  style={{ width: 150 }}
-                  placeholder="Account Rep"
-                  optionFilterProp="children"
-                  filterOption={(input, option) =>
-                    option.props.children
-                      .toLowerCase()
-                      .indexOf(input.toLowerCase()) >= 0
-                  }
-                >
-                  {accountRepresentatives.map(accountRepresentative => {
-                    return (
-                      <Option
-                        key={accountRepresentative._id}
-                        value={accountRepresentative.name}
-                      >
-                        {accountRepresentative.name}
-                      </Option>
-                    );
-                  })}
-                </Select>*/}
+            
+                  
               </div>
               <div className={`selectlocation ${currentSelect === 'customerType' ? 'open-dd': ''} ${filter.customerType.length > 0 ? 'dropdown-open': ''}`} id="customertypelocation">
               {filter.customerType.length > 0  && <label style={{ color: "#707070" }}>Customer:</label>}
@@ -333,26 +290,7 @@ class FilterSection extends React.Component {
                       })}
                     </Select>
                     <img className="expandicon" src={iconExpand} />
-                {/*<Select
-                  onChange={this.selectAction.bind(this, "customerType")}
-                  mode="multiple"
-                  style={{ width: 150 }}
-                  placeholder="Customer Type"
-                  optionFilterProp="children"
-                  filterOption={(input, option) =>
-                    option.props.children
-                      .toLowerCase()
-                      .indexOf(input.toLowerCase()) >= 0
-                  }
-                >
-                  {customerTypes.map(customerType => {
-                    return (
-                      <Option key={customerType._id} value={customerType.type}>
-                        {customerType.type}
-                      </Option>
-                    );
-                  })}
-                </Select>*/}
+                
               </div>
               <div className={`selectlocation ${currentSelect === 'status' ? 'open-dd': ''} ${filter.status.length > 0 ? 'dropdown-open': ''}`} id="statuslocation">
               {filter.status.length > 0  && <label style={{ color: "#707070" }}>Status:</label>}
@@ -390,26 +328,6 @@ class FilterSection extends React.Component {
                   })}
                     </Select>
                     <img className="expandicon" src={iconExpand} />
-                {/*<Select
-                  onChange={this.selectAction.bind(this, "status")}
-                  mode="multiple"
-                  style={{ width: 130 }}
-                  placeholder="Status"
-                  optionFilterProp="children"
-                  filterOption={(input, option) =>
-                    option.props.children
-                      .toLowerCase()
-                      .indexOf(input.toLowerCase()) >= 0
-                  }
-                >
-                  {status.map(status => {
-                    return (
-                      <Option key={status} value={status}>
-                        {status}
-                      </Option>
-                    );
-                  })}
-                </Select>*/}
               </div>
             </div>
           </Col>

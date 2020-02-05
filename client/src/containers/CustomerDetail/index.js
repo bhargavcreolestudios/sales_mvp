@@ -11,7 +11,7 @@ const tabs = [
     tab: "Overview",
     component: (
       <div>
-        <h2 style={{ textAlign: "center", color: "#aaaaaa" }}>No Data Found</h2>
+        <h2 style={{ textAlign: "center", color: "#aaaaaa", marginTop: 45 }}>No Data Found</h2>
       </div>
     )
   },
@@ -19,7 +19,7 @@ const tabs = [
     tab: "Activity",
     component: (
       <div>
-        <h2 style={{ textAlign: "center", color: "#aaaaaa" }}>No Data Found</h2>
+        <h2 style={{ textAlign: "center", color: "#aaaaaa", marginTop: 45 }}>No Data Found</h2>
       </div>
     )
   },
@@ -27,7 +27,7 @@ const tabs = [
     tab: "Documents",
     component: (
       <div>
-        <h2 style={{ textAlign: "center", color: "#aaaaaa" }}>No Data Found</h2>
+        <h2 style={{ textAlign: "center", color: "#aaaaaa", marginTop: 45 }}>No Data Found</h2>
       </div>
     )
   },
@@ -35,7 +35,7 @@ const tabs = [
     tab: "Properties",
     component: (
       <div>
-        <h2 style={{ textAlign: "center", color: "#aaaaaa" }}>No Data Found</h2>
+        <h2 style={{ textAlign: "center", color: "#aaaaaa", marginTop: 45 }}>No Data Found</h2>
       </div>
     )
   },
@@ -43,7 +43,7 @@ const tabs = [
     tab: "Equipment",
     component: (
       <div>
-        <h2 style={{ textAlign: "center", color: "#aaaaaa" }}>No Data Found</h2>
+        <h2 style={{ textAlign: "center", color: "#aaaaaa", marginTop: 45 }}>No Data Found</h2>
       </div>
     )
   },
@@ -60,7 +60,7 @@ class CustomerDetail extends React.Component {
         <Header />
         <BackOption redirectBack="/" />
         <CustomerDetailSection />
-        <SubHeader defaultActiveKey="0" tabPane={tabs} className="detailsTab" />
+        <SubHeader defaultActiveKey="5" tabPane={tabs} className="detailsTab" />
       </Layout>
     );
   }

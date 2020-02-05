@@ -1,11 +1,12 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import { Row, Col, Select, Table, Modal, Input } from "antd";
+import { Row, Col, Select, Table, Modal, Input, Button } from "antd";
 import NewContact from "../NewContact";
 import services from "../../services/customerService";
 import iconFilter from "../../assets/icoSFilter.svg";
 import newCustomer from "../../assets/icoAdd1.svg";
 import iconMore from "../../assets/icoMoreo.svg";
+import iconClose from "../../assets/close.svg";
 import iconExpand from "../../assets/expand.svg";
 import "./index.css";
 
@@ -15,6 +16,7 @@ class Contacts extends React.Component {
     isOpen: false,
     contacts: [],
     showData: [],
+    currentSelect: null,
     isEditModal: false,
     status: [
       "Inactive",
@@ -35,6 +37,18 @@ class Contacts extends React.Component {
       contacts: res.contacts,
       showData: res.contacts
     });
+  }
+  handleSelectVisible = (open, key) => {
+    if(open) {
+      this.setState({
+        currentSelect: key
+      })
+    }else {
+      this.setState({
+        currentSelect: null
+      })
+    }
+    // this.props.parentSelect(open)
   }
   handleCreate = e => {
     e.preventDefault();
@@ -130,6 +144,8 @@ class Contacts extends React.Component {
     const {
       isOpen,
       isEditModal,
+      filter,
+      currentSelect,
       contacts,
       status,
       showData,
@@ -232,27 +248,44 @@ class Contacts extends React.Component {
             </Col>
             <Col span={2}>
               <div className="filterOptions">
-                <div>
-                  <Select
-                    onChange={this.selectAction.bind(this, "status")}
-                    mode="multiple"
-                    style={{ width: 130 }}
-                    placeholder="Status"
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      option.props.children
-                        .toLowerCase()
-                        .indexOf(input.toLowerCase()) >= 0
-                    }
-                  >
-                    {status.map(status => {
+              <div className={`selectlocation ${currentSelect === 'status' ? 'open-dd': ''} ${filter.status.length > 0 ? 'dropdown-open': ''}`} id="statuslocation">
+                {filter.status.length > 0  && <label style={{ color: "#707070" }}>Status:</label>}
+                    <Select
+                        onChange={this.selectAction.bind(this, "status")}
+                        getPopupContainer={() =>
+                           document.getElementById("statuslocation")
+                         }
+                         onDropdownVisibleChange={(open) => this.handleSelectVisible(open, 'status')}
+                         dropdownRender={menu => (
+                        <div>
+                          {menu}
+                          <div className="dropdownfooter">
+                          <img src={iconClose} />
+                          <Button className="close">Clear</Button>
+                            </div>
+                        </div>
+                      )}
+                        mode="multiple"
+                        style={{ width: 95 }}
+                        placeholder="Status"
+                        optionFilterProp="children"
+                        filterOption={(input, option) =>
+                          option.props.children
+                            .toLowerCase()
+                            .indexOf(input.toLowerCase()) >= 0
+                        }
+                      >
+                       {status.map(status => {
                       return (
                         <Option key={status} value={status}>
                           {status}
                         </Option>
                       );
                     })}
-                  </Select>
+                      </Select>
+                      <img className="expandicon" src={iconExpand} />
+                </div>
+                <div>
                 </div>
               </div>
             </Col>

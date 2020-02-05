@@ -104,7 +104,7 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
               </Form.Item>
               <Form.Item label="Account Rep">
                 {getFieldDecorator('accountRep', {
-                  initialValue: isEdit ? customerDetail.accountRep : '',
+                  initialValue: isEdit ? customerDetail.accountRep : undefined,
                   rules: [
                     { required: true, message: 'Please select account rep!' }
                   ]
@@ -114,14 +114,16 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                     placeholder="Select"
                     onChange={value => console.log(value)}
                   >
-                    <Option value="test 1">test 1</Option>
-                    <Option value="test 2">test 2</Option>
+                    <Option value="Jillian Crain">Jillian Crain</Option>
+                    <Option value="Jeff Osborne">Jeff Osborne</Option>
+                    <Option value="Cindy Truett">Cindy Truett</Option>
+
                   </Select>
                 )}
               </Form.Item>
               <Form.Item label="Customer Type">
                 {getFieldDecorator('customerType', {
-                  initialValue: isEdit ? customerDetail.customerType : '',
+                  initialValue: isEdit ? customerDetail.customerType : undefined,
                   rules: [
                     { required: true, message: 'Please select customer type!' }
                   ]
@@ -131,8 +133,11 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                     placeholder="Select"
                     onChange={value => console.log(value)}
                   >
-                    <Option value="user 1">user 1</Option>
-                    <Option value="user 2">user 2</Option>
+                    <Option value="Architect">Architect</Option>
+                    <Option value="Contractor">Contractor</Option>
+                    <Option value="End Users">End Users</Option>
+
+                    <Option value="Property Management">Property Management</Option>
                   </Select>
                 )}
               </Form.Item>
@@ -556,7 +561,7 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                     <Col className="col2" span={12}>
                       <Form.Item className="reasonSection">
                         {getFieldDecorator('reason', {
-                          initialValue: isEdit ? customerDetail.reason : '',
+                          initialValue: isEdit ? customerDetail.reason : undefined,
                           rules: [
                             {
                               required: true,
