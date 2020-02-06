@@ -102,7 +102,7 @@
   line-height: 1;
   content: '*';
 }
-.ant-form-item-label label:before {
+.ant-form-item-label label.ant-form-item-required:before {
     display: inline-block;
     margin-right: 4px;
     font-size: 14px;

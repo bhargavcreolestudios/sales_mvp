@@ -142,45 +142,13 @@ class FilterSection extends React.Component {
       })
       this.props.parentSelect(open);
   }
-
- /* handleSelectVisible = (open, key) => {
-    let { currentSelect } = this.state;
-    if(key === 'location') {
-      currentSelect.location = open;
-      this.setState({
-        currentSelect
-      })
-      this.props.parentSelect(open, 'location');
-    }
-    else if(key === 'division') {
-      currentSelect.division = open
-      this.setState({
-        currentSelect
-      })
-      this.props.parentSelect(open, 'division');
-    }
-    else if(key === 'accountRepresentative') {
-      currentSelect.accountRepresentative = open
-      this.setState({
-        currentSelect
-      })
-      this.props.parentSelect(open, 'accountRepresentative');
-    }
-    else if(key === 'customerType') {
-      currentSelect.customerType = open
-      this.setState({
-        currentSelect
-      })
-      this.props.parentSelect(open, 'customerType');
-    }
-    else if (key === 'status') {
-      currentSelect.status = open
-      this.setState({
-        currentSelect
-      })
-      this.props.parentSelect(open, 'status');
-    }
-  }*/
+  handleFilterClear = (key) => {
+    let {filter} = this.state;
+    filter[key] = [];
+    this.setState({
+      filter
+    })
+  }
   render() {
     let {
       locations,
@@ -219,8 +187,8 @@ class FilterSection extends React.Component {
                   <div>
                     {menu}
                     <div className="dropdownfooter">
-                    <img src={iconClose} />
-                    <Button className="close">Clear</Button>
+                    <img src={iconClose} onClick={() => this.handleFilterClear('location')} />
+                    <Button className="close" onClick={() => this.handleFilterClear('location')}>Clear</Button>
                       </div>
                   </div>
                 )}

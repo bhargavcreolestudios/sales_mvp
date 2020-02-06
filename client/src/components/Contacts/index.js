@@ -153,9 +153,9 @@ class Contacts extends React.Component {
           <div className="nameWrapper">
             <div className="customTD fullNameWrapper">
               <p className="name lineheight-normal">
-                <Link to="/customer-detail" style={{ color: "#141823" }}>
-                  {`${record.firstName} ${record.lastName}`}
-                </Link>
+                <a style={{ color: "#141823" }}>
+                  {`${record.firstName} ${record.lastName ? record.lastName : ''}`}
+                </a>
               </p>
             </div>
             <div className="iconMoreWrapper">
@@ -169,29 +169,29 @@ class Contacts extends React.Component {
         dataIndex: "titlePosition",
         render: (text, record) => (
           <div className="customTD">
-            <p className="content">{record.position}</p>
+            <p className="content">{record.position ? record.position : 'NA'}</p>
           </div>
         )
       },
       {
         title: "E-Mail",
         dataIndex: "email",
-        render: text => <p className="content otherContent">{text}</p>
+        render: (text, record) => <p className="content otherContent">{record.email ? record.email : 'NA' }</p>
       },
       {
         title: "Extension",
         dataIndex: "extension",
-        render: text => <p className="content otherContent">{text}</p>
+        render: (text, record) => <p className="content otherContent">{record.extension ? record.extension : '0'}</p>
       },
       {
         title: "Mobile No.",
         dataIndex: "mobile",
-        render: text => <p className="content otherContent">{text}</p>
+        render: (text, record) => <p className="content otherContent">{record.mobile ? record.mobile : 'NA'}</p>
       },
       {
         title: "Other No.",
         dataIndex: "officeNumber",
-        render: text => <p className="content otherContent">{text}</p>
+        render: (text, record) => <p className="content otherContent">{record.officeNumber ? record.officeNumber : 'NA'}</p>
       }
     ];
     const rowSelection = {

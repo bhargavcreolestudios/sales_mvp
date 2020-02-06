@@ -85,9 +85,9 @@ class CustomerListSection extends React.Component {
           <div className="nameWrapper">
             <div className="customTD fullNameWrapper">
               <p className="name bolderName">
-                <span>{record.companyName}</span>
+                <span>{record.displayName}</span>
               </p>
-              <p className="content">{record.displayName}</p>
+              <p className="content">{record.companyName}</p>
             </div>
             <Popover
               content={content}
@@ -167,6 +167,7 @@ class CustomerListSection extends React.Component {
             rowSelection={rowSelection}
             columns={columns}
             dataSource={showData}
+            rowKey={record => record._id}
             pagination={false}
             onRow={record => ({
               onClick: e => {

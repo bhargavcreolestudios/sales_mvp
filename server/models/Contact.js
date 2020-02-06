@@ -6,7 +6,7 @@ const contactSchema = new Schema({
   firstName: String,
   lastName: String,
   userId: String,
-  email: { type: String, unique: true, lowercase: true },
+  email: { type: String, lowercase: true },
   officeNumber: { type: String, trim: true },
   mobile: { type: String, trim: true },
   extension: { type: String },

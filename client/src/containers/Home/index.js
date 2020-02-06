@@ -24,6 +24,17 @@ class Home extends React.Component {
         this.setState({ errorForm: true });
         return;
       } else {
+        if(values.shippingAddressSame) {
+          delete values.shippingAddress;
+          delete values.shippingCity;
+          delete values.shippingState;
+          delete values.shippingZipCode;
+        }
+        if(!values.isSubCustomer) {
+          delete values.parentCustomer;
+          delete values.billWithParent;
+          delete values.propertyType;
+        }
         await services.createCustomer(values);
         let allCustomers = await services.getCustomers();
         this.setState({
@@ -77,9 +88,10 @@ class Home extends React.Component {
           className="customerInformation"
           title="Customer Information"
           visible={isOpen}
-          onOk={() => this.setState({ isOpen: false, defaultActiveKey: "0" })}
+          destroyOnClose={true}
+          onOk={() => this.setState({ isOpen: false,errorForm: false, defaultActiveKey: "0" })}
           onCancel={() =>
-            this.setState({ isOpen: false, defaultActiveKey: "0" })
+            this.setState({ isOpen: false, defaultActiveKey: "0", errorForm: false })
           }
           footer={null}
         >

@@ -25,27 +25,24 @@ const NewContact = Form.create({ name: "form_in_modal" })(
       const { visible, onCreate, form, isEdit } = this.props;
       const { getFieldDecorator } = form;
       return (
-        <Form onSubmit={onCreate} layout="vertical">
+        <Form onSubmit={onCreate} layout="vertical" autoComplete="off">
           <Row>
             <Col className="col1" span={24}>
               <Row>
                 <Col className="spaceBetween1" span={12}>
-                  <Form.Item label="First Name">
+                  <Form.Item label="First Name" className="mandatoryField">
                     {getFieldDecorator("firstName", {
                       initialValue: isEdit ? contactDetail.firstName : "",
                       rules: [
                         { required: true, message: "Please enter first name!" }
                       ]
-                    })(<Input />)}
+                    })(<Input autoComplete="off" />)}
                   </Form.Item>
                 </Col>
                 <Col className="spaceBetween2" span={12}>
                   <Form.Item label="Last Name">
                     {getFieldDecorator("lastName", {
                       initialValue: isEdit ? contactDetail.lastName : "",
-                      rules: [
-                        { required: true, message: "Please enter last name!" }
-                      ]
                     })(<Input />)}
                   </Form.Item>
                 </Col>
@@ -53,9 +50,6 @@ const NewContact = Form.create({ name: "form_in_modal" })(
               <Form.Item label="Title/Position">
                 {getFieldDecorator("position", {
                   initialValue: isEdit ? contactDetail.position : "",
-                  rules: [
-                    { required: true, message: "Please enter position/title!" }
-                  ]
                 })(<Input />)}
               </Form.Item>
               <Form.Item label="Email">
@@ -63,7 +57,6 @@ const NewContact = Form.create({ name: "form_in_modal" })(
                   initialValue: isEdit ? contactDetail.email : "",
                   rules: [
                     { type: "email", message: "Please enter  valid email!" },
-                    { required: true, message: "Please enter email!" }
                   ]
                 })(<Input />)}
               </Form.Item>
@@ -72,12 +65,6 @@ const NewContact = Form.create({ name: "form_in_modal" })(
                   <Form.Item className="spaceBetween1" label="Mobile">
                     {getFieldDecorator("mobile", {
                       initialValue: isEdit ? contactDetail.mobile : "",
-                      rules: [
-                        {
-                          required: true,
-                          message: "Please enter mobile number!"
-                        }
-                      ]
                     })(<Input />)}
                   </Form.Item>
                 </Col>
@@ -85,12 +72,6 @@ const NewContact = Form.create({ name: "form_in_modal" })(
                   <Form.Item className="spaceBetween2" label="Office No.">
                     {getFieldDecorator("officeNumber", {
                       initialValue: isEdit ? contactDetail.officeNumber : "",
-                      rules: [
-                        {
-                          required: true,
-                          message: "Please enter office number!"
-                        }
-                      ]
                     })(<Input />)}
                   </Form.Item>
                 </Col>
@@ -98,12 +79,6 @@ const NewContact = Form.create({ name: "form_in_modal" })(
                   <Form.Item className="spaceBetween3" label="Extension">
                     {getFieldDecorator("extension", {
                       initialValue: isEdit ? contactDetail.extension : "",
-                      rules: [
-                        {
-                          required: true,
-                          message: "Please enter extension number!"
-                        }
-                      ]
                     })(<Input />)}
                   </Form.Item>
                 </Col>

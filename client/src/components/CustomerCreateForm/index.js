@@ -28,13 +28,15 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
       errorForm: false,
       customerDetail: {},
       isEdit: false,
-      isSubCustomer: true
+      isSubCustomer: false
     };
     componentDidMount() {
       if (this.props.customerInfo) {
         this.setState({
           isEdit: true,
-          customerDetail: this.props.customerInfo
+          customerDetail: this.props.customerInfo,
+          isSameAdd: this.props.customerInfo ? this.props.customerInfo.shippingAddressSame : false,
+          isSubCustomer: this.props.customerInfo ? this.props.customerInfo.isSubCustomer : false,
         });
       }
     }
@@ -46,7 +48,9 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
       }
       if(this.props.customerInfo !== prevProps.customerInfo) {
         this.setState({
-          customerDetail: this.props.customerInfo
+          customerDetail: this.props.customerInfo,
+          isSameAdd: this.props.customerInfo ? this.props.customerInfo.shippingAddressSame : true,
+          isSubCustomer: this.props.customerInfo ? this.props.customerInfo.isSubCustomer : false,
         });
       }
     }
@@ -58,18 +62,17 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
         isEdit,
         customerDetail
       } = this.state;
+      console.log(customerDetail,'customerDetail');
       const { visible, onCancel, onCreate, form } = this.props;
       const { getFieldDecorator } = form;
       return (
-        <Form onSubmit={onCreate} layout="vertical">
+        <Form onSubmit={onCreate} layout="vertical" autoComplete="off">
+          {/* <input autoComplete="off" name="hidden" type="text" style="display:none;"></input> */}
           <Row>
             <Col className="col1" span={12}>
               <Form.Item label="Company">
                 {getFieldDecorator('companyName', {
                   initialValue: isEdit ? customerDetail.companyName : '',
-                  rules: [
-                    { required: true, message: 'Please enter company name!' }
-                  ]
                 })(<Input />)}
               </Form.Item>
               <Row>
@@ -77,9 +80,6 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                   <Form.Item label="First Name">
                     {getFieldDecorator('firstName', {
                       initialValue: isEdit ? customerDetail.firstName : '',
-                      rules: [
-                        { required: true, message: 'Please enter first name!' }
-                      ]
                     })(<Input />)}
                   </Form.Item>
                 </Col>
@@ -87,9 +87,6 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                   <Form.Item label="Last Name">
                     {getFieldDecorator('lastName', {
                       initialValue: isEdit ? customerDetail.lastName : '',
-                      rules: [
-                        { required: true, message: 'Please enter last name!' }
-                      ]
                     })(<Input />)}
                   </Form.Item>
                 </Col>
@@ -164,6 +161,10 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                         {
                           required: true,
                           message: 'Please enter phone number!'
+                        },
+                        {
+                          max: 10,
+                          message: 'Phone number should be around 10 digit'
                         }
                       ]
                     })(<Input />)}
@@ -204,6 +205,7 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
               </Row>
               <Form.Item className="radio">
                 {getFieldDecorator('isSubCustomer', {
+                  initialValue: customerDetail.isSubCustomer || false,
                   valuePropName: 'checked'
                 })(
                   <Checkbox
@@ -216,44 +218,46 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                 )}
               </Form.Item>
               <Form.Item>
-                {getFieldDecorator('subCustomer', {
+                {getFieldDecorator('parentCustomer', {
+                  initialValue: customerDetail.parentCustomer || undefined,
                   rules: [
                     {
-                      required: !isSubCustomer,
+                      required: isSubCustomer,
                       message: 'Please select parent customer!'
                     }
                   ]
                 })(
                   <Select
-                    disabled={isSubCustomer}
+                    disabled={!isSubCustomer}
                     className="select"
                     placeholder="Enter parent customer"
                     onChange={value => console.log(value)}
                   >
-                    <Option value="user 1">user 1</Option>
-                    <Option value="user 2">user 2</Option>
+                    <Option value="John Doe">John Doe</Option>
+                    <Option value="John Clue">John Clue</Option>
                   </Select>
                 )}
               </Form.Item>
               <Row>
                 <Col className="spaceBetween1" span={12}>
                   <Form.Item label="Bill with Parent">
-                    {getFieldDecorator('billParent', {
+                    {getFieldDecorator('billWithParent', {
+                      initialValue: customerDetail.billWithParent || undefined,
                       rules: [
                         {
-                          required: !isSubCustomer,
+                          required: isSubCustomer,
                           message: 'Please select bill parent!'
                         }
                       ]
                     })(
                       <Select
-                        disabled={isSubCustomer}
+                        disabled={!isSubCustomer}
                         className="select"
                         placeholder="Select"
                         onChange={value => console.log(value)}
                       >
-                        <Option value="user 1">user 1</Option>
-                        <Option value="user 2">user 2</Option>
+                        <Option value="John Doe">John Doe</Option>
+                        <Option value="John Clue">John Clue</Option>
                       </Select>
                     )}
                   </Form.Item>
@@ -261,21 +265,24 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                 <Col className="spaceBetween2" span={12}>
                   <Form.Item label="Property Type">
                     {getFieldDecorator('propertyType', {
+                      initialValue: customerDetail.propertyType || undefined,
                       rules: [
                         {
-                          required: !isSubCustomer,
+                          required: isSubCustomer,
                           message: 'Please select property type!'
                         }
                       ]
                     })(
                       <Select
-                        disabled={isSubCustomer}
+                        disabled={!isSubCustomer}
                         className="select"
                         placeholder="Select"
                         onChange={value => console.log(value)}
                       >
-                        <Option value="user 1">user 1</Option>
-                        <Option value="user 2">user 2</Option>
+                        <Option value="Real property">Real property</Option>
+                        <Option value="Personal property">Personal property</Option>
+                        <Option value="Public property">Public property</Option>
+
                       </Select>
                     )}
                   </Form.Item>
@@ -353,7 +360,8 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                       <Form.Item>
                         <div className="shippingAddressWrapper">
                           <label>Shipping Address</label>
-                          {getFieldDecorator('isShippingAddress', {
+                          {getFieldDecorator('shippingAddressSame', {
+                            initialValue: customerDetail.shippingAddressSame || false,
                             valuePropName: 'checked'
                           })(
                             <Checkbox
