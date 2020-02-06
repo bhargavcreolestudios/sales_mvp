@@ -59,6 +59,17 @@ class CustomerDetailSection extends React.Component {
       if (err) {
         return;
       } else {
+        if(values.shippingAddressSame) {
+          delete values.shippingAddress;
+          delete values.shippingCity;
+          delete values.shippingState;
+          delete values.shippingZipCode;
+        }
+        if(!values.isSubCustomer) {
+          delete values.parentCustomer;
+          delete values.billWithParent;
+          delete values.propertyType;
+        }
         await customerService.updateCustomer(
           this.props.match.params.id,
           values
@@ -84,8 +95,8 @@ class CustomerDetailSection extends React.Component {
             <Col span={16}>
               <div className="titleWrapper">
                 <h1 className="customerName">{`${
-                  customerDetail.companyName
-                    ? customerDetail.companyName
+                  customerDetail.displayName
+                    ? customerDetail.displayName
                     : "A & G Sales"
                 }`}</h1>
                 <a onClick={this.openEditCustomerModal}>
@@ -95,8 +106,8 @@ class CustomerDetailSection extends React.Component {
               <div>
                 <div className="titleDetailSection">
                   <p>{`${
-                    customerDetail.displayName
-                      ? customerDetail.displayName
+                    customerDetail.customerName
+                      ? customerDetail.customerName
                       : "A & G Fence & Supply"
                   }`}</p>
                   <span></span>
@@ -172,6 +183,7 @@ class CustomerDetailSection extends React.Component {
           <Modal
             title="Customer Information"
             className="customerInformation"
+            destroyOnClose={true}
             getContainer={() => document.getElementById("modal-wrapper")}
             visible={customerEditModal}
             onOk={() => this.setState({ customerEditModal: false })}

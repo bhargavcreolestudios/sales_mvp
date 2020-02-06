@@ -85,3 +85,8 @@
   position: relative;
   top: 10px;
 }
+
+/* Mandatory Field */
+.mandatoryField .ant-form-item-label:before {
+  display: none;
+}
