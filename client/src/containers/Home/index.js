@@ -12,15 +12,24 @@ class Home extends React.Component {
   state = {
     isOpen: false,
     customers: [],
+    isTabError: false,
     errorForm: false,
     defaultActiveKey: "0"
   };
-
   handleCreate = e => {
     e.preventDefault();
     const { form } = this.formRef.props;
     form.validateFieldsAndScroll(async (err, values) => {
       if (err) {
+        if((err.accountNo || err.paymentTerms || err.preferredPayment || err.preferredDelivery || err.openingBalance ||err.asOf ||err.reason || err.taxResaleNo || err.exemptionDetails) && (!err.billingAddress || !err.city || !err.state || !err.zipCode)) {
+          this.setState({
+            isTabError: true
+          });
+        } else {
+          this.setState({
+            isTabError: false
+          });
+        } 
         this.setState({ errorForm: true });
         return;
       } else {
@@ -53,7 +62,7 @@ class Home extends React.Component {
     this.setState({ isOpen: !this.state.isOpen });
   };
   render() {
-    const { isOpen, defaultActiveKey, customers, errorForm } = this.state;
+    const { isOpen, defaultActiveKey, customers, errorForm, isTabError } = this.state;
     const tabs = [
       {
         tab: "All",
@@ -91,7 +100,7 @@ class Home extends React.Component {
           destroyOnClose={true}
           onOk={() => this.setState({ isOpen: false,errorForm: false, defaultActiveKey: "0" })}
           onCancel={() =>
-            this.setState({ isOpen: false, defaultActiveKey: "0", errorForm: false })
+            this.setState({ isOpen: false, defaultActiveKey: "0", errorForm: false, isTabError: false })
           }
           footer={null}
         >
@@ -99,11 +108,13 @@ class Home extends React.Component {
             errorForm={errorForm}
             wrappedComponentRef={this.saveFormRef}
             visible={isOpen}
+            isTabError={isTabError}
             onCancel={() =>
               this.setState({
                 isOpen: false,
                 defaultActiveKey: "0",
-                errorForm: false
+                errorForm: false,
+                isTabError: false
               })
             }
             onCreate={this.handleCreate}

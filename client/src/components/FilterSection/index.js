@@ -143,11 +143,13 @@ class FilterSection extends React.Component {
       this.props.parentSelect(open);
   }
   handleFilterClear = (key) => {
+    let { customers } = this.props;
     let {filter} = this.state;
     filter[key] = [];
     this.setState({
       filter
     })
+    this.props.filter(customers);
   }
   render() {
     let {
@@ -192,6 +194,8 @@ class FilterSection extends React.Component {
                       </div>
                   </div>
                 )}
+                // allowClear={true}
+                  value={filter.location ? filter.location : []}
                   mode="multiple"
                   style={{ width: 115 }}
                   placeholder="Location"
@@ -219,14 +223,14 @@ class FilterSection extends React.Component {
                     getPopupContainer={() =>
                        document.getElementById("divisionlocation")
                      }
-                     
+                     value={filter.division ? filter.division : []}
                      onDropdownVisibleChange={(open) => this.handleDivisionSelectVisible(open, 'division')}
                      dropdownRender={menu => (
                     <div>
                       {menu}
                       <div className="dropdownfooter">
-                      <img src={iconClose} />
-                      <Button className="close">Clear</Button>
+                      <img src={iconClose} onClick={() => this.handleFilterClear('division')}/>
+                      <Button className="close" onClick={() => this.handleFilterClear('division')}>Clear</Button>
                         </div>
                     </div>
                   )}
@@ -258,13 +262,14 @@ class FilterSection extends React.Component {
                       getPopupContainer={() =>
                          document.getElementById("accountRepresentativelocation")
                        }
+                       value={filter.accountRepresentative ? filter.accountRepresentative : []}
                        onDropdownVisibleChange={(open) => this.handleAccountSelectVisible(open, 'accountRepresentative')}
                        dropdownRender={menu => (
                       <div>
                         {menu}
                         <div className="dropdownfooter">
-                        <img src={iconClose} />
-                        <Button className="close">Clear</Button>
+                        <img src={iconClose} onClick={() => this.handleFilterClear('accountRepresentative')} />
+                        <Button className="close" onClick={() => this.handleFilterClear('accountRepresentative')} >Clear</Button>
                           </div>
                       </div>
                     )}
@@ -300,13 +305,14 @@ class FilterSection extends React.Component {
                       getPopupContainer={() =>
                          document.getElementById("customertypelocation")
                        }
+                       value={filter.customerType ? filter.customerType : []}
                        onDropdownVisibleChange={(open) => this.handleTypeSelectVisible(open, 'customerType')}
                        dropdownRender={menu => (
                       <div>
                         {menu}
                         <div className="dropdownfooter">
-                        <img src={iconClose} />
-                        <Button className="close">Clear</Button>
+                        <img src={iconClose}  onClick={() => this.handleFilterClear('customerType')} />
+                        <Button className="close"  onClick={() => this.handleFilterClear('customerType')}>Clear</Button>
                           </div>
                       </div>
                     )}
@@ -338,13 +344,14 @@ class FilterSection extends React.Component {
                       getPopupContainer={() =>
                          document.getElementById("statuslocation")
                        }
+                       value={filter.status ? filter.status : []}
                        onDropdownVisibleChange={(open) => this.handleStatusSelectVisible(open, 'status')}
                        dropdownRender={menu => (
                       <div>
                         {menu}
                         <div className="dropdownfooter">
-                        <img src={iconClose} />
-                        <Button className="close">Clear</Button>
+                        <img src={iconClose}  onClick={() => this.handleFilterClear('status')}/>
+                        <Button className="close"  onClick={() => this.handleFilterClear('status')}>Clear</Button>
                           </div>
                       </div>
                     )}

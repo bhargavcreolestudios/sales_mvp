@@ -58,7 +58,7 @@
 
 .selectlocation .ant-select {
   position: relative;
-  padding-right: 15px;
+  padding-right: 13px;
 }
 
 .selectlocation.open-dd:after {

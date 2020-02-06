@@ -12,6 +12,7 @@ class CustomerDetailSection extends React.Component {
   state = {
     loading: false,
     customerEditModal: false,
+    isTabError: false,
     customerDetail: {},
     formRef: React.createRef()
   };
@@ -57,6 +58,16 @@ class CustomerDetailSection extends React.Component {
     const { form } = formRef.props;
     form.validateFieldsAndScroll(async (err, values) => {
       if (err) {
+        if((err.accountNo || err.paymentTerms || err.preferredPayment || err.preferredDelivery || err.openingBalance ||err.asOf ||err.reason || err.taxResaleNo || err.exemptionDetails) && (!err.billingAddress || !err.city || !err.state || !err.zipCode)) {
+          this.setState({
+            isTabError: true
+          });
+        } else {
+          this.setState({
+            isTabError: false
+          });
+        } 
+        this.setState({ errorForm: true });
         return;
       } else {
         if(values.shippingAddressSame) {
@@ -87,7 +98,7 @@ class CustomerDetailSection extends React.Component {
     });
   };
   render() {
-    const { customerEditModal, customerDetail, loading } = this.state;
+    const { customerEditModal, customerDetail, loading, isTabError } = this.state;
     return (
       <Spin spinning={loading} size="large">
         <div className="customer-detail-section">
@@ -106,8 +117,8 @@ class CustomerDetailSection extends React.Component {
               <div>
                 <div className="titleDetailSection">
                   <p>{`${
-                    customerDetail.customerName
-                      ? customerDetail.customerName
+                    customerDetail.companyName
+                      ? customerDetail.companyName
                       : "A & G Fence & Supply"
                   }`}</p>
                   <span></span>
@@ -187,14 +198,15 @@ class CustomerDetailSection extends React.Component {
             getContainer={() => document.getElementById("modal-wrapper")}
             visible={customerEditModal}
             onOk={() => this.setState({ customerEditModal: false })}
-            onCancel={() => this.setState({ customerEditModal: false })}
+            onCancel={() => this.setState({ customerEditModal: false, isTabError: false })}
             footer={null}
           >
             <CustomerEditForm
               customerInfo={customerDetail}
+              isTabError={isTabError}
               wrappedComponentRef={this.saveFormRef}
               visible={customerEditModal}
-              onCancel={() => this.setState({ customerEditModal: false })}
+              onCancel={() => this.setState({ customerEditModal: false, isTabError: false })}
               onCreate={this.handleCreate}
             />
           </Modal>

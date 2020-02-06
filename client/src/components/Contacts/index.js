@@ -119,6 +119,13 @@ class Contacts extends React.Component {
     }
     this.setState({ showData: contacts });
   };
+  handleFilterClear = () => {
+    let {filter} = this.state;
+    filter['status'] = [];
+    this.setState({
+      filter
+    })
+  }
   selectAction = (key, value) => {
     let { filter } = this.state;
     filter[key] = value;
@@ -228,7 +235,7 @@ class Contacts extends React.Component {
         </div>
         <div className="filterSection">
           <Row>
-            <Col span={22}>
+            <Col span={19}>
               <div className="filterIcon">
                 <img src={iconFilter} />
                 <Input
@@ -239,7 +246,7 @@ class Contacts extends React.Component {
                 />
               </div>
             </Col>
-            <Col span={2}>
+            <Col span={5}>
               <div className="filterOptions">
               <div className={`selectlocation ${currentSelect === 'status' ? 'open-dd': ''} ${filter.status.length > 0 ? 'dropdown-open': ''}`} id="statuslocation">
                 {filter.status.length > 0  && <label style={{ color: "#707070" }}>Status:</label>}
@@ -253,11 +260,12 @@ class Contacts extends React.Component {
                         <div>
                           {menu}
                           <div className="dropdownfooter">
-                          <img src={iconClose} />
-                          <Button className="close">Clear</Button>
+                          <img src={iconClose} onClick={() => this.handleFilterClear()}/>
+                          <Button className="close" onClick={() => this.handleFilterClear()}>Clear</Button>
                             </div>
                         </div>
                       )}
+                      value={filter.status ? filter.status: []}
                         mode="multiple"
                         style={{ width: 95 }}
                         placeholder="Status"

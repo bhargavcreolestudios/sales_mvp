@@ -18,7 +18,6 @@ class NewCustomer extends React.Component {
 	    if (err) {
 	    	return;
 	    }
-	    console.log('Received values of form: ', values);
 	    form.resetFields();
 	    });
 	}

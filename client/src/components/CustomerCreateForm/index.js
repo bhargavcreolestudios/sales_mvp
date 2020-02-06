@@ -27,6 +27,7 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
       isSameAdd: false,
       errorForm: false,
       customerDetail: {},
+      isTab: false,
       isEdit: false,
       isSubCustomer: false
     };
@@ -35,6 +36,7 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
         this.setState({
           isEdit: true,
           customerDetail: this.props.customerInfo,
+          isTab: this.props.isTabError,
           isSameAdd: this.props.customerInfo ? this.props.customerInfo.shippingAddressSame : false,
           isSubCustomer: this.props.customerInfo ? this.props.customerInfo.isSubCustomer : false,
         });
@@ -53,16 +55,21 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
           isSubCustomer: this.props.customerInfo ? this.props.customerInfo.isSubCustomer : false,
         });
       }
+      if(this.props.isTabError !== prevProps.isTabError) {
+        this.setState({
+          isTab: this.props.isTabError
+        })
+      }
     }
     render() {
       const {
         isSameAdd,
         isSubCustomer,
         errorForm,
+        isTab,
         isEdit,
         customerDetail
       } = this.state;
-      console.log(customerDetail,'customerDetail');
       const { visible, onCancel, onCreate, form } = this.props;
       const { getFieldDecorator } = form;
       return (
@@ -291,7 +298,13 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
             </Col>
             <Col className="col1" span={24}>
               <Tabs
-                defaultActiveKey="1"
+                activeKey={isTab ? "2" : "1"}
+                // defaultActiveKey={isTab ? "2" : "1"}
+                onChange={(activeKey) => {
+                  this.setState({
+                    isTab: activeKey === "1" ? false : true
+                  })
+                }}
                 className={errorForm ? 'errorTabAstrik' : ''}
               >
                 <TabPane tab="Address" key="1">
@@ -580,8 +593,8 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                             placeholder="Select a reason"
                             onChange={value => console.log(value)}
                           >
-                            <Option value="user 1">user 1</Option>
-                            <Option value="user 2">user 2</Option>
+                            <Option value="reason 1">reason 1</Option>
+                            <Option value="reason 2">reason 2</Option>
                           </Select>
                         )}
                       </Form.Item>
