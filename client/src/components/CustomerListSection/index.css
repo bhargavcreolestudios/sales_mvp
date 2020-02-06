@@ -45,7 +45,7 @@
   margin-bottom: 0 !important;
 }
 .customTD .name.bolderName span {
-  font-family: 'Roboto-Medium';
+  font-family: 'Roboto-Medium' !important;
 }
 .content {
   font-size: 14px;
@@ -156,3 +156,4 @@
 #customerListingTable .ant-popover-placement-bottomLeft {
   padding-top: 0;
 }
+.ant-table-tbody tr:hover { cursor: pointer; }

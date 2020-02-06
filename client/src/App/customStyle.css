@@ -91,10 +91,10 @@ table .ant-checkbox-checked .ant-checkbox-inner::after {
   top: 10px;
 }
 table th {
-  color: #707070;
+  color: #707070 !important;
 }
 table th:nth-child(2) {
-  color: #141823;
+  color: #141823 !important;
 }
 table th:nth-child(2) .ant-table-column-title:after {
   content: '';
@@ -151,7 +151,7 @@ table td:nth-child(4) {
   opacity: 1;
 }
 
-.ant-table-thead > tr:hover.ant-table-row-selected > td, .ant-table-tbody > tr:hover.ant-table-row-selected > td {
+.ant-table-thead > tr.ant-table-row-selected:hover > td, .ant-table-tbody > tr.ant-table-row-selected:hover > td,.ant-table-tbody > tr.ant-table-row-selected > td,.ant-table-thead > tr.ant-table-row-selected > td {
   background: #f0f5fd;
 }
 
@@ -213,5 +213,6 @@ h3.ant-typography, .ant-typography h3 {
 .customTD.fullNameWrapper .lineheight-normal {
   line-height:30px;
 }
-
-
+.ant-table-tbody > tr > td:first-child {
+  height: 55px;
+}

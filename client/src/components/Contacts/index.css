@@ -18,6 +18,7 @@
 .newCustomer{
 	cursor: pointer;
 	margin: 5px 0px 0px 2%;
+  color: #383838;
 }
 .filterSection{
 	margin-top: 10px;
@@ -74,4 +75,7 @@
 }
 .mainContactWrapper {
   min-height: 350px;
+}
+.contactfilter .ant-select-selection-selected-value {
+  font-family: roboto-medium;
 }

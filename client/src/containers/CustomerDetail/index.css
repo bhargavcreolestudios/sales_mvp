@@ -9,4 +9,5 @@
 }
 .ant-tabs-tab-active {
   color: #383838 !important;
+  font-family: roboto-medium;
 }

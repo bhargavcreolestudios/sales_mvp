@@ -79,6 +79,7 @@
   z-index: 1;
   color: #000 !important;
   font-size: 16px;
+  cursor: pointer;
 }
 
 .filterOptions .selectlocation .ant-select-open .ant-select-selection__placeholder {
@@ -177,6 +178,7 @@
   color: #383838;
   padding: 0;
   border:0;
+  cursor: pointer;
 }
 
 .selectlocation.open-dd .ant-select-selection--multiple .ant-select-selection__choice {
@@ -205,6 +207,7 @@
 }
 .ant-select-selection--multiple .ant-select-search--inline {
   position: absolute;
+  cursor: pointer;
 }
 .filterIcon {
   width: 100%;
@@ -216,7 +219,7 @@
     top: 50%;
     transform: translateY(-50%);
     padding-right: 5px !important;
-    z-index: 1;
+    cursor: pointer;
 }
 .filterOptions .selectlocation label {
   color: #707070 !important;
@@ -227,6 +230,7 @@
 
 .filterOptions .selectlocation.open-dd .expandicon {
   filter: invert(1);
+  z-index: 1;
 }
 
 .overlay table:after {
@@ -242,6 +246,7 @@
 
 .selectlocation .ant-select-selection--multiple .ant-select-search--inline .ant-select-search__field {
   color: transparent;
+  cursor: pointer;
 }
 
 

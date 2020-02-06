@@ -10,7 +10,7 @@
   font-weight: 500;
 }
 .ant-menu-dark .ant-menu-item-selected {
-  font-weight: bold !important;
+  font-family: roboto-medium;
 }
 .ant-menu-dark,
 .ant-menu-dark .ant-menu-sub {
@@ -41,4 +41,21 @@
 }
 .ant-menu-dark.ant-menu-horizontal {
   padding-left: 110px;
+}
+
+@media only screen and (max-width: 1050px) {
+  .SubHeaderWrapper .SubHeaderButtons {
+    position: initial !important;
+  }
+  .SubHeaderWrapper .SubHeaderButtons .SubHeaderFirstButtons::before {
+    display: none !important;
+  }
+  table td:nth-child(2), table td:nth-child(3), table td:nth-child(4) {
+    width: auto;
+  }
+}
+@media only screen and (max-width: 1250px) {
+  .ant-menu-dark.ant-menu-horizontal {
+    padding-left: 0px;
+  }
 }
