@@ -37,8 +37,12 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
           isEdit: true,
           customerDetail: this.props.customerInfo,
           isTab: this.props.isTabError,
-          isSameAdd: this.props.customerInfo ? this.props.customerInfo.shippingAddressSame : false,
-          isSubCustomer: this.props.customerInfo ? this.props.customerInfo.isSubCustomer : false,
+          isSameAdd: this.props.customerInfo
+            ? this.props.customerInfo.shippingAddressSame
+            : false,
+          isSubCustomer: this.props.customerInfo
+            ? this.props.customerInfo.isSubCustomer
+            : false
         });
       }
     }
@@ -48,19 +52,57 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
           errorForm: this.props.errorForm
         });
       }
-      if(this.props.customerInfo !== prevProps.customerInfo) {
+      if (this.props.customerInfo !== prevProps.customerInfo) {
         this.setState({
           customerDetail: this.props.customerInfo,
-          isSameAdd: this.props.customerInfo ? this.props.customerInfo.shippingAddressSame : true,
-          isSubCustomer: this.props.customerInfo ? this.props.customerInfo.isSubCustomer : false,
+          isSameAdd: this.props.customerInfo
+            ? this.props.customerInfo.shippingAddressSame
+            : true,
+          isSubCustomer: this.props.customerInfo
+            ? this.props.customerInfo.isSubCustomer
+            : false
         });
       }
-      if(this.props.isTabError !== prevProps.isTabError) {
+      if (this.props.isTabError !== prevProps.isTabError) {
         this.setState({
           isTab: this.props.isTabError
-        })
+        });
       }
     }
+    /* handlePhoneBlur = (e) => {
+      this.props.form.validateFields(['phone'], (errors, values) => {
+        console.log(errors, 'test')
+        if(errors) {
+          if(errors.phone) {
+            return;
+          }else {
+            return;
+          }
+        }else {
+          console.log(values, 'values')
+        }
+      })
+    } */
+    phoneNumberValidation = (rule, value, callback) => {
+      try {
+        if(!value) {
+          callback()
+        }else {
+          let validNumber = /^\d{10}$/;
+          if(validNumber.test(value)) {
+            callback();
+          }
+          // else if(validNumber.test(value)) {}
+          else {
+            callback([new Error('Must be 10 Number')]);
+          }
+        }
+       
+      }catch(e) {
+        console.log(e, 'eee')
+      }
+      
+    };
     render() {
       const {
         isSameAdd,
@@ -79,21 +121,21 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
             <Col className="col1" span={12}>
               <Form.Item label="Company">
                 {getFieldDecorator('companyName', {
-                  initialValue: isEdit ? customerDetail.companyName : '',
+                  initialValue: isEdit ? customerDetail.companyName : ''
                 })(<Input />)}
               </Form.Item>
               <Row>
                 <Col className="spaceBetween1" span={12}>
                   <Form.Item label="First Name">
                     {getFieldDecorator('firstName', {
-                      initialValue: isEdit ? customerDetail.firstName : '',
+                      initialValue: isEdit ? customerDetail.firstName : ''
                     })(<Input />)}
                   </Form.Item>
                 </Col>
                 <Col className="spaceBetween2" span={12}>
                   <Form.Item label="Last Name">
                     {getFieldDecorator('lastName', {
-                      initialValue: isEdit ? customerDetail.lastName : '',
+                      initialValue: isEdit ? customerDetail.lastName : ''
                     })(<Input />)}
                   </Form.Item>
                 </Col>
@@ -108,10 +150,7 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
               </Form.Item>
               <Form.Item label="Account Rep">
                 {getFieldDecorator('accountRep', {
-                  initialValue: isEdit ? customerDetail.accountRep : undefined,
-                  rules: [
-                    { required: true, message: 'Please select account rep!' }
-                  ]
+                  initialValue: isEdit ? customerDetail.accountRep : undefined
                 })(
                   <Select
                     className="select"
@@ -121,16 +160,12 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                     <Option value="Jillian Crain">Jillian Crain</Option>
                     <Option value="Jeff Osborne">Jeff Osborne</Option>
                     <Option value="Cindy Truett">Cindy Truett</Option>
-
                   </Select>
                 )}
               </Form.Item>
               <Form.Item label="Customer Type">
                 {getFieldDecorator('customerType', {
-                  initialValue: isEdit ? customerDetail.customerType : undefined,
-                  rules: [
-                    { required: true, message: 'Please select customer type!' }
-                  ]
+                  initialValue: isEdit ? customerDetail.customerType : undefined
                 })(
                   <Select
                     className="select"
@@ -141,7 +176,9 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                     <Option value="Contractor">Contractor</Option>
                     <Option value="End Users">End Users</Option>
 
-                    <Option value="Property Management">Property Management</Option>
+                    <Option value="Property Management">
+                      Property Management
+                    </Option>
                   </Select>
                 )}
               </Form.Item>
@@ -154,8 +191,7 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                     {
                       type: 'email',
                       message: 'Please enter valid email address'
-                    },
-                    { required: true, message: 'Please enter email address!' }
+                    }
                   ]
                 })(<Input />)}
               </Form.Item>
@@ -165,14 +201,7 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                     {getFieldDecorator('phone', {
                       initialValue: isEdit ? customerDetail.phone : '',
                       rules: [
-                        {
-                          required: true,
-                          message: 'Please enter phone number!'
-                        },
-                        {
-                          max: 10,
-                          message: 'Phone number should be around 10 digit'
-                        }
+                        { validator: this.phoneNumberValidation }
                       ]
                     })(<Input />)}
                   </Form.Item>
@@ -181,12 +210,6 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                   <Form.Item label="Mobile">
                     {getFieldDecorator('mobile', {
                       initialValue: isEdit ? customerDetail.mobile : '',
-                      rules: [
-                        {
-                          required: true,
-                          message: 'Please enter mobile number!'
-                        }
-                      ]
                     })(<Input />)}
                   </Form.Item>
                 </Col>
@@ -195,10 +218,7 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                 <Col className="spaceBetween1" span={12}>
                   <Form.Item label="Fax">
                     {getFieldDecorator('fax', {
-                      initialValue: isEdit ? customerDetail.fax : '',
-                      rules: [
-                        { required: true, message: 'Please enter FAX number!' }
-                      ]
+                      initialValue: isEdit ? customerDetail.fax : ''
                     })(<Input />)}
                   </Form.Item>
                 </Col>
@@ -287,9 +307,10 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                         onChange={value => console.log(value)}
                       >
                         <Option value="Real property">Real property</Option>
-                        <Option value="Personal property">Personal property</Option>
+                        <Option value="Personal property">
+                          Personal property
+                        </Option>
                         <Option value="Public property">Public property</Option>
-
                       </Select>
                     )}
                   </Form.Item>
@@ -298,14 +319,14 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
             </Col>
             <Col className="col1" span={24}>
               <Tabs
-                activeKey={isTab ? "2" : "1"}
+                activeKey={isTab ? '2' : '1'}
                 // defaultActiveKey={isTab ? "2" : "1"}
-                onChange={(activeKey) => {
+                onChange={activeKey => {
                   this.setState({
-                    isTab: activeKey === "1" ? false : true
-                  })
+                    isTab: activeKey === '1' ? false : true
+                  });
                 }}
-                className={errorForm ? 'errorTabAstrik' : ''}
+                // className={errorForm ? 'errorTabAstrik' : ''}
               >
                 <TabPane tab="Address" key="1">
                   <Row>
@@ -314,67 +335,38 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                         {getFieldDecorator('billingAddress', {
                           initialValue: isEdit
                             ? customerDetail.billingAddress
-                            : '',
-                          rules: [
-                            { required: true, message: 'Please enter address!' }
-                          ]
+                            : ''
                         })(<Input />)}
                       </Form.Item>
                       <Form.Item label="City">
                         {getFieldDecorator('city', {
-                          initialValue: isEdit
-                            ? customerDetail.city
-                            : '',
-                          rules: [
-                            {
-                              required: true,
-                              message: 'Please enter city name!'
-                            }
-                          ]
+                          initialValue: isEdit ? customerDetail.city : ''
                         })(<Input />)}
                       </Form.Item>
                       <Row>
                         <Col className="spaceBetween1" span={12}>
                           <Form.Item label="State">
                             {getFieldDecorator('state', {
-                              initialValue: isEdit
-                                ? customerDetail.state
-                                : '',
-                              rules: [
-                                {
-                                  required: true,
-                                  message: 'Please enter state name!'
-                                }
-                              ]
+                              initialValue: isEdit ? customerDetail.state : ''
                             })(<Input />)}
                           </Form.Item>
                         </Col>
                         <Col className="spaceBetween2" span={12}>
                           <Form.Item label="Zip Code">
                             {getFieldDecorator('zipCode', {
-                              initialValue: isEdit
-                                ? customerDetail.zipCode
-                                : '',
-                              rules: [
-                                {
-                                  required: true,
-                                  message: 'Please enter zip code!'
-                                }
-                              ]
+                              initialValue: isEdit ? customerDetail.zipCode : ''
                             })(<Input />)}
                           </Form.Item>
                         </Col>
                       </Row>
                     </Col>
                     <Col className="spaceBetween2" span={12}>
-                      {/*<Form.Item label="Shipping Address">
-					                {getFieldDecorator('shippingAddress')(<div><Checkbox className="sameAddress">Same as billing address</Checkbox> <Input /></div>)}
-					              </Form.Item>*/}
                       <Form.Item>
                         <div className="shippingAddressWrapper">
                           <label>Shipping Address</label>
                           {getFieldDecorator('shippingAddressSame', {
-                            initialValue: customerDetail.shippingAddressSame || false,
+                            initialValue:
+                              customerDetail.shippingAddressSame || false,
                             valuePropName: 'checked'
                           })(
                             <Checkbox
@@ -389,29 +381,23 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                         </div>
                         <Form.Item>
                           {getFieldDecorator('shippingAddress', {
-                             initialValue: isEdit
-                             ? customerDetail.shippingAddress
-                             : '',
-                            rules: [
-                              {
-                                required: !isSameAdd,
-                                message: 'Please enter shipping address!'
-                              }
-                            ]
+                            initialValue: isEdit
+                              ? customerDetail.shippingAddress
+                              : '',
+                            // rules: [
+                            //   {
+                            //     required: !isSameAdd,
+                            //     message: 'Please enter shipping address!'
+                            //   }
+                            // ]
                           })(<Input disabled={isSameAdd} />)}
                         </Form.Item>
                       </Form.Item>
                       <Form.Item label="City" className="relativeTop">
                         {getFieldDecorator('shippingCity', {
                           initialValue: isEdit
-                          ? customerDetail.shippingCity
-                          : '',
-                          rules: [
-                            {
-                              required: !isSameAdd,
-                              message: 'Please enter city name!'
-                            }
-                          ]
+                            ? customerDetail.shippingCity
+                            : '',
                         })(<Input disabled={isSameAdd} />)}
                       </Form.Item>
                       <Row>
@@ -419,14 +405,8 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                           <Form.Item label="State" className="relativeTop">
                             {getFieldDecorator('shippingState', {
                               initialValue: isEdit
-                              ? customerDetail.shippingState
-                              : '',
-                              rules: [
-                                {
-                                  required: !isSameAdd,
-                                  message: 'Please enter state name!'
-                                }
-                              ]
+                                ? customerDetail.shippingState
+                                : '',
                             })(<Input disabled={isSameAdd} />)}
                           </Form.Item>
                         </Col>
@@ -434,14 +414,14 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                           <Form.Item label="Zip Code" className="relativeTop">
                             {getFieldDecorator('shippingZipCode', {
                               initialValue: isEdit
-                              ? customerDetail.shippingZipCode
-                              : '',
-                              rules: [
-                                {
-                                  required: !isSameAdd,
-                                  message: 'Please enter zip code!'
-                                }
-                              ]
+                                ? customerDetail.shippingZipCode
+                                : '',
+                              // rules: [
+                              //   {
+                              //     required: !isSameAdd,
+                              //     message: 'Please enter zip code!'
+                              //   }
+                              // ]
                             })(<Input disabled={isSameAdd} />)}
                           </Form.Item>
                         </Col>
@@ -458,13 +438,7 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                             {getFieldDecorator('accountNo', {
                               initialValue: isEdit
                                 ? customerDetail.accountNo
-                                : '',
-                              rules: [
-                                {
-                                  required: true,
-                                  message: 'Please enter account number!'
-                                }
-                              ]
+                                : ''
                             })(<Input />)}
                           </Form.Item>
                         </Col>
@@ -474,17 +448,8 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                               initialValue: isEdit
                                 ? customerDetail.paymentTerms
                                 : undefined,
-                              rules: [
-                                {
-                                  required: true,
-                                  message: 'Please select payment terms!'
-                                }
-                              ]
                             })(
-                              <Select
-                                className="select"
-                                placeholder="Select"
-                              >
+                              <Select className="select" placeholder="Select">
                                 <Option value="6 Month">6 Month</Option>
                                 <Option value="1 Year">1 Year</Option>
                               </Select>
@@ -499,17 +464,8 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                               initialValue: isEdit
                                 ? customerDetail.preferredPayment
                                 : undefined,
-                              rules: [
-                                {
-                                  required: true,
-                                  message: 'Please select preferred payment!'
-                                }
-                              ]
                             })(
-                              <Select
-                                className="select"
-                                placeholder="Select"
-                              >
+                              <Select className="select" placeholder="Select">
                                 <Option value="Cash">Cash</Option>
                                 <Option value="Credit Card">Credit Card</Option>
                                 <Option value="Net Banking">Net Banking</Option>
@@ -523,17 +479,8 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                               initialValue: isEdit
                                 ? customerDetail.preferredDelivery
                                 : undefined,
-                              rules: [
-                                {
-                                  required: true,
-                                  message: 'Please select preferred delivery!'
-                                }
-                              ]
                             })(
-                              <Select
-                                className="select"
-                                placeholder="Select"
-                              >
+                              <Select className="select" placeholder="Select">
                                 <Option value="Today">Today</Option>
                                 <Option value="Tomorrow">Tomorrow</Option>
                               </Select>
@@ -552,10 +499,6 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                                 {
                                   type: 'number',
                                   message: 'Invalid Number'
-                                },
-                                {
-                                  required: true,
-                                  message: 'Please enter opening balance!'
                                 }
                               ]
                             })(<InputNumber />)}
@@ -565,12 +508,6 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                           <Form.Item label="As Of">
                             {getFieldDecorator('asOf', {
                               initialValue: isEdit ? customerDetail.asOf : '',
-                              rules: [
-                                {
-                                  required: true,
-                                  message: 'Please enter as of!'
-                                }
-                              ]
                             })(<Input />)}
                           </Form.Item>
                         </Col>
@@ -580,13 +517,9 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                     <Col className="col2" span={12}>
                       <Form.Item className="reasonSection">
                         {getFieldDecorator('reason', {
-                          initialValue: isEdit ? customerDetail.reason : undefined,
-                          rules: [
-                            {
-                              required: true,
-                              message: 'Please select a reason!'
-                            }
-                          ]
+                          initialValue: isEdit
+                            ? customerDetail.reason
+                            : undefined
                         })(
                           <Select
                             className="select"
@@ -602,26 +535,14 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                         {getFieldDecorator('taxResaleNo', {
                           initialValue: isEdit
                             ? customerDetail.taxResaleNo
-                            : '',
-                          rules: [
-                            {
-                              required: true,
-                              message: 'Please enter tax resale number!'
-                            }
-                          ]
+                            : ''
                         })(<Input />)}
                       </Form.Item>
                       <Form.Item label="Exemption Details">
                         {getFieldDecorator('exemptionDetails', {
                           initialValue: isEdit
                             ? customerDetail.exemptionDetails
-                            : '',
-                          rules: [
-                            {
-                              required: true,
-                              message: 'Please enter exemption details!'
-                            }
-                          ]
+                            : ''
                         })(<Input />)}
                       </Form.Item>
                     </Col>

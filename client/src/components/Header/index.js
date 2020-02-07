@@ -5,6 +5,8 @@ import iconSearch from '../../assets/search.svg';
 import iconAdd from '../../assets/add.svg';
 import iconNotification from '../../assets/notification.svg';
 import iconUser from '../../assets/user.svg';
+import logoWhite from '../../assets/logoWhite.svg';
+
 import './index.css';
 class Header extends React.Component {
   render() {
@@ -17,7 +19,11 @@ class Header extends React.Component {
           style={{ lineHeight: '55px' }}
           className="headerWrapper"
         >
-          <Menu.Item key="1"></Menu.Item>
+          <Menu.Item key="1" style={{width: 90}}>
+            <div className="logoImageWrapper">
+              <img src={logoWhite} />
+            </div>
+          </Menu.Item>
           <Menu.Item key="2">Dashboard</Menu.Item>
           <Menu.Item key="3">Leads</Menu.Item>
           <Menu.Item key="4">Quotes</Menu.Item>

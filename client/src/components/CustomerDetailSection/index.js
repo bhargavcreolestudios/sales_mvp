@@ -1,12 +1,12 @@
-import React from "react";
-import { Row, Col, Modal, notification, Spin } from "antd";
-import { Link, withRouter } from "react-router-dom";
-import Button from "../Button";
-import customerService from "../../services/customerService";
-import iconEdit from "../../assets/icoPedit.svg";
-import customerImage from "../../assets/customerImage.png";
-import CustomerEditForm from "../CustomerCreateForm";
-import "./index.css";
+import React from 'react';
+import { Row, Col, Modal, notification, Spin } from 'antd';
+import { Link, withRouter } from 'react-router-dom';
+import Button from '../Button';
+import customerService from '../../services/customerService';
+import iconEdit from '../../assets/icoPedit.svg';
+import customerImage from '../../assets/customerImage.png';
+import CustomerEditForm from '../CustomerCreateForm';
+import './index.css';
 
 class CustomerDetailSection extends React.Component {
   state = {
@@ -26,17 +26,17 @@ class CustomerDetailSection extends React.Component {
         if (Object.keys(detail).length > 1) {
           this.setState({ customerDetail: detail });
         } else {
-          notification["info"]({
-            message: "No Record",
-            description: "Redirecting to homepage.",
+          notification['info']({
+            message: 'No Record',
+            description: 'Redirecting to homepage.',
             duration: 1.5
           });
           setTimeout(() => {
-            this.props.history.push("/");
+            this.props.history.push('/');
           }, 2000);
         }
       } else {
-        this.props.history.replace("/");
+        this.props.history.replace('/');
       }
       this.setState({ loading: false });
     } catch (error) {}
@@ -58,7 +58,18 @@ class CustomerDetailSection extends React.Component {
     const { form } = formRef.props;
     form.validateFieldsAndScroll(async (err, values) => {
       if (err) {
-        if((err.accountNo || err.paymentTerms || err.preferredPayment || err.preferredDelivery || err.openingBalance ||err.asOf ||err.reason || err.taxResaleNo || err.exemptionDetails) && (!err.billingAddress || !err.city || !err.state || !err.zipCode)) {
+        if (
+          (err.accountNo ||
+            err.paymentTerms ||
+            err.preferredPayment ||
+            err.preferredDelivery ||
+            err.openingBalance ||
+            err.asOf ||
+            err.reason ||
+            err.taxResaleNo ||
+            err.exemptionDetails) &&
+          (!err.billingAddress || !err.city || !err.state || !err.zipCode)
+        ) {
           this.setState({
             isTabError: true
           });
@@ -66,17 +77,17 @@ class CustomerDetailSection extends React.Component {
           this.setState({
             isTabError: false
           });
-        } 
+        }
         this.setState({ errorForm: true });
         return;
       } else {
-        if(values.shippingAddressSame) {
+        if (values.shippingAddressSame) {
           delete values.shippingAddress;
           delete values.shippingCity;
           delete values.shippingState;
           delete values.shippingZipCode;
         }
-        if(!values.isSubCustomer) {
+        if (!values.isSubCustomer) {
           delete values.parentCustomer;
           delete values.billWithParent;
           delete values.propertyType;
@@ -97,8 +108,17 @@ class CustomerDetailSection extends React.Component {
       }
     });
   };
+  phoneFormat = (value) => {
+    let x = value.replace(/\D/g, '').match(/(\d{3})(\d{3})(\d{4})/);
+    return '(' + x[1] + ') ' + x[2] + '-' + x[3];
+  }
   render() {
-    const { customerEditModal, customerDetail, loading, isTabError } = this.state;
+    const {
+      customerEditModal,
+      customerDetail,
+      loading,
+      isTabError
+    } = this.state;
     return (
       <Spin spinning={loading} size="large">
         <div className="customer-detail-section">
@@ -108,7 +128,7 @@ class CustomerDetailSection extends React.Component {
                 <h1 className="customerName">{`${
                   customerDetail.displayName
                     ? customerDetail.displayName
-                    : "A & G Sales"
+                    : 'A & G Sales'
                 }`}</h1>
                 <a onClick={this.openEditCustomerModal}>
                   <img src={iconEdit} />
@@ -119,7 +139,7 @@ class CustomerDetailSection extends React.Component {
                   <p>{`${
                     customerDetail.companyName
                       ? customerDetail.companyName
-                      : "A & G Fence & Supply"
+                      : 'A & G Fence & Supply'
                   }`}</p>
                   <span></span>
                   <p>Manufacturer</p>
@@ -130,27 +150,42 @@ class CustomerDetailSection extends React.Component {
                   <img src={customerImage} />
                   <div className="details">
                     <div>
-                      <span>Phone:</span>{" "}
-                      <p to="/">{`${
+                      <span>Phone:</span>{' '}
+                      <p>{`${
                         customerDetail.phone
-                          ? customerDetail.phone
-                          : "+1 (562) 803-1888"
+                          ?  this.phoneFormat(customerDetail.phone)
+                          : '+1 (562) 803-1888'
                       }`}</p>
                     </div>
                     <div>
                       <span>Address:</span>
-                      <p to="/">{`${
-                        customerDetail.billingAddress
-                          ? customerDetail.billingAddress
-                          : "11926 Woodruff Ave. Downey, CA 90241"
-                      }`}</p>
+                      <div className="address-edit-section">
+                        <p>{`${
+                          customerDetail.billingAddress
+                            ? customerDetail.billingAddress
+                            : '11926 Woodruff Ave.'
+                        }`}</p>
+                        <section>
+                          <span>{`${
+                            customerDetail.city ? customerDetail.city : '-'
+                          }`}</span>
+                          <span>{`${
+                            customerDetail.state ? ', ' + customerDetail.state : '-'
+                          }`}</span>
+                          <span>{`${
+                            customerDetail.zipCode
+                              ? ' ' + customerDetail.zipCode
+                              : '-'
+                          }`}</span>
+                        </section>
+                      </div>
                     </div>
                     <div>
-                      <span>E-mail:</span>{" "}
-                      <p to="/">{`${
+                      <span>E-mail:</span>{' '}
+                      <p>{`${
                         customerDetail.email
                           ? customerDetail.email
-                          : "info@agsales.com"
+                          : 'info@agsales.com'
                       }`}</p>
                     </div>
                   </div>
@@ -195,10 +230,12 @@ class CustomerDetailSection extends React.Component {
             title="Customer Information"
             className="customerInformation"
             destroyOnClose={true}
-            getContainer={() => document.getElementById("modal-wrapper")}
+            getContainer={() => document.getElementById('modal-wrapper')}
             visible={customerEditModal}
             onOk={() => this.setState({ customerEditModal: false })}
-            onCancel={() => this.setState({ customerEditModal: false, isTabError: false })}
+            onCancel={() =>
+              this.setState({ customerEditModal: false, isTabError: false })
+            }
             footer={null}
           >
             <CustomerEditForm
@@ -206,7 +243,9 @@ class CustomerDetailSection extends React.Component {
               isTabError={isTabError}
               wrappedComponentRef={this.saveFormRef}
               visible={customerEditModal}
-              onCancel={() => this.setState({ customerEditModal: false, isTabError: false })}
+              onCancel={() =>
+                this.setState({ customerEditModal: false, isTabError: false })
+              }
               onCreate={this.handleCreate}
             />
           </Modal>

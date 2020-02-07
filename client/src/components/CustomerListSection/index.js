@@ -56,6 +56,10 @@ class CustomerListSection extends React.Component {
       currentKey: status
     })
   } 
+  phoneFormat = (value) => {
+    let x = value.replace(/\D/g, '').match(/(\d{3})(\d{3})(\d{4})/);
+    return '(' + x[1] + ') ' + x[2] + '-' + x[3];
+  }
   render() {
     const { moreOption, key, customers, showData, currentSelect, currentKey } = this.state;
     const content = (
@@ -118,9 +122,9 @@ class CustomerListSection extends React.Component {
         key: "billingAddress",
         render: (text, record) => (
           <div className="customTD">
-            <p className="content">{text}</p>
+            <p className="content">{text ? text : 'NA'}</p>
             <p className="content">
-              {record.city} {record.state}
+              {record.city ? record.city : 'NA' } {record.state  ? record.city : 'NA'}
             </p>
           </div>
         )
@@ -129,19 +133,19 @@ class CustomerListSection extends React.Component {
         title: "Type",
         dataIndex: "customerType",
         key: "customerType",
-        render: text => <p className="content otherContent">{text}</p>
+        render: (text, record) => <p className="content otherContent">{record.customerType ? record.customerType : 'NA' }</p>
       },
       {
         title: "Phone",
         dataIndex: "phone",
         key: "phone",
-        render: text => <p className="content otherContent">{text}</p>
+        render: (text, record) => <p className="content otherContent">{record.phone ? this.phoneFormat(record.phone): 'NA'}</p>
       },
       {
         title: "Fax No.",
         dataIndex: "fax",
         key: "fax",
-        render: text => <p className="content otherContent">{text}</p>
+        render: text => <p className="content otherContent">{text? text: 'NA'}</p>
       }
     ];
     const rowSelection = {

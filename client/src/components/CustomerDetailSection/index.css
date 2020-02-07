@@ -156,3 +156,20 @@
 .addNewSection {
   margin-top: 10px;
 }
+.address-edit-section {
+  flex-direction: column;
+  padding-top: 0 !important;
+}
+.address-edit-section p {
+  margin-bottom: 0;
+}
+.address-edit-section span {
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.31;
+  letter-spacing: normal;
+  text-align: left;
+  color: #004881;
+}
