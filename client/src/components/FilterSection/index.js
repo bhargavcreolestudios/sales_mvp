@@ -211,6 +211,7 @@ class FilterSection extends React.Component {
                         <div
                           className="closeSelectWrapper"
                           onClick={(e) => this.handleFilterClear(e,'location')}
+                          onMouseDown={e => e.preventDefault()}
                         >
                           <img src={iconClose} />
                           <Button className="close">Clear</Button>
@@ -259,6 +260,7 @@ class FilterSection extends React.Component {
                   getPopupContainer={() =>
                     document.getElementById('divisionlocation')
                   }
+                  onMouseDown={e => e.preventDefault()}
                   value={filter.division ? filter.division : []}
                   onDropdownVisibleChange={open =>
                     this.handleDivisionSelectVisible(open, 'division')
@@ -269,6 +271,7 @@ class FilterSection extends React.Component {
                       <div className="dropdownfooter">
                         <div
                           className="closeSelectWrapper"
+                          onMouseDown={e => e.preventDefault()}
                           onClick={(e) => this.handleFilterClear(e,'division')}
                         >
                           <img src={iconClose} />
@@ -337,6 +340,7 @@ class FilterSection extends React.Component {
                       <div className="dropdownfooter">
                         <div
                           className="closeSelectWrapper"
+                          onMouseDown={e => e.preventDefault()}
                           onClick={(e) =>
                             this.handleFilterClear(e,'accountRepresentative')
                           }
@@ -397,6 +401,7 @@ class FilterSection extends React.Component {
                       {menu}
                       <div className="dropdownfooter">
                         <div
+                          onMouseDown={e => e.preventDefault()}
                           className="closeSelectWrapper"
                           onClick={(e) => this.handleFilterClear(e,'customerType')}
                         >
@@ -454,6 +459,7 @@ class FilterSection extends React.Component {
                       <div className="dropdownfooter">
                         <div
                           className="closeSelectWrapper"
+                          onMouseDown={e => e.preventDefault()}
                           onClick={(e) => this.handleFilterClear(e,'status')}
                         >
                           <img src={iconClose} />
