@@ -147,7 +147,8 @@ class FilterSection extends React.Component {
     });
     this.props.parentSelect(open);
   };
-  handleFilterClear = key => {
+  handleFilterClear = (e, key) => {
+    e.stopPropagation();
     let { customers } = this.props;
     let { filter } = this.state;
     filter[key] = [];
@@ -209,7 +210,7 @@ class FilterSection extends React.Component {
                       <div className="dropdownfooter">
                         <div
                           className="closeSelectWrapper"
-                          onClick={() => this.handleFilterClear('location')}
+                          onClick={(e) => this.handleFilterClear(e,'location')}
                         >
                           <img src={iconClose} />
                           <Button className="close">Clear</Button>
@@ -268,7 +269,7 @@ class FilterSection extends React.Component {
                       <div className="dropdownfooter">
                         <div
                           className="closeSelectWrapper"
-                          onClick={() => this.handleFilterClear('division')}
+                          onClick={(e) => this.handleFilterClear(e,'division')}
                         >
                           <img src={iconClose} />
                           <Button className="close">Clear</Button>
@@ -336,8 +337,8 @@ class FilterSection extends React.Component {
                       <div className="dropdownfooter">
                         <div
                           className="closeSelectWrapper"
-                          onClick={() =>
-                            this.handleFilterClear('accountRepresentative')
+                          onClick={(e) =>
+                            this.handleFilterClear(e,'accountRepresentative')
                           }
                         >
                           <img src={iconClose} />
@@ -397,7 +398,7 @@ class FilterSection extends React.Component {
                       <div className="dropdownfooter">
                         <div
                           className="closeSelectWrapper"
-                          onClick={() => this.handleFilterClear('customerType')}
+                          onClick={(e) => this.handleFilterClear(e,'customerType')}
                         >
                           <img src={iconClose} />
                           <Button className="close">Clear</Button>
@@ -453,7 +454,7 @@ class FilterSection extends React.Component {
                       <div className="dropdownfooter">
                         <div
                           className="closeSelectWrapper"
-                          onClick={() => this.handleFilterClear('status')}
+                          onClick={(e) => this.handleFilterClear(e,'status')}
                         >
                           <img src={iconClose} />
                           <Button className="close">Clear</Button>

@@ -122,9 +122,9 @@ class CustomerListSection extends React.Component {
         key: "billingAddress",
         render: (text, record) => (
           <div className="customTD">
-            <p className="content">{text ? text : 'NA'}</p>
+            <p className="content">{text ? text : ''}</p>
             <p className="content">
-              {record.city ? record.city : 'NA' } {record.state  ? record.city : 'NA'}
+              {record.city ? record.city : '' } {record.state  ? record.city : ''}
             </p>
           </div>
         )

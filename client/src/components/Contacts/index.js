@@ -128,7 +128,8 @@ class Contacts extends React.Component {
     }
     this.setState({ showData: contacts });
   };
-  handleFilterClear = () => {
+  handleFilterClear = (e) => {
+    e.stopPropagation();
     let { filter } = this.state;
     filter['status'] = [];
     this.setState({
@@ -304,7 +305,7 @@ class Contacts extends React.Component {
                         <div className="dropdownfooter">
                           <div
                             className="closeSelectWrapper"
-                            onClick={() => this.handleFilterClear()}
+                            onClick={(e) => this.handleFilterClear(e)}
                           >
                             <img src={iconClose} />
                             <Button className="close">Clear</Button>
