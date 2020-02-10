@@ -112,6 +112,7 @@
 }
 .ant-table-tbody tr {
   position: relative;
+  white-space: nowrap;
 }
 .moreMenuWrapper {
   position: absolute;
@@ -157,3 +158,20 @@
   padding-top: 0;
 }
 .ant-table-tbody tr:hover { cursor: pointer; }
+.ant-table{ overflow: auto; }
+/* width */
+.ant-table::-webkit-scrollbar {
+  height: 5px;
+  cursor: pointer;
+}
+
+/* Track */
+.ant-table::-webkit-scrollbar-track {
+      background: #e8f1fa;
+}
+
+/* Handle */
+.ant-table::-webkit-scrollbar-thumb {
+      background: #074881;
+    border-radius: 5px;
+}
