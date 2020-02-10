@@ -22,7 +22,6 @@ const { Option } = Select;
 const { TabPane } = Tabs;
 
 const PhoneNumberInput = props => {
-  console.log(props, 'props')
   const [phoneValue, setPhoneValue] = useState(props.value);
   useEffect(() => {
     setPhoneValue(props.value)
