@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import NumberFormat from 'react-number-format';
 import {
   Form,
   Radio,
@@ -20,6 +21,28 @@ import './index.css';
 const { Option } = Select;
 const { TabPane } = Tabs;
 
+const PhoneNumberInput = props => {
+  console.log(props, 'props')
+  const [phoneValue, setPhoneValue] = useState(props.value);
+  useEffect(() => {
+    setPhoneValue(props.value)
+  }, [props.value]);
+  const handleChange = e => {
+    setPhoneValue(e.value)
+    props.onChange(e.value);
+  };
+  return (
+    <NumberFormat
+      format="(###) ###-####"
+      mask=""
+      className="numberFormatInput"
+      name={props['data-__field'].name}
+      placeholder=""
+      onValueChange={handleChange}
+      value={phoneValue}
+    />
+  );
+};
 const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
   //class CustomerCreateForm extends React.Component{
   class extends React.Component {
@@ -85,11 +108,11 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
     } */
     phoneNumberValidation = (rule, value, callback) => {
       try {
-        if(!value) {
-          callback()
-        }else {
+        if (!value) {
+          callback();
+        } else {
           let validNumber = /^\d{10}$/;
-          if(validNumber.test(value)) {
+          if (validNumber.test(value)) {
             callback();
           }
           // else if(validNumber.test(value)) {}
@@ -97,11 +120,9 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
             callback([new Error('Must be 10 Number')]);
           }
         }
-       
-      }catch(e) {
-        console.log(e, 'eee')
+      } catch (e) {
+        console.log(e, 'eee');
       }
-      
     };
     render() {
       const {
@@ -200,16 +221,14 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                   <Form.Item label="Phone">
                     {getFieldDecorator('phone', {
                       initialValue: isEdit ? customerDetail.phone : '',
-                      rules: [
-                        { validator: this.phoneNumberValidation }
-                      ]
-                    })(<Input />)}
+                      rules: [{ validator: this.phoneNumberValidation }]
+                    })(<PhoneNumberInput />)}
                   </Form.Item>
                 </Col>
                 <Col className="spaceBetween2" span={12}>
                   <Form.Item label="Mobile">
                     {getFieldDecorator('mobile', {
-                      initialValue: isEdit ? customerDetail.mobile : '',
+                      initialValue: isEdit ? customerDetail.mobile : ''
                     })(<Input />)}
                   </Form.Item>
                 </Col>
@@ -383,7 +402,7 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                           {getFieldDecorator('shippingAddress', {
                             initialValue: isEdit
                               ? customerDetail.shippingAddress
-                              : '',
+                              : ''
                             // rules: [
                             //   {
                             //     required: !isSameAdd,
@@ -397,7 +416,7 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                         {getFieldDecorator('shippingCity', {
                           initialValue: isEdit
                             ? customerDetail.shippingCity
-                            : '',
+                            : ''
                         })(<Input disabled={isSameAdd} />)}
                       </Form.Item>
                       <Row>
@@ -406,7 +425,7 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                             {getFieldDecorator('shippingState', {
                               initialValue: isEdit
                                 ? customerDetail.shippingState
-                                : '',
+                                : ''
                             })(<Input disabled={isSameAdd} />)}
                           </Form.Item>
                         </Col>
@@ -415,7 +434,7 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                             {getFieldDecorator('shippingZipCode', {
                               initialValue: isEdit
                                 ? customerDetail.shippingZipCode
-                                : '',
+                                : ''
                               // rules: [
                               //   {
                               //     required: !isSameAdd,
@@ -447,7 +466,7 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                             {getFieldDecorator('paymentTerms', {
                               initialValue: isEdit
                                 ? customerDetail.paymentTerms
-                                : undefined,
+                                : undefined
                             })(
                               <Select className="select" placeholder="Select">
                                 <Option value="6 Month">6 Month</Option>
@@ -463,7 +482,7 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                             {getFieldDecorator('preferredPayment', {
                               initialValue: isEdit
                                 ? customerDetail.preferredPayment
-                                : undefined,
+                                : undefined
                             })(
                               <Select className="select" placeholder="Select">
                                 <Option value="Cash">Cash</Option>
@@ -478,7 +497,7 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                             {getFieldDecorator('preferredDelivery', {
                               initialValue: isEdit
                                 ? customerDetail.preferredDelivery
-                                : undefined,
+                                : undefined
                             })(
                               <Select className="select" placeholder="Select">
                                 <Option value="Today">Today</Option>
@@ -507,7 +526,7 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                         <Col className="spaceBetween2" span={12}>
                           <Form.Item label="As Of">
                             {getFieldDecorator('asOf', {
-                              initialValue: isEdit ? customerDetail.asOf : '',
+                              initialValue: isEdit ? customerDetail.asOf : ''
                             })(<Input />)}
                           </Form.Item>
                         </Col>
@@ -533,9 +552,7 @@ const CustomerCreateForm = Form.create({ name: 'form_in_modal' })(
                       </Form.Item>
                       <Form.Item label="Tax Resale No.">
                         {getFieldDecorator('taxResaleNo', {
-                          initialValue: isEdit
-                            ? customerDetail.taxResaleNo
-                            : ''
+                          initialValue: isEdit ? customerDetail.taxResaleNo : ''
                         })(<Input />)}
                       </Form.Item>
                       <Form.Item label="Exemption Details">
