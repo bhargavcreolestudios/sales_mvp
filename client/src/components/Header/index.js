@@ -5,21 +5,22 @@ import iconSearch from '../../assets/search.svg';
 import iconAdd from '../../assets/add.svg';
 import iconNotification from '../../assets/notification.svg';
 import iconUser from '../../assets/user.svg';
-import logoWhite from '../../assets/logoWhite.svg';
+import logoWhite from '../../assets/jobfilez_white.png';
 
 import './index.css';
 class Header extends React.Component {
   render() {
     return (
-      <div>
+      <div className="scroll-header">
         <Menu
           theme="dark"
+          inlineCollapsed={false}
           mode="horizontal"
           defaultSelectedKeys={['9']}
           style={{ lineHeight: '55px' }}
           className="headerWrapper"
         >
-          <Menu.Item key="1" style={{width: 90}}>
+          <Menu.Item key="1" style={{width: 150}}>
             <div className="logoImageWrapper">
               <img src={logoWhite} />
             </div>

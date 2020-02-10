@@ -133,19 +133,19 @@ class CustomerListSection extends React.Component {
         title: "Type",
         dataIndex: "customerType",
         key: "customerType",
-        render: (text, record) => <p className="content otherContent">{record.customerType ? record.customerType : 'NA' }</p>
+        render: (text, record) => <p className="content otherContent">{record.customerType ? record.customerType : '' }</p>
       },
       {
         title: "Phone",
         dataIndex: "phone",
         key: "phone",
-        render: (text, record) => <p className="content otherContent">{record.phone ? this.phoneFormat(record.phone): 'NA'}</p>
+        render: (text, record) => <p className="content otherContent">{record.phone ? this.phoneFormat(record.phone): ''}</p>
       },
       {
         title: "Fax No.",
         dataIndex: "fax",
         key: "fax",
-        render: text => <p className="content otherContent">{text? text: 'NA'}</p>
+        render: text => <p className="content otherContent">{text? text: ''}</p>
       }
     ];
     const rowSelection = {

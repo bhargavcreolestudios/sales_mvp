@@ -6,7 +6,7 @@ const productSchema = new Schema({
   firstName: String,
   lastName: String,
   displayName: String,
-  email: { type: String, unique: true, lowercase: true },
+  email: { type: String, lowercase: true },
   phone: { type: String, trim: true },
   mobile: { type: String, trim: true },
   fax: { type: String, trim: true },

@@ -1,5 +1,24 @@
+.scroll-header {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
 .headerWrapper {
   background: #004881 !important;
+}
+.scroll-header::-webkit-scrollbar {
+  height: 5px;
+  cursor: pointer;
+}
+
+/* Track */
+.scroll-header::-webkit-scrollbar-track {
+      background:#91a9bf;
+}
+
+/* Handle */
+.scroll-header::-webkit-scrollbar-thumb {
+      background: #f5f5f7;
+    border-radius: 5px;
 }
 .headerWrapper li {
   background-color: #004881 !important;
@@ -12,6 +31,12 @@
 }
 .ant-menu-dark .ant-menu-item-selected {
   font-family: roboto-medium;
+}
+.headerWrapper .ant-menu-overflowed-submenu {
+  display: none !important;
+}
+.headerWrapper .ant-menu-item.menuitem-overflowed {
+  display: inline-block !important;
 }
 .ant-menu-dark,
 .ant-menu-dark .ant-menu-sub {

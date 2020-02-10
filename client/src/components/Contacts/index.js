@@ -189,7 +189,7 @@ class Contacts extends React.Component {
         render: (text, record) => (
           <div className="customTD">
             <p className="content">
-              {record.position ? record.position : 'NA'}
+              {record.position ? record.position : ''}
             </p>
           </div>
         )
@@ -199,7 +199,7 @@ class Contacts extends React.Component {
         dataIndex: 'email',
         render: (text, record) => (
           <p className="content otherContent">
-            {record.email ? record.email : 'NA'}
+            {record.email ? record.email : ''}
           </p>
         )
       },
@@ -217,7 +217,7 @@ class Contacts extends React.Component {
         dataIndex: 'mobile',
         render: (text, record) => (
           <p className="content otherContent">
-            {record.mobile ? record.mobile : 'NA'}
+            {record.mobile ? record.mobile : ''}
           </p>
         )
       },
@@ -226,7 +226,7 @@ class Contacts extends React.Component {
         dataIndex: 'officeNumber',
         render: (text, record) => (
           <p className="content otherContent">
-            {record.officeNumber ? record.officeNumber : 'NA'}
+            {record.officeNumber ? record.officeNumber : ''}
           </p>
         )
       }
