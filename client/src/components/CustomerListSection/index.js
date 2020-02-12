@@ -162,23 +162,20 @@ class CustomerListSection extends React.Component {
     ];
     const rowSelection = {
       onChange: (selectedRowKeys, selectedRows) => {
-        console.log(
-          `selectedRowKeys: ${selectedRowKeys}`,
-          "selectedRows: ",
-          selectedRows
-        );
       }
       /*getCheckboxProps: record => ({
 				disabled: record.name === 'Disabled User', // Column configuration not to be checked
 				name: record.name,
 			}),*/
     };
+    let tableHeight = 0;
+      tableHeight = (height - eleHeight) - 25
     return (
       <>
         <FilterSection filter={this.filteredData} customers={customers} parentSelect={this.parentSelect}/>
         <div id="customerListingTable" className={`${currentSelect ? 'overlay': ''}`} ref={(ref) => this.formRef = ref }>
           <Table
-          style={{ width: '100%', maxHeight: (height - eleHeight) - 25 }}
+          style={{ width: '100%', maxHeight: tableHeight}}
             rowKey="key"
             className="customerListingTable"
             rowSelection={rowSelection}

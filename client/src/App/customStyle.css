@@ -46,9 +46,6 @@ body {
 .ant-select-disabled .ant-select-selection__placeholder {
   color: #a7b0b2;
 }
-.ant-table-header-column .ant-checkbox-wrapper {
-  display: none;
-}
 .ant-checkbox-wrapper span:not(.ant-checkbox) {
   font-family: 'Roboto';
   font-size: 14px;
