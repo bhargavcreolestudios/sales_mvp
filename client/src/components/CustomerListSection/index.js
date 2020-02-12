@@ -18,16 +18,28 @@ class CustomerListSection extends React.Component {
     currentSelect: false,
     customers: [],
     currentKey: null,
+    eleHeight: 0,
+    height: window.innerHeight,
     showData: []
   };
   moreOption = key => {
     this.setState({ moreOption: true, key: key });
+  };
+  updateDimensions = (e) => {
+    this.setState({ height: window.innerHeight, eleHeight: this.formRef.getBoundingClientRect().top });
   };
   async componentDidMount() {
     if(!this.props.noData) {
       let allCustomers = await customerService.getCustomers();
       this.setState({ customers: allCustomers, showData: allCustomers });
     }
+    this.setState({
+      eleHeight: this.formRef.getBoundingClientRect().top
+    })
+    window.addEventListener('resize', this.updateDimensions);
+  }
+   componentWillUnmount() {
+    window.removeEventListener('resize', this.updateDimensions);
   }
   componentDidUpdate(prevProps) {
     if(!this.props.noData) {
@@ -61,7 +73,7 @@ class CustomerListSection extends React.Component {
     return '(' + x[1] + ') ' + x[2] + '-' + x[3];
   }
   render() {
-    const { moreOption, key, customers, showData, currentSelect, currentKey } = this.state;
+    const { moreOption, key, customers, showData, currentSelect, currentKey, height, eleHeight } = this.state;
     const content = (
       <div className="CustomerListingActivityContent">
         <p>
@@ -164,8 +176,9 @@ class CustomerListSection extends React.Component {
     return (
       <>
         <FilterSection filter={this.filteredData} customers={customers} parentSelect={this.parentSelect}/>
-        <div id="customerListingTable" className={`${currentSelect ? 'overlay': ''}`}>
+        <div id="customerListingTable" className={`${currentSelect ? 'overlay': ''}`} ref={(ref) => this.formRef = ref }>
           <Table
+          style={{ width: '100%', maxHeight: (height - eleHeight) - 25 }}
             rowKey="key"
             className="customerListingTable"
             rowSelection={rowSelection}

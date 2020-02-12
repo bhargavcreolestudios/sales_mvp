@@ -17,6 +17,8 @@ class Contacts extends React.Component {
     contacts: [],
     showData: [],
     rowSelect: null,
+    eleHeight: 0,
+    height: window.innerHeight,
     currentSelect: null,
     isEditModal: false,
     status: [
@@ -32,12 +34,20 @@ class Contacts extends React.Component {
     },
     editContact: {}
   };
+  updateDimensions = (e) => {
+    this.setState({ height: window.innerHeight, eleHeight: this.formRef.getBoundingClientRect().top });
+  };
   async componentDidMount() {
+    window.addEventListener('resize', this.updateDimensions);
     let res = await services.getContacts(this.props.match.params.id);
     this.setState({
+      eleHeight: this.formRef.getBoundingClientRect().top,
       contacts: res.contacts || [],
       showData: res.contacts
     });
+  }
+     componentWillUnmount() {
+    window.removeEventListener('resize', this.updateDimensions);
   }
   handleSelectVisible = (open, key) => {
     this.setState({
@@ -160,7 +170,8 @@ class Contacts extends React.Component {
       contacts,
       status,
       showData,
-      editContact
+      editContact,
+      height, eleHeight
     } = this.state;
     const columns = [
       {
@@ -299,6 +310,7 @@ class Contacts extends React.Component {
                     onDropdownVisibleChange={open =>
                       this.handleSelectVisible(open, 'status')
                     }
+                    onMouseDown={e => e.preventDefault()}
                     dropdownRender={menu => (
                       <div>
                         <div>{menu}</div>
@@ -340,8 +352,9 @@ class Contacts extends React.Component {
             </Col>
           </Row>
         </div>
-        <div className={`${currentSelect ? 'overlay' : ''}`}>
+        <div className={`contactlisting ${currentSelect ? 'overlay' : ''}`}  ref={(ref) => this.formRef = ref} >
           <Table
+            style={{ width: '100%', maxHeight: (height - eleHeight) - 25 }}
             rowSelection={rowSelection}
             columns={columns}
             onRow={(record, index) => {

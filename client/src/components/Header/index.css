@@ -1,6 +1,14 @@
 .scroll-header {
   overflow-x: auto;
   overflow-y: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 11;
+}
+section.ant-layout {
+  padding-top: 60px;
 }
 .headerWrapper {
   background: #004881 !important;
